@@ -22,8 +22,8 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class Item implements Entity {
-    private static final Map<String, Item> cache = new HashMap<>();
-    private static final EntityInfo<Item> INFO = new EntityInfo<>(Entity.class.getResource("item.json"), Item::new, cache);
+    private static final Map<String, Item> CACHE = new HashMap<>();
+    private static final EntityInfo<Item> INFO = new EntityInfo<>(Entity.class.getResource("item.json"), Item::new, CACHE);
     private final DataObject data;
     private final String id;
 
@@ -37,7 +37,7 @@ public class Item implements Entity {
     }
 
     public static Item get(String id) {
-        return cache.get(id);
+        return CACHE.get(id);
     }
 
     @Override

@@ -20,11 +20,13 @@ import net.vpg.bot.core.Util;
 import net.vpg.bot.pokemon.Type;
 
 import javax.annotation.Nonnull;
+import java.lang.annotation.Target;
 import java.util.HashMap;
 import java.util.Map;
 
 public class Move implements Entity {
     public static final Map<String, Move> CACHE = new HashMap<>();
+    public static final EntityInfo<Move> INFO = new EntityInfo<>(Move.class.getResource("move.json"), Move::new, CACHE);
     protected DataObject data;
     protected int pp;
     protected int accuracy;
@@ -72,10 +74,6 @@ public class Move implements Entity {
         this.target = Target.fromKey(data.getString("target"));
         this.category = Category.fromKey(data.getString("category"));
         this.metadata = new Metadata(data.getObject("meta"));
-    }
-
-    public static EntityInfo<Move> getInfo() {
-        return new EntityInfo<>(Move.class.getResource("move.json"), Move::new, CACHE);
     }
 
     public static Move get(String id) {

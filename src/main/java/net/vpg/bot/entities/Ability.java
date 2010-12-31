@@ -24,7 +24,7 @@ import java.util.Map;
 
 public class Ability implements Entity {
     public static final Map<String, Ability> CACHE = new HashMap<>();
-    private static EntityInfo<Ability> info;
+    public static final EntityInfo<Ability> INFO = new EntityInfo<>(Ability.class.getResource("ability.json"), Ability::new, CACHE);
     protected final String id;
     protected final String name;
     protected final String effect;
@@ -35,10 +35,6 @@ public class Ability implements Entity {
         this.name = Util.toProperCase(String.join(" ", id.split("-")));
         this.effect = data.getString("effect");
         this.description = data.getString("description");
-    }
-
-    public static EntityInfo<Ability> getInfo() {
-        return info == null ? info = new EntityInfo<>(Ability.class.getResource("ability.json"), Ability::new, CACHE) : info;
     }
 
     public static Ability get(String id) {

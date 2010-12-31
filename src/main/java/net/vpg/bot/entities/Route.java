@@ -18,8 +18,9 @@ package net.vpg.bot.entities;
 import net.dv8tion.jda.api.utils.data.DataObject;
 import net.vpg.bot.core.Util;
 
-import java.util.Arrays;
+import java.util.Collections;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
 
@@ -54,9 +55,7 @@ public class Route implements Entity {
 
     public Map<Pokemon, Integer> getRates() {
         if (resolvedRates == null) {
-            resolvedRates = rawRates.entrySet()
-                .stream()
-                .collect(Collectors.toMap(e -> e.getKey().get(), Map.Entry::getValue));
+            resolvedRates = rawRates.entrySet().stream().collect(Collectors.toMap(e -> e.getKey().get(), Map.Entry::getValue));
         }
         return resolvedRates;
     }
@@ -66,12 +65,8 @@ public class Route implements Entity {
             resolvedSpawns = getRates()
                 .entrySet()
                 .stream()
-                .map(entry -> {
-                    Pokemon[] spawns = new Pokemon[entry.getValue()];
-                    Arrays.fill(spawns, entry.getKey());
-                    return spawns;
-                })
-                .flatMap(Arrays::stream)
+                .map(entry -> Collections.nCopies(entry.getValue(), entry.getKey()))
+                .flatMap(List::stream)
                 .toArray(Pokemon[]::new);
         }
         return Util.getRandom(resolvedSpawns);

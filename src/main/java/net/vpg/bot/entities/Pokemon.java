@@ -62,10 +62,6 @@ public class Pokemon implements Entity {
                 .collect(Collectors.toList())));
     }
 
-    public static EntityInfo<Pokemon> getInfo() {
-        return INFO;
-    }
-
     public static Pokemon get(String id) {
         return CACHE.get(id);
     }
@@ -127,7 +123,7 @@ public class Pokemon implements Entity {
 
         public AbilitySlot(boolean hidden, String abilityId, int slot) {
             this.hidden = hidden;
-            this.reference = new EntityReference<>(Ability.getInfo(), abilityId);
+            this.reference = new EntityReference<>(Ability.INFO, abilityId);
             this.slot = slot;
         }
 

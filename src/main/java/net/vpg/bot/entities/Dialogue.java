@@ -33,6 +33,7 @@ import java.util.stream.Collectors;
 
 public class Dialogue implements Entity {
     public static final Map<String, Dialogue> CACHE = new HashMap<>();
+    public static final EntityInfo<Dialogue> INFO = new EntityInfo<>(Dialogue.class.getResource("dialogue.json"), Dialogue::new, CACHE);
     private final String id;
     private final Map<String, State> states;
 
@@ -42,10 +43,6 @@ public class Dialogue implements Entity {
             .stream(DataArray::getObject)
             .map(State::new)
             .collect(Util.groupingBy(State::getId));
-    }
-
-    public static EntityInfo<Dialogue> getInfo() {
-        return new EntityInfo<>(Dialogue.class.getResource("dialogue.json"), Dialogue::new, CACHE);
     }
 
     public static Dialogue get(String id) {

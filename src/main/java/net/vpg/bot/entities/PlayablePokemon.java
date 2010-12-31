@@ -28,6 +28,7 @@ import java.util.Map;
 public class PlayablePokemon extends DatabaseObject {
     public static final String COLLECTION_NAME = "pokemon";
     public static final Map<String, PlayablePokemon> CACHE = new HashMap<>();
+    public static final EntityInfo<PlayablePokemon> INFO = new EntityInfo<>(COLLECTION_NAME, PlayablePokemon::new, CACHE);
     protected final Moveset moves;
     protected final StatMapping evs;
     protected final StatMapping ivs;
@@ -78,10 +79,6 @@ public class PlayablePokemon extends DatabaseObject {
             .put("nature", nature)
             .put("heldItem", heldItem)
             .put("gender", gender);
-    }
-
-    public static EntityInfo<PlayablePokemon> getInfo() {
-        return new EntityInfo<>(COLLECTION_NAME, PlayablePokemon::new, CACHE);
     }
 
     public static PlayablePokemon get(String id) {

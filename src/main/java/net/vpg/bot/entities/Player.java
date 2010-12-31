@@ -30,9 +30,10 @@ import java.util.regex.Pattern;
 
 public class Player extends DatabaseObject {
     public static final String COLLECTION_NAME = "players";
-    public static final Pattern referencePattern = Pattern.compile("\\$\\{([A-Za-z-]+)}");
-    public static final Pattern genderBasedTextSplit = Pattern.compile("\\{m:(.+);f:(.+)}");
     public static final Map<String, Player> CACHE = new HashMap<>();
+    public static final EntityInfo<Player> INFO = new EntityInfo<>(COLLECTION_NAME, Player::new, CACHE);
+    public static final Pattern REFERENCE_PATTERN = Pattern.compile("\\$\\{([A-Za-z-]+)}");
+    public static final Pattern GENDER_SPLIT = Pattern.compile("\\{m:(.+);f:(.+)}");
     private final PlayerTeam team;
     private final Bag bag;
     // -1 if not set, 0 for female, 1 for male
@@ -59,10 +60,6 @@ public class Player extends DatabaseObject {
             .put("monsCaught", monsCaught)
             .put("position", "")
             .put("party", team);
-    }
-
-    public static EntityInfo<Player> getInfo() {
-        return new EntityInfo<>(COLLECTION_NAME, Player::new, CACHE);
     }
 
     public static Player get(String id) {
@@ -120,8 +117,8 @@ public class Player extends DatabaseObject {
     }
 
     public String resolveReferences(String s) {
-        s = referencePattern.matcher(s).replaceAll(m -> getProperty(m.group(1)));
-        s = genderBasedTextSplit.matcher(s).replaceAll(m -> gender.isMale() ? m.group(1) : m.group(2));
+        s = REFERENCE_PATTERN.matcher(s).replaceAll(m -> getProperty(m.group(1)));
+        s = GENDER_SPLIT.matcher(s).replaceAll(m -> gender.isMale() ? m.group(1) : m.group(2));
         return s;
     }
 
