@@ -25,8 +25,6 @@ import net.vpg.bot.commands.event.TextCommandReceivedEvent;
 import net.vpg.bot.entities.Item;
 import net.vpg.bot.entities.Player;
 import net.vpg.bot.framework.Bot;
-import net.vpg.bot.framework.BotButtonEvent;
-import net.vpg.bot.framework.ButtonHandler;
 import net.vpg.bot.framework.Sender;
 
 import java.util.Map;
@@ -39,7 +37,7 @@ public class BagCommand extends TrilogyCommand {
         setMaxArgs(1);
     }
 
-    private static void execute(Sender e, User user, long page) {
+    public static void execute(Sender e, User user, long page) {
         Map<Item, Integer> items = Player.get(user.getId()).getBag().getItems();
         long maxPages = (long) Math.ceil(items.size() / 10.0);
         long actualPage = Math.min(maxPages, Math.max(1, page));
@@ -69,22 +67,5 @@ public class BagCommand extends TrilogyCommand {
     @Override
     public void onSlashCommandRun(SlashCommandReceivedEvent e) {
         execute(e, e.getUser(), e.getLong("page"));
-    }
-
-    public static class BagButtonHandler implements ButtonHandler {
-        @Override
-        public String getName() {
-            return "bag";
-        }
-
-        @Override
-        public void handle(BotButtonEvent e) {
-            User user = e.getUser();
-            if (!e.getArg(0).equals(user.getId())) {
-                return;
-            }
-            long page = Long.parseLong(e.getArg(1));
-            execute(e, user, page);
-        }
     }
 }
