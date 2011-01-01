@@ -394,8 +394,8 @@ public class Move implements Entity {
             return (healing == 0 ? "" : "**Heal**: " + healing + "%\n") +
                 (minHits == 0 ? "" : "**Minimum Hits**: " + minHits + "\n") +
                 (maxHits == 0 ? "" : "**Maximum Hits**: " + maxHits + "\n") +
-                (minTurns == 0 ? "" : "**Minimum Hits**: " + minTurns + "\n") +
-                (maxTurns == 0 ? "" : "**Minimum Hits**: " + maxTurns + "\n") +
+                (minTurns == 0 ? "" : "**Minimum Turns**: " + minTurns + "\n") +
+                (maxTurns == 0 ? "" : "**Maximum Turns**: " + maxTurns + "\n") +
                 (critRate == 0 ? "" : "**Crit Boost**: +" + critRate + "\n") +
                 (drain == 0 ? "" : "**Drain**: " + drain + "%\n") +
                 (ailmentChance == 0 ? "" : "**Ailment Chance**: " + ailmentChance + "%\n") +
