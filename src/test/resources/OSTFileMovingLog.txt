@@ -1,0 +1,625 @@
+---- Process started on 2021-01-18 at 7:57:40 PM (IST) ----
+Enter the path of the parent directory containing the OST Collections: 
+[19:57:45.101] Detected Collection: D:\Pokemon\Pokemon Super Music Collections\Pokémon Black & Pokémon White Super Music Collection
+[19:57:45.102] Outputting to D:\Pokemon\Pokemon Super Music Collections\Pokémon Black & Pokémon White Super Music Collection\Full Pokémon Black & Pokémon White Super Music Collection
+[19:57:45.102] Detected Disc: D:\Pokemon\Pokemon Super Music Collections\Pokémon Black & Pokémon White Super Music Collection\Disc 1
+[19:57:45.103] Detected Disc: D:\Pokemon\Pokemon Super Music Collections\Pokémon Black & Pokémon White Super Music Collection\Disc 2
+[19:57:45.103] Detected Disc: D:\Pokemon\Pokemon Super Music Collections\Pokémon Black & Pokémon White Super Music Collection\Disc 3
+[19:57:45.103] Detected Disc: D:\Pokemon\Pokemon Super Music Collections\Pokémon Black & Pokémon White Super Music Collection\Disc 4
+[19:57:45.330] Moved Disc 1\Coronation Day.mp3 to the Output Directory
+[19:57:45.446] Moved Disc 1\A New Adventure!.mp3 to the Output Directory
+[19:57:45.827] Moved Disc 1\Title Screen.mp3 to the Output Directory
+[19:57:45.971] Moved Disc 1\Onward to Adventure!.mp3 to the Output Directory
+[19:57:46.191] Moved Disc 1\A Day of Beginnings.mp3 to the Output Directory
+[19:57:46.509] Moved Disc 1\Nuvema Town.mp3 to the Output Directory
+[19:57:46.630] Moved Disc 1\Battle! (Cheren-Bianca).mp3 to the Output Directory
+[19:57:46.663] Moved Disc 1\Hurry Along 1.mp3 to the Output Directory
+[19:57:46.752] Moved Disc 1\Professor Juniper.mp3 to the Output Directory
+[19:57:46.868] Moved Disc 1\Juniper Pokémon Lab.mp3 to the Output Directory
+[19:57:46.871] Moved Disc 1\Obtained a Key Item!.mp3 to the Output Directory
+[19:57:46.938] Moved Disc 1\Let's Go Together!.mp3 to the Output Directory
+[19:57:47.014] Moved Disc 1\Route 1.mp3 to the Output Directory
+[19:57:47.092] Moved Disc 1\Battle! (Wild Pokémon).mp3 to the Output Directory
+[19:57:47.109] Moved Disc 1\Victory! (Wild Pokémon).mp3 to the Output Directory
+[19:57:47.127] Moved Disc 1\Level Up!.mp3 to the Output Directory
+[19:57:47.219] Moved Disc 1\Accumula Town.mp3 to the Output Directory
+[19:57:47.320] Moved Disc 1\Hurry Along 2.mp3 to the Output Directory
+[19:57:47.412] Moved Disc 1\Pokémon Center.mp3 to the Output Directory
+[19:57:47.445] Moved Disc 1\Pokémon Healed.mp3 to the Output Directory
+[19:57:47.459] Moved Disc 1\Pokédex Evaluation... You've Just Begun!.mp3 to the Output Directory
+[19:57:47.556] Moved Disc 1\Team Plasma Plots.mp3 to the Output Directory
+[19:57:47.638] Moved Disc 1\Route 2 (Spring-Summer).mp3 to the Output Directory
+[19:57:50.461] Moved Disc 1\Xtransceiver.mp3 to the Output Directory
+[19:57:50.624] Moved Disc 1\Trainers' Eyes Meet (Youngster).mp3 to the Output Directory
+[19:57:50.795] Moved Disc 1\Battle! (Trainer Battle).mp3 to the Output Directory
+[19:57:50.915] Moved Disc 1\Victory! (Trainer Battle).mp3 to the Output Directory
+[19:57:51.119] Moved Disc 1\Trainers' Eyes Meet (Lass).mp3 to the Output Directory
+[19:57:51.153] Moved Disc 1\Obtained an Item!.mp3 to the Output Directory
+[19:57:51.324] Moved Disc 1\Striaton .mp3 to the Output Directory
+[19:57:51.349] Moved Disc 1\Pokédex Evaluation... You're on Your Way!.mp3 to the Output Directory
+[19:57:51.472] Moved Disc 1\The Dreamyard.mp3 to the Output Directory
+[19:57:51.558] Moved Disc 1\Team Plasma Appears!.mp3 to the Output Directory
+[19:57:53.558] Moved Disc 1\Battle! (Team Plasma).mp3 to the Output Directory
+[19:57:53.858] Moved Disc 1\Victory! (Team Plasma).mp3 to the Output Directory
+[19:57:53.921] Moved Disc 1\Evolution.mp3 to the Output Directory
+[19:57:53.948] Moved Disc 1\Congratulations! Your Pokémon Evolved!.mp3 to the Output Directory
+[19:57:54.351] Moved Disc 1\Trainers' Eyes Meet (Twins).mp3 to the Output Directory
+[19:57:54.442] Moved Disc 1\Cheren's Theme.mp3 to the Output Directory
+[19:57:54.496] Moved Disc 1\There's Trouble!.mp3 to the Output Directory
+[19:57:54.636] Moved Disc 1\Nacrene City.mp3 to the Output Directory
+[19:57:54.697] Moved Disc 1\Pokédex Evaluation... Keep at It!.mp3 to the Output Directory
+[19:57:54.780] Moved Disc 1\Pokémon Gym.mp3 to the Output Directory
+[19:57:54.909] Moved Disc 1\Battle! (Gym Leader).mp3 to the Output Directory
+[19:57:55.003] Moved Disc 1\Victory Lies Before You!.mp3 to the Output Directory
+[19:57:55.074] Moved Disc 1\Victory! (Gym Leader).mp3 to the Output Directory
+[19:57:55.121] Moved Disc 1\Received a League Gym Badge.mp3 to the Output Directory
+[19:57:55.135] Moved Disc 1\Obtained a TM!.mp3 to the Output Directory
+[19:57:55.271] Moved Disc 1\Gate.mp3 to the Output Directory
+[19:57:55.351] Moved Disc 1\Skyarrow Bridge.mp3 to the Output Directory
+[19:57:55.508] Moved Disc 1\Castelia City.mp3 to the Output Directory
+[19:57:55.565] Moved Disc 1\Trainers' Eyes Meet (Clerk ♂).mp3 to the Output Directory
+[19:57:57.896] Moved Disc 1\Route 4 (Spring).mp3 to the Output Directory
+[19:57:58.065] Moved Disc 1\Trainers' Eyes Meet (Backpacker).mp3 to the Output Directory
+[19:57:58.975] Moved Disc 1\Nimbasa City.mp3 to the Output Directory
+[19:57:59.163] Moved Disc 1\Bianca's Theme.mp3 to the Output Directory
+[19:57:59.559] Moved Disc 1\An Unwavering Heart.mp3 to the Output Directory
+[19:57:59.779] Moved Disc 1\Prisoner to a Formula.mp3 to the Output Directory
+[19:58:00.507] Moved Disc 1\Battle! (N).mp3 to the Output Directory
+[19:58:00.725] Moved Disc 1\A Tight Spot During Battle!.mp3 to the Output Directory
+[19:58:01.105] Moved Disc 1\Bicycle.mp3 to the Output Directory
+[19:58:01.305] Moved Disc 1\Champion Alder.mp3 to the Output Directory
+[19:58:01.738] Moved Disc 2\Driftveil Drawbridge.mp3 to the Output Directory
+[19:58:01.826] Moved Disc 2\Driftveil City.mp3 to the Output Directory
+[19:58:02.410] Moved Disc 2\Cold Storage.mp3 to the Output Directory
+[19:58:02.548] Moved Disc 2\Route 6 (Spring-Summer).mp3 to the Output Directory
+[19:58:02.592] Moved Disc 2\Trainers' Eyes Meet (Parasol Lady).mp3 to the Output Directory
+[19:58:02.640] Moved Disc 2\Trainers' Eyes Meet (Scientist).mp3 to the Output Directory
+[19:58:02.730] Moved Disc 2\Chargestone Cave.mp3 to the Output Directory
+[19:58:02.868] Moved Disc 2\Mistralton City.mp3 to the Output Directory
+[19:58:02.968] Moved Disc 2\Cedric Juniper.mp3 to the Output Directory
+[19:58:03.016] Moved Disc 2\Pokédex Evaluation... Not Bad!.mp3 to the Output Directory
+[19:58:03.039] Moved Disc 2\Move Deleted.mp3 to the Output Directory
+[19:58:03.113] Moved Disc 2\Trainers' Eyes Meet (Psychic).mp3 to the Output Directory
+[19:58:03.211] Moved Disc 2\Icirrus City.mp3 to the Output Directory
+[19:58:03.344] Moved Disc 2\Dragonspiral Tower.mp3 to the Output Directory
+[19:58:03.396] Moved Disc 2\Trainers' Eyes Meet (Team Plasma).mp3 to the Output Directory
+[19:58:03.501] Moved Disc 2\Dragonspiral Tower Top Floor.mp3 to the Output Directory
+[19:58:03.550] Moved Disc 2\Route 4 (Summer).mp3 to the Output Directory
+[19:58:03.677] Moved Disc 2\Relic Castle.mp3 to the Output Directory
+[19:58:05.636] Moved Disc 2\Light Stone-Dark Stone.mp3 to the Output Directory
+[19:58:05.728] Moved Disc 2\Tubeline Bridge.mp3 to the Output Directory
+[19:58:05.819] Moved Disc 2\Shopping Mall Nine.mp3 to the Output Directory
+[19:58:05.875] Moved Disc 2\Trainers' Eyes Meet (Roughneck).mp3 to the Output Directory
+[19:58:06.436] Moved Disc 2\Opelucid City Gym (Pokémon Black).mp3 to the Output Directory
+[19:58:08.016] Moved Disc 2\Opelucid City Gym (Pokémon White).mp3 to the Output Directory
+[19:58:08.907] Moved Disc 2\Route 10.mp3 to the Output Directory
+[19:58:09.020] Moved Disc 2\Victory Road.mp3 to the Output Directory
+[19:58:09.092] Moved Disc 2\Trainers' Eyes Meet (Ace Trainer).mp3 to the Output Directory
+[19:58:09.177] Moved Disc 2\The Pokémon League.mp3 to the Output Directory
+[19:58:09.315] Moved Disc 2\Battle! (Elite Four).mp3 to the Output Directory
+[19:58:09.385] Moved Disc 2\The Pokémon League Besieged!.mp3 to the Output Directory
+[19:58:09.487] Moved Disc 2\Embracing One's Duty.mp3 to the Output Directory
+[19:58:09.587] Moved Disc 2\N's Castle.mp3 to the Output Directory
+[19:58:10.812] Moved Disc 2\The Pokémon Child, N.mp3 to the Output Directory
+[19:58:11.450] Moved Disc 2\N's Dragon.mp3 to the Output Directory
+[19:58:11.552] Moved Disc 2\The Dragon Awakes.mp3 to the Output Directory
+[19:58:11.723] Moved Disc 2\Battle! (Reshiram-Zekrom).mp3 to the Output Directory
+[19:58:11.851] Moved Disc 2\Decisive Battle! (N).mp3 to the Output Directory
+[19:58:11.913] Moved Disc 2\Ghetsis' Ambitions.mp3 to the Output Directory
+[19:58:12.662] Moved Disc 2\Battle! (Ghetsis).mp3 to the Output Directory
+[19:58:12.823] Moved Disc 2\Farewell.mp3 to the Output Directory
+[19:58:12.912] Moved Disc 2\Ending Onward to Our Own Futures.mp3 to the Output Directory
+[19:58:13.019] Moved Disc 3\Route 2 (Autumn-Winter).mp3 to the Output Directory
+[19:58:13.045] Moved Disc 3\Received a Pokémon Egg!.mp3 to the Output Directory
+[19:58:13.138] Moved Disc 3\The Royal Unova.mp3 to the Output Directory
+[19:58:13.198] Moved Disc 3\Nintendo Wi-Fi Connection.mp3 to the Output Directory
+[19:58:13.327] Moved Disc 3\Global Terminal.mp3 to the Output Directory
+[19:58:13.389] Moved Disc 3\GTS.mp3 to the Output Directory
+[19:58:13.479] Moved Disc 3\Spin Trade.mp3 to the Output Directory
+[19:58:13.506] Moved Disc 3\Pokédex Evaluation... Just a Little More!.mp3 to the Output Directory
+[19:58:13.598] Moved Disc 3\Route 4 (Autumn).mp3 to the Output Directory
+[19:58:15.989] Moved Disc 3\Gear Station.mp3 to the Output Directory
+[19:58:16.908] Moved Disc 3\The Battle Subway.mp3 to the Output Directory
+[19:58:17.509] Moved Disc 3\Battle! (Battle Subway Trainer).mp3 to the Output Directory
+[19:58:17.533] Moved Disc 3\Received BP!.mp3 to the Output Directory
+[19:58:17.607] Moved Disc 3\Musical Theater.mp3 to the Output Directory
+[19:58:17.640] Moved Disc 3\Received Props!.mp3 to the Output Directory
+[19:58:17.681] Moved Disc 3\Dress Up with Props.mp3 to the Output Directory
+[19:58:17.712] Moved Disc 3\The Curtain for the Musical Rises!.mp3 to the Output Directory
+[19:58:17.767] Moved Disc 3\Musical Stardom.mp3 to the Output Directory
+[19:58:17.825] Moved Disc 3\Musical Forest Stroll.mp3 to the Output Directory
+[19:58:17.880] Moved Disc 3\Musical A Sweet Soirée.mp3 to the Output Directory
+[19:58:17.957] Moved Disc 3\Musical Exciting Nimbasa.mp3 to the Output Directory
+[19:58:18.530] Moved Disc 3\A Ferris Wheel Ride Together.mp3 to the Output Directory
+[19:58:18.640] Moved Disc 3\Feeling Check.mp3 to the Output Directory
+[19:58:18.787] Moved Disc 3\Feeling Check Perfect!.mp3 to the Output Directory
+[19:58:18.915] Moved Disc 3\Feeling Check Getting Close.mp3 to the Output Directory
+[19:58:18.939] Moved Disc 3\Feeling Check Lukewarm.mp3 to the Output Directory
+[19:58:19.030] Moved Disc 3\Route 6 (Autumn-Winter).mp3 to the Output Directory
+[19:58:19.164] Moved Disc 3\Battle! (Legendary Pokémon).mp3 to the Output Directory
+[19:58:19.251] Moved Disc 3\Anville Town.mp3 to the Output Directory
+[19:58:19.330] Moved Disc 3\Marvelous Bridge.mp3 to the Output Directory
+[19:58:19.429] Moved Disc 3\Route 12 (Spring-Summer).mp3 to the Output Directory
+[19:58:19.521] Moved Disc 3\Trainers' Eyes Meet (Cyclist).mp3 to the Output Directory
+[19:58:19.573] Moved Disc 3\Poké Transfer Lab.mp3 to the Output Directory
+[19:58:19.626] Moved Disc 3\Poké Transfer Choose Your Pokémon!.mp3 to the Output Directory
+[19:58:19.701] Moved Disc 3\Poké Transfer Catch Your Pokémon!.mp3 to the Output Directory
+[19:58:19.736] Moved Disc 3\Trainers' Eyes Meet (Pokéfan).mp3 to the Output Directory
+[19:58:19.792] Moved Disc 3\Black City.mp3 to the Output Directory
+[19:58:19.857] Moved Disc 3\White Forest.mp3 to the Output Directory
+[19:58:20.989] Moved Disc 3\Game Sync.mp3 to the Output Directory
+[19:58:21.539] Moved Disc 3\Entralink.mp3 to the Output Directory
+[19:58:21.573] Moved Disc 3\Begin an Entralink Mission!.mp3 to the Output Directory
+[19:58:21.633] Moved Disc 3\Someone's Entralink.mp3 to the Output Directory
+[19:58:21.685] Moved Disc 3\Mission Accomplished!.mp3 to the Output Directory
+[19:58:21.701] Moved Disc 3\Mission Failed!.mp3 to the Output Directory
+[19:58:21.749] Moved Disc 3\Trainers' Eyes Meet (Gentleman).mp3 to the Output Directory
+[19:58:21.850] Moved Disc 3\Undella Town (Autumn-Winter-Spring).mp3 to the Output Directory
+[19:58:21.904] Moved Disc 3\Undella Town (Summer).mp3 to the Output Directory
+[19:58:21.982] Moved Disc 3\Cynthia's Theme.mp3 to the Output Directory
+[19:58:22.601] Moved Disc 3\Battle! (Cynthia).mp3 to the Output Directory
+[19:58:22.674] Moved Disc 3\Lostlorn Forest.mp3 to the Output Directory
+[19:58:22.776] Moved Disc 3\Battle! (Strong Wild Pokémon).mp3 to the Output Directory
+[19:58:22.863] Moved Disc 4\Surf.mp3 to the Output Directory
+[19:58:23.056] Moved Disc 4\Abyssal Ruins.mp3 to the Output Directory
+[19:58:23.117] Moved Disc 4\Route 12 (Autumn-Winter).mp3 to the Output Directory
+[19:58:23.208] Moved Disc 4\Lacunosa Town.mp3 to the Output Directory
+[19:58:23.298] Moved Disc 4\Village Bridge.mp3 to the Output Directory
+[19:58:23.365] Moved Disc 4\Mystery Gift.mp3 to the Output Directory
+[19:58:23.423] Moved Disc 4\Route 4 (Winter).mp3 to the Output Directory
+[19:58:23.518] Moved Disc 4\Challenging a Battle Competition.mp3 to the Output Directory
+[19:58:23.566] Moved Disc 4\Team Rocket!.mp3 to the Output Directory
+[19:58:23.748] Moved Disc 4\Battle! (Kyurem).mp3 to the Output Directory
+[19:58:23.774] Moved Disc 4\Pokédex Evaluation... It's Perfect!.mp3 to the Output Directory
+[19:58:23.919] Moved Disc 4\Battle! (Champion).mp3 to the Output Directory
+[19:58:23.973] Moved Disc 4\Victory! (Champion).mp3 to the Output Directory
+[19:58:26.462] Moved Disc 4\Congratulations on Entering the Hall of Fame!.mp3 to the Output Directory
+[19:58:28.398] Moved Disc 4\Summer in Lacunosa.mp3 to the Output Directory
+[19:58:29.230] Moved Disc 4\A Lullaby for Trains.mp3 to the Output Directory
+[19:58:29.336] Moved Disc 4\Final Battle! (N Remix).mp3 to the Output Directory
+[19:58:29.499] Moved Disc 4\Farewell (Refrain).mp3 to the Output Directory
+[19:58:29.499] Detected Collection: D:\Pokemon\Pokemon Super Music Collections\Pokémon Black 2 & Pokémon White 2 Super Music Collection
+[19:58:29.512] Outputting to D:\Pokemon\Pokemon Super Music Collections\Pokémon Black 2 & Pokémon White 2 Super Music Collection\Full Pokémon Black 2 & Pokémon White 2 Super Music Collection
+[19:58:29.520] Detected Disc: D:\Pokemon\Pokemon Super Music Collections\Pokémon Black 2 & Pokémon White 2 Super Music Collection\Disc 1
+[19:58:29.521] Detected Disc: D:\Pokemon\Pokemon Super Music Collections\Pokémon Black 2 & Pokémon White 2 Super Music Collection\Disc 2
+[19:58:29.526] Detected Disc: D:\Pokemon\Pokemon Super Music Collections\Pokémon Black 2 & Pokémon White 2 Super Music Collection\Disc 3
+[19:58:29.527] Detected Disc: D:\Pokemon\Pokemon Super Music Collections\Pokémon Black 2 & Pokémon White 2 Super Music Collection\Disc 4
+[19:58:29.613] Moved Disc 1\Opening.mp3 to the Output Directory
+[19:58:29.807] Moved Disc 1\Title Screen.mp3 to the Output Directory
+[19:58:29.863] Moved Disc 1\An Adventure Is Beginning.mp3 to the Output Directory
+[19:58:30.580] Moved Disc 1\Aspertia City.mp3 to the Output Directory
+[19:58:30.672] Moved Disc 1\Bianca's Theme.mp3 to the Output Directory
+[19:58:30.749] Moved Disc 1\Route 19 (Spring_Summer).mp3 to the Output Directory
+[19:58:30.992] Moved Disc 1\Battle! (Wild Pokémon).mp3 to the Output Directory
+[19:58:31.057] Moved Disc 1\Floccesy Town.mp3 to the Output Directory
+[19:58:31.130] Moved Disc 1\Floccesy Ranch.mp3 to the Output Directory
+[19:58:31.219] Moved Disc 1\Rival's Theme.mp3 to the Output Directory
+[19:58:31.352] Moved Disc 1\Battle! (Rival).mp3 to the Output Directory
+[19:58:31.413] Moved Disc 1\Virbank City.mp3 to the Output Directory
+[19:58:31.526] Moved Disc 1\Virbank City Gym (Performed by Koffing and the Toxics).mp3 to the Output Directory
+[19:58:31.610] Moved Disc 1\Team Plasma Returns.mp3 to the Output Directory
+[19:58:31.746] Moved Disc 1\Pokéstar Studios.mp3 to the Output Directory
+[19:58:31.851] Moved Disc 1\Filming Underway at Pokéstar Studios.mp3 to the Output Directory
+[19:58:31.919] Moved Disc 1\Pokéstar Studios_ Battle.mp3 to the Output Directory
+[19:58:32.033] Moved Disc 1\Pokéstar Studios_ Glory.mp3 to the Output Directory
+[19:58:33.538] Moved Disc 1\Pokéstar Studios_ Defeat.mp3 to the Output Directory
+[19:58:33.690] Moved Disc 1\Pokéstar Studios_ Invasion.mp3 to the Output Directory
+[19:58:33.749] Moved Disc 1\Pokéstar Studios_ Success.mp3 to the Output Directory
+[19:58:33.801] Moved Disc 1\Pokéstar Studios_ Retreat.mp3 to the Output Directory
+[19:58:33.880] Moved Disc 1\Pokéstar Studios_ Weird.mp3 to the Output Directory
+[19:58:33.912] Moved Disc 1\Pokéstar Studios_ Love.mp3 to the Output Directory
+[19:58:34.307] Moved Disc 1\Pokéstar Studios_ Sorrow.mp3 to the Output Directory
+[19:58:34.583] Moved Disc 1\Pokéstar Studios_ Horror.mp3 to the Output Directory
+[19:58:34.665] Moved Disc 1\Pokéstar Studios_ Purified.mp3 to the Output Directory
+[19:58:34.713] Moved Disc 1\Pokéstar Studios_ Fear.mp3 to the Output Directory
+[19:58:34.782] Moved Disc 1\Pokéstar Studios_ Humor.mp3 to the Output Directory
+[19:58:34.830] Moved Disc 1\Pokéstar Studios_ Despair.mp3 to the Output Directory
+[19:58:34.906] Moved Disc 1\Pokéstar Studios_ Shock.mp3 to the Output Directory
+[19:58:34.936] Moved Disc 1\Immortalized in Pokéstar Studios!.mp3 to the Output Directory
+[19:58:35.050] Moved Disc 1\Castelia Sewers.mp3 to the Output Directory
+[19:58:35.157] Moved Disc 1\Castelia City Gym.mp3 to the Output Directory
+[19:58:35.216] Moved Disc 1\Trainers' Eyes Meet (Harlequin).mp3 to the Output Directory
+[19:58:35.274] Moved Disc 1\Funfest Mission Start!.mp3 to the Output Directory
+[19:58:35.381] Moved Disc 1\Unity Tower.mp3 to the Output Directory
+[19:58:35.418] Moved Disc 1\Colress's Theme.mp3 to the Output Directory
+[19:58:35.589] Moved Disc 1\Battle! (Trainer Battle).mp3 to the Output Directory
+[19:58:35.685] Moved Disc 1\Join Avenue.mp3 to the Output Directory
+[19:58:35.720] Moved Disc 1\Join Avenue_ Level Up 1.mp3 to the Output Directory
+[19:58:35.745] Moved Disc 1\Join Avenue_ Level Up 2.mp3 to the Output Directory
+[19:58:35.827] Moved Disc 1\Join Avenue Meet and Greet!.mp3 to the Output Directory
+[19:58:35.854] Moved Disc 1\Nimbasa City Gym_ Runway.mp3 to the Output Directory
+[19:58:35.881] Moved Disc 1\Trainers' Eyes Meet (Beauty).mp3 to the Output Directory
+[19:58:35.931] Moved Disc 1\Nimbasa City Gym_ Stage.mp3 to the Output Directory
+[19:58:36.994] Moved Disc 1\Battle! (Gym Leader).mp3 to the Output Directory
+[19:58:37.934] Moved Disc 1\Victory Lies Before You!.mp3 to the Output Directory
+[19:58:38.533] Moved Disc 2\Driftveil City Gym.mp3 to the Output Directory
+[19:58:38.663] Moved Disc 2\Pokémon World Tournament (Pwt).mp3 to the Output Directory
+[19:58:38.698] Moved Disc 2\The PWT.mp3 to the Output Directory
+[19:58:38.806] Moved Disc 2\Battle! (Gym Leader—Kanto Version).mp3 to the Output Directory
+[19:58:38.929] Moved Disc 2\Battle! (Champion—Kanto Version).mp3 to the Output Directory
+[19:58:39.141] Moved Disc 2\Battle! (Gym Leader—Johto Version).mp3 to the Output Directory
+[19:58:39.242] Moved Disc 2\Battle! (Champion—Johto Version).mp3 to the Output Directory
+[19:58:39.372] Moved Disc 2\Battle! (Gym Leader—Hoenn Version).mp3 to the Output Directory
+[19:58:39.529] Moved Disc 2\Battle! (Champion—Hoenn Version).mp3 to the Output Directory
+[19:58:39.676] Moved Disc 2\Battle! (Gym Leader—Sinnoh Version).mp3 to the Output Directory
+[19:58:39.768] Moved Disc 2\Battle! (Champion—Sinnoh Version).mp3 to the Output Directory
+[19:58:39.897] Moved Disc 2\PWT Final Round!.mp3 to the Output Directory
+[19:58:39.948] Moved Disc 2\Winning in the PWT!.mp3 to the Output Directory
+[19:58:40.699] Moved Disc 2\PWT Victor!.mp3 to the Output Directory
+[19:58:41.637] Moved Disc 2\Underground Ruins.mp3 to the Output Directory
+[19:58:42.258] Moved Disc 2\Battle! (Regirock-Regice-Registeel).mp3 to the Output Directory
+[19:58:42.509] Moved Disc 2\Aboard the Plasma Frigate.mp3 to the Output Directory
+[19:58:42.575] Moved Disc 2\Zinzolin's Theme.mp3 to the Output Directory
+[19:58:42.640] Moved Disc 2\Cheren's Theme.mp3 to the Output Directory
+[19:58:42.685] Moved Disc 2\Mistralton City Gym.mp3 to the Output Directory
+[19:58:42.742] Moved Disc 2\Earned a Participation Prize Medal!.mp3 to the Output Directory
+[19:58:42.787] Moved Disc 2\Medal Box- Medal Box Upgraded!.mp3 to the Output Directory
+[19:58:42.847] Moved Disc 2\Lentimas Town.mp3 to the Output Directory
+[19:58:42.916] Moved Disc 2\The Road to Reversal Mountain.mp3 to the Output Directory
+[19:58:43.204] Moved Disc 2\Reversal Mountain (Pokémon Black).mp3 to the Output Directory
+[19:58:43.315] Moved Disc 2\Reversal Mountain (Pokémon White).mp3 to the Output Directory
+[19:58:43.487] Moved Disc 2\Strange House.mp3 to the Output Directory
+[19:58:43.549] Moved Disc 2\Battle! (Legendary Pokémon—Sinnoh Version).mp3 to the Output Directory
+[19:58:43.630] Moved Disc 2\Opelucid City Gym.mp3 to the Output Directory
+[19:58:43.698] Moved Disc 2\Opelucid City Attacked!.mp3 to the Output Directory
+[19:58:43.766] Moved Disc 2\The Frozen City.mp3 to the Output Directory
+[19:58:43.812] Moved Disc 2\Trainers' Eyes Meet (Team Plasma).mp3 to the Output Directory
+[19:58:44.016] Moved Disc 2\Battle! (Team Plasma).mp3 to the Output Directory
+[19:58:45.468] Moved Disc 2\Shadow Triad's Theme.mp3 to the Output Directory
+[19:58:45.580] Moved Disc 2\Marine Tube.mp3 to the Output Directory
+[19:58:45.674] Moved Disc 2\Humilau City.mp3 to the Output Directory
+[19:58:45.756] Moved Disc 2\Humilau City Gym.mp3 to the Output Directory
+[19:58:45.850] Moved Disc 2\Route 22 (Spring-Summer).mp3 to the Output Directory
+[19:58:45.876] Moved Disc 2\Plasma Frigate Sortie.mp3 to the Output Directory
+[19:58:46.498] Moved Disc 3\Infiltrating the Plasma Frigate!.mp3 to the Output Directory
+[19:58:46.817] Moved Disc 3\Battle! (Colress).mp3 to the Output Directory
+[19:58:46.850] Moved Disc 3\Awakening.mp3 to the Output Directory
+[19:58:46.909] Moved Disc 3\Confrontation.mp3 to the Output Directory
+[19:58:46.945] Moved Disc 3\Absorption.mp3 to the Output Directory
+[19:58:47.011] Moved Disc 3\Fusion.mp3 to the Output Directory
+[19:58:47.166] Moved Disc 3\Battle! (Black Kyurem-White Kyurem).mp3 to the Output Directory
+[19:58:47.270] Moved Disc 3\Battle! (Ghetsis).mp3 to the Output Directory
+[19:58:47.376] Moved Disc 3\Route 23.mp3 to the Output Directory
+[19:58:47.514] Moved Disc 3\N's Castle.mp3 to the Output Directory
+[19:58:47.571] Moved Disc 3\N's Room.mp3 to the Output Directory
+[19:58:47.664] Moved Disc 3\N's Theme.mp3 to the Output Directory
+[19:58:47.789] Moved Disc 3\Battle! (N).mp3 to the Output Directory
+[19:58:47.840] Moved Disc 3\Unova Link.mp3 to the Output Directory
+[19:58:47.931] Moved Disc 3\Xtransceiver Minigames.mp3 to the Output Directory
+[19:58:48.007] Moved Disc 3\Xtransceiver- Game Start!.mp3 to the Output Directory
+[19:58:48.442] Moved Disc 3\Xtransceiver- Game Won!.mp3 to the Output Directory
+[19:58:49.785] Moved Disc 3\Route 19 (Autumn-Winter).mp3 to the Output Directory
+[19:58:50.398] Moved Disc 3\Cave of Being.mp3 to the Output Directory
+[19:58:50.556] Moved Disc 3\Battle! (Azelf-Mesprit-Uxie).mp3 to the Output Directory
+[19:58:50.583] Moved Disc 3\Black Tower- Entrance.mp3 to the Output Directory
+[19:58:50.676] Moved Disc 3\Black Tower.mp3 to the Output Directory
+[19:58:50.735] Moved Disc 3\White Treehollow- Entrance.mp3 to the Output Directory
+[19:58:50.796] Moved Disc 3\White Treehollow.mp3 to the Output Directory
+[19:58:50.835] Moved Disc 3\Tympole Choir.mp3 to the Output Directory
+[19:58:50.943] Moved Disc 3\Route 22 (Autumn-Winter).mp3 to the Output Directory
+[19:58:50.985] Moved Disc 3\Pokédex Habitat List Complete!.mp3 to the Output Directory
+[19:58:51.010] Moved Disc 3\Medal Rally Complete!.mp3 to the Output Directory
+[19:58:51.143] Moved Disc 3\Battle! (Champion Iris).mp3 to the Output Directory
+[19:58:51.424] Moved Disc 3\Staff Credits.mp3 to the Output Directory
+[19:58:51.513] Moved Disc 3\The End.mp3 to the Output Directory
+[19:58:51.709] Moved Disc 3\Musical- Charming Munna.mp3 to the Output Directory
+[19:58:51.793] Moved Disc 3\Musical- Pokémon Party!.mp3 to the Output Directory
+[19:58:51.860] Moved Disc 3\Musical- Carnival Pokémon.mp3 to the Output Directory
+[19:58:51.928] Moved Disc 3\Musical- Meloettaaa!!!.mp3 to the Output Directory
+[19:58:53.371] Moved Disc 3\Pokémon World Championships Final.mp3 to the Output Directory
+[19:58:53.531] Moved Disc 3\Relic Song.mp3 to the Output Directory
+[19:58:53.684] Moved Disc 4\Title Screen (Pokémon Emerald).mp3 to the Output Directory
+[19:58:53.750] Moved Disc 4\Match Call.mp3 to the Output Directory
+[19:58:53.827] Moved Disc 4\Abnormal Weather.mp3 to the Output Directory
+[19:58:53.885] Moved Disc 4\Rayquaza Appears!.mp3 to the Output Directory
+[19:58:54.226] Moved Disc 4\Battle Frontier (Hoenn Version).mp3 to the Output Directory
+[19:58:54.811] Moved Disc 4\Battle Tower (Hoenn Version).mp3 to the Output Directory
+[19:58:54.919] Moved Disc 4\Battle Factory (Hoenn Version).mp3 to the Output Directory
+[19:58:55.049] Moved Disc 4\Battle Arena.mp3 to the Output Directory
+[19:58:55.131] Moved Disc 4\Battle Dome.mp3 to the Output Directory
+[19:58:55.209] Moved Disc 4\Battle Pike.mp3 to the Output Directory
+[19:58:55.289] Moved Disc 4\Battle Palace.mp3 to the Output Directory
+[19:58:55.403] Moved Disc 4\Battle Pyramid.mp3 to the Output Directory
+[19:58:55.496] Moved Disc 4\Battle Pyramid Summit.mp3 to the Output Directory
+[19:58:55.542] Moved Disc 4\Received Battle Points! (Hoenn Version).mp3 to the Output Directory
+[19:58:55.677] Moved Disc 4\Battle! (Frontier Brain—Hoenn Version).mp3 to the Output Directory
+[19:58:55.704] Moved Disc 4\Battle Symbol Received!.mp3 to the Output Directory
+[19:58:55.805] Moved Disc 4\Battle! (Mew).mp3 to the Output Directory
+[19:58:55.938] Moved Disc 4\Title Screen (Pokémon Platinum).mp3 to the Output Directory
+[19:58:56] Moved Disc 4\Press Start.mp3 to the Output Directory
+[19:58:56.385] Moved Disc 4\Special Program- ''Let's Ask Prof. Rowan!''.mp3 to the Output Directory
+[19:58:56.959] Moved Disc 4\Looker's Theme.mp3 to the Output Directory
+[19:58:57.686] Moved Disc 4\Global Terminal.mp3 to the Output Directory
+[19:58:57.811] Moved Disc 4\Wi-Fi Plaza.mp3 to the Output Directory
+[19:58:57.860] Moved Disc 4\Wi-Fi Plaza- Mini-Games.mp3 to the Output Directory
+[19:58:57.997] Moved Disc 4\Cleared Wobbuffet Pop!.mp3 to the Output Directory
+[19:58:58.586] Moved Disc 4\Wi-Fi Plaza- Parade.mp3 to the Output Directory
+[19:58:58.774] Moved Disc 4\Giratina Appears!.mp3 to the Output Directory
+[19:58:58.836] Moved Disc 4\Giratina Appears! Part 2.mp3 to the Output Directory
+[19:58:59.028] Moved Disc 4\Distortion World.mp3 to the Output Directory
+[19:58:59.335] Moved Disc 4\Battle! (Giratina).mp3 to the Output Directory
+[19:58:59.400] Moved Disc 4\Spin Trade.mp3 to the Output Directory
+[19:58:59.484] Moved Disc 4\Mystery Gift (Pokémon Platinum).mp3 to the Output Directory
+[19:58:59.560] Moved Disc 4\Super Contest- Cuteness.mp3 to the Output Directory
+[19:58:59.606] Moved Disc 4\Super Contest- Coolness.mp3 to the Output Directory
+[19:59:03.729] Moved Disc 4\Super Contest- Toughness.mp3 to the Output Directory
+[19:59:04.161] Moved Disc 4\Super Contest- Beauty.mp3 to the Output Directory
+[19:59:04.385] Moved Disc 4\Super Content- Smartness.mp3 to the Output Directory
+[19:59:04.606] Moved Disc 4\Villa Music Box- Twinleaf Tune.mp3 to the Output Directory
+[19:59:04.921] Moved Disc 4\Villa Audio System- Bossa Nova Lilycove.mp3 to the Output Directory
+[19:59:05.826] Moved Disc 4\Fight Area (Battle Frontier).mp3 to the Output Directory
+[19:59:06.018] Moved Disc 4\Battle Arcade.mp3 to the Output Directory
+[19:59:06.039] Moved Disc 4\Received BP in the Battle Arcade!.mp3 to the Output Directory
+[19:59:06.148] Moved Disc 4\Battle Hall.mp3 to the Output Directory
+[19:59:06.238] Moved Disc 4\Battle Factory (Sinnoh Version).mp3 to the Output Directory
+[19:59:06.361] Moved Disc 4\Battle Castle.mp3 to the Output Directory
+[19:59:06.370] Moved Disc 4\Received Castle Points!.mp3 to the Output Directory
+[19:59:06.407] Moved Disc 4\Received Battle Points! (Sinnoh Version).mp3 to the Output Directory
+[19:59:06.596] Moved Disc 4\Battle! (Frontier Brain—Sinnoh Version).mp3 to the Output Directory
+[19:59:06.645] Moved Disc 4\Victory! (Frontier Brain—Sinnoh Version).mp3 to the Output Directory
+[19:59:06.646] Detected Collection: D:\Pokemon\Pokemon Super Music Collections\Pokémon Diamond & Pokémon Pearl Super Music Collection
+[19:59:06.684] Outputting to D:\Pokemon\Pokemon Super Music Collections\Pokémon Diamond & Pokémon Pearl Super Music Collection\Full Pokémon Diamond & Pokémon Pearl Super Music Collection
+[19:59:06.713] Detected Disc: D:\Pokemon\Pokemon Super Music Collections\Pokémon Diamond & Pokémon Pearl Super Music Collection\Disc 1
+[19:59:06.735] Detected Disc: D:\Pokemon\Pokemon Super Music Collections\Pokémon Diamond & Pokémon Pearl Super Music Collection\Disc 2
+[19:59:06.928] Moved Disc 1\Opening Movie.mp3 to the Output Directory
+[19:59:07.982] Moved Disc 1\Introduction.mp3 to the Output Directory
+[19:59:08.109] Moved Disc 1\Special Report Search for the Red Gyarados!.mp3 to the Output Directory
+[19:59:08.253] Moved Disc 1\Twinleaf Town (Day).mp3 to the Output Directory
+[19:59:08.367] Moved Disc 1\Rival.mp3 to the Output Directory
+[19:59:08.531] Moved Disc 1\Route 201 (Day).mp3 to the Output Directory
+[19:59:08.749] Moved Disc 1\Lake.mp3 to the Output Directory
+[19:59:08.869] Moved Disc 1\A Surprise at the Lake!.mp3 to the Output Directory
+[19:59:09.400] Moved Disc 1\Battle! (Wild Pokémon).mp3 to the Output Directory
+[19:59:10.132] Moved Disc 1\Victory! (Wild Pokémon).mp3 to the Output Directory
+[19:59:10.277] Moved Disc 1\Dawn.mp3 to the Output Directory
+[19:59:10.421] Moved Disc 1\Obtained an Item!.mp3 to the Output Directory
+[19:59:10.543] Moved Disc 1\Sandgem Town (Day).mp3 to the Output Directory
+[19:59:10.641] Moved Disc 1\The Pokémon Lab.mp3 to the Output Directory
+[19:59:10.746] Moved Disc 1\Hurry Along.mp3 to the Output Directory
+[19:59:10.857] Moved Disc 1\Pokémon Center (Day).mp3 to the Output Directory
+[19:59:10.935] Moved Disc 1\Pokémon Healed.mp3 to the Output Directory
+[19:59:11.921] Moved Disc 1\Trainers' Eyes Meet (Youngster).mp3 to the Output Directory
+[19:59:12.714] Moved Disc 1\Trainers' Eyes Meet (Lass).mp3 to the Output Directory
+[19:59:12.853] Moved Disc 1\Battle! (Trainer Battle).mp3 to the Output Directory
+[19:59:12.934] Moved Disc 1\Victory! (Trainer Battle).mp3 to the Output Directory
+[19:59:13.651] Moved Disc 1\Jubilife City (Day).mp3 to the Output Directory
+[19:59:14.027] Moved Disc 1\Obtained a Key Item!.mp3 to the Output Directory
+[19:59:14.169] Moved Disc 1\Poké Mart.mp3 to the Output Directory
+[19:59:14.268] Moved Disc 1\Route 203 (Day).mp3 to the Output Directory
+[19:59:14.367] Moved Disc 1\Battle! (Rival).mp3 to the Output Directory
+[19:59:14.603] Moved Disc 1\Oreburgh Gate.mp3 to the Output Directory
+[19:59:14.719] Moved Disc 1\Obtained a TM!.mp3 to the Output Directory
+[19:59:14.810] Moved Disc 1\Oreburgh City (Day).mp3 to the Output Directory
+[19:59:14.932] Moved Disc 1\Oreburgh Mine.mp3 to the Output Directory
+[19:59:16.156] Moved Disc 1\Pokémon Gym.mp3 to the Output Directory
+[19:59:16.679] Moved Disc 1\Battle! (Gym Leader).mp3 to the Output Directory
+[19:59:16.816] Moved Disc 1\Victory! (Gym Leader).mp3 to the Output Directory
+[19:59:16.894] Moved Disc 1\Obtained a Badge!.mp3 to the Output Directory
+[19:59:17.447] Moved Disc 1\Trainers' Eyes Meet (Twins).mp3 to the Output Directory
+[19:59:17.559] Moved Disc 1\Level Up!.mp3 to the Output Directory
+[19:59:17.685] Moved Disc 1\Floaroma Town (Day).mp3 to the Output Directory
+[19:59:17.790] Moved Disc 1\Obtained a Berry!.mp3 to the Output Directory
+[19:59:17.904] Moved Disc 1\Route 205 (Day).mp3 to the Output Directory
+[19:59:18.037] Moved Disc 1\Team Galactic Appears!.mp3 to the Output Directory
+[19:59:18.177] Moved Disc 1\Battle! (Team Galactic).mp3 to the Output Directory
+[19:59:18.301] Moved Disc 1\Eterna Forest.mp3 to the Output Directory
+[19:59:18.391] Moved Disc 1\Let's Go Together!.mp3 to the Output Directory
+[19:59:18.549] Moved Disc 1\Eterna City (Day).mp3 to the Output Directory
+[19:59:18.711] Moved Disc 1\Galactic Eterna Building.mp3 to the Output Directory
+[19:59:18.850] Moved Disc 1\Battle! (Team Galactic Commander).mp3 to the Output Directory
+[19:59:19.019] Moved Disc 1\Victory! (Team Galactic).mp3 to the Output Directory
+[19:59:20.213] Moved Disc 1\Evolution.mp3 to the Output Directory
+[19:59:21.404] Moved Disc 1\Congratulations! Your Pokémon Evolved!.mp3 to the Output Directory
+[19:59:21.691] Moved Disc 1\Bicycle.mp3 to the Output Directory
+[19:59:21.806] Moved Disc 1\Trainers' Eyes Meet (Cyclist).mp3 to the Output Directory
+[19:59:21.919] Moved Disc 1\Route 206 (Day).mp3 to the Output Directory
+[19:59:22.043] Moved Disc 1\Hearthome City (Day).mp3 to the Output Directory
+[19:59:22.253] Moved Disc 1\Route 209 (Day).mp3 to the Output Directory
+[19:59:22.392] Moved Disc 1\Trainers' Eyes Meet (Hiker).mp3 to the Output Directory
+[19:59:22.536] Moved Disc 1\Solaceon Town (Day).mp3 to the Output Directory
+[19:59:22.610] Moved Disc 1\Obtained a Pokétch App!.mp3 to the Output Directory
+[19:59:22.713] Moved Disc 1\Route 210.mp3 to the Output Directory
+[19:59:22.891] Moved Disc 1\Veilstone City (Day).mp3 to the Output Directory
+[19:59:23.621] Moved Disc 1\Valor Lakefront (Day).mp3 to the Output Directory
+[19:59:25.072] Moved Disc 1\Canalave City.mp3 to the Output Directory
+[19:59:25.617] Moved Disc 1\Route 216 (Day).mp3 to the Output Directory
+[19:59:25.798] Moved Disc 1\Snowpoint City (Day).mp3 to the Output Directory
+[19:59:25.901] Moved Disc 1\Team Galactic HQ.mp3 to the Output Directory
+[19:59:26.055] Moved Disc 1\Battle! (Team Galactic Boss).mp3 to the Output Directory
+[19:59:26.163] Moved Disc 1\Deep Within Team Galactic HQ.mp3 to the Output Directory
+[19:59:26.336] Moved Disc 1\Mt. Coronet.mp3 to the Output Directory
+[19:59:26.435] Moved Disc 1\Spear Pillar.mp3 to the Output Directory
+[19:59:26.537] Moved Disc 1\The Legendary Pokémon Appears!.mp3 to the Output Directory
+[19:59:26.620] Moved Disc 1\Catastrophe!.mp3 to the Output Directory
+[19:59:26.784] Moved Disc 1\Battle! (DialgaPalkia).mp3 to the Output Directory
+[19:59:26.920] Moved Disc 1\Sunyshore City (Day).mp3 to the Output Directory
+[19:59:27.461] Moved Disc 1\Victory Road.mp3 to the Output Directory
+[19:59:28.962] Moved Disc 1\Trainers' Eyes Meet (Ace Trainer).mp3 to the Output Directory
+[19:59:29.908] Moved Disc 1\Pokémon League (Day).mp3 to the Output Directory
+[19:59:30.068] Moved Disc 1\Fight Area (Day).mp3 to the Output Directory
+[19:59:30.222] Moved Disc 1\Route 225 (Day).mp3 to the Output Directory
+[19:59:30.309] Moved Disc 1\Route 228 (Day).mp3 to the Output Directory
+[19:59:30.540] Moved Disc 2\Twinleaf Town (Night).mp3 to the Output Directory
+[19:59:30.703] Moved Disc 2\Route 201 (Night).mp3 to the Output Directory
+[19:59:30.795] Moved Disc 2\Pokémon Center (Night).mp3 to the Output Directory
+[19:59:30.909] Moved Disc 2\Nintendo Wi-Fi Connection.mp3 to the Output Directory
+[19:59:31.591] Moved Disc 2\Sandgem Town (Night).mp3 to the Output Directory
+[19:59:31.895] Moved Disc 2\Lucas.mp3 to the Output Directory
+[19:59:32.020] Moved Disc 2\Jubilife City.mp3 to the Output Directory
+[19:59:32.214] Moved Disc 2\TV Station.mp3 to the Output Directory
+[19:59:32.385] Moved Disc 2\GTS.mp3 to the Output Directory
+[19:59:32.606] Moved Disc 2\Surf.mp3 to the Output Directory
+[19:59:32.763] Moved Disc 2\Canalave City (Night).mp3 to the Output Directory
+[19:59:32.884] Moved Disc 2\Move Deleted.mp3 to the Output Directory
+[19:59:34.133] Moved Disc 2\Route 203 (Night).mp3 to the Output Directory
+[19:59:34.240] Moved Disc 2\Trainers' Eyes Meet (Black Belt).mp3 to the Output Directory
+[19:59:34.377] Moved Disc 2\Oreburgh City (Night).mp3 to the Output Directory
+[19:59:34.493] Moved Disc 2\Route 205 (Night).mp3 to the Output Directory
+[19:59:34.680] Moved Disc 2\Trainers' Eyes Meet (Sailor).mp3 to the Output Directory
+[19:59:34.817] Moved Disc 2\Eterna City (Night).mp3 to the Output Directory
+[19:59:34.943] Moved Disc 2\The Underground.mp3 to the Output Directory
+[19:59:36.061] Moved Disc 2\Captured a Flag Underground!.mp3 to the Output Directory
+[19:59:36.645] Moved Disc 2\Trainers' Eyes Meet (Aroma Lady).mp3 to the Output Directory
+[19:59:36.821] Moved Disc 2\Floaroma Town (Night).mp3 to the Output Directory
+[19:59:36.927] Moved Disc 2\Old Chateau.mp3 to the Output Directory
+[19:59:37.436] Moved Disc 2\Solaceon Town (Night).mp3 to the Output Directory
+[19:59:37.649] Moved Disc 2\Great Marsh.mp3 to the Output Directory
+[19:59:37.780] Moved Disc 2\Route 206 (Night).mp3 to the Output Directory
+[19:59:37.889] Moved Disc 2\Trainers' Eyes Meet (Collector).mp3 to the Output Directory
+[19:59:38.049] Moved Disc 2\Veilstone City (Night).mp3 to the Output Directory
+[19:59:38.264] Moved Disc 2\Game Corner.mp3 to the Output Directory
+[19:59:38.379] Moved Disc 2\You're a Winner!.mp3 to the Output Directory
+[19:59:38.484] Moved Disc 2\You're a Jackpot Winner!.mp3 to the Output Directory
+[19:59:38.602] Moved Disc 2\Trainers' Eyes Meet (PI).mp3 to the Output Directory
+[19:59:38.791] Moved Disc 2\Route 209 (Night).mp3 to the Output Directory
+[19:59:38.998] Moved Disc 2\Snowpoint City (Night).mp3 to the Output Directory
+[19:59:40.041] Moved Disc 2\Route 216 (Night).mp3 to the Output Directory
+[19:59:41.646] Moved Disc 2\Lake Caverns.mp3 to the Output Directory
+[19:59:41.829] Moved Disc 2\Battle! (AzelfMespritUxie).mp3 to the Output Directory
+[19:59:42.028] Moved Disc 2\Route 210 (Night).mp3 to the Output Directory
+[19:59:42.123] Moved Disc 2\A Poké Radar Hit!.mp3 to the Output Directory
+[19:59:42.245] Moved Disc 2\Sunyshore City (Night).mp3 to the Output Directory
+[19:59:42.382] Moved Disc 2\Trainers' Eyes Meet (Artist).mp3 to the Output Directory
+[19:59:42.531] Moved Disc 2\Amity Square.mp3 to the Output Directory
+[19:59:42.592] Moved Disc 2\Got an Accessory.mp3 to the Output Directory
+[19:59:42.751] Moved Disc 2\Hearthome City (Night).mp3 to the Output Directory
+[19:59:42.859] Moved Disc 2\Contest Hall.mp3 to the Output Directory
+[19:59:43.303] Moved Disc 2\Poffins.mp3 to the Output Directory
+[19:59:44.425] Moved Disc 2\Super Contest!.mp3 to the Output Directory
+[19:59:44.544] Moved Disc 2\Contest Dress Up.mp3 to the Output Directory
+[19:59:44.674] Moved Disc 2\Dance Easy.mp3 to the Output Directory
+[19:59:44.831] Moved Disc 2\Dance Difficult.mp3 to the Output Directory
+[19:59:45.016] Moved Disc 2\Contest Results Announcement.mp3 to the Output Directory
+[19:59:45.617] Moved Disc 2\Contest Winner.mp3 to the Output Directory
+[19:59:45.749] Moved Disc 2\Route 228 (Night).mp3 to the Output Directory
+[19:59:45.875] Moved Disc 2\Valor Lakefront (Night).mp3 to the Output Directory
+[19:59:45.994] Moved Disc 2\Fight Area (Night).mp3 to the Output Directory
+[19:59:46.141] Moved Disc 2\Battle Tower.mp3 to the Output Directory
+[19:59:46.275] Moved Disc 2\Route 225 (Night).mp3 to the Output Directory
+[19:59:46.399] Moved Disc 2\Stark Mountain.mp3 to the Output Directory
+[19:59:46.554] Moved Disc 2\Battle! (Legendary Pokémon).mp3 to the Output Directory
+[19:59:46.625] Moved Disc 2\Mystery Gift.mp3 to the Output Directory
+[19:59:46.769] Moved Disc 2\Pokémon League (Night).mp3 to the Output Directory
+[19:59:46.902] Moved Disc 2\Decisive Battle! (Pokémon League).mp3 to the Output Directory
+[19:59:47.703] Moved Disc 2\The Elite Four Appear!.mp3 to the Output Directory
+[19:59:49.026] Moved Disc 2\Battle! (Elite Four).mp3 to the Output Directory
+[19:59:49.947] Moved Disc 2\Victory! (Elite Four).mp3 to the Output Directory
+[19:59:50.075] Moved Disc 2\Champion Cynthia.mp3 to the Output Directory
+[19:59:50.205] Moved Disc 2\Battle! (Champion).mp3 to the Output Directory
+[19:59:50.304] Moved Disc 2\Victory! (Champion).mp3 to the Output Directory
+[19:59:50.424] Moved Disc 2\Hall of Fame.mp3 to the Output Directory
+[19:59:50.605] Moved Disc 2\Congratulations on Entering the Hall of Fame!.mp3 to the Output Directory
+[19:59:50.833] Moved Disc 2\Ending Theme.mp3 to the Output Directory
+[19:59:50.833] Detected Collection: D:\Pokemon\Pokemon Super Music Collections\Pokémon Ruby & Pokémon Sapphire Super Music Collection
+[19:59:50.854] Outputting to D:\Pokemon\Pokemon Super Music Collections\Pokémon Ruby & Pokémon Sapphire Super Music Collection\Full Pokémon Ruby & Pokémon Sapphire Super Music Collection
+[19:59:50.865] Detected Disc: D:\Pokemon\Pokemon Super Music Collections\Pokémon Ruby & Pokémon Sapphire Super Music Collection\Disc 1
+[19:59:50.866] Detected Disc: D:\Pokemon\Pokemon Super Music Collections\Pokémon Ruby & Pokémon Sapphire Super Music Collection\Disc 2
+[19:59:51.482] Moved Disc 1\Opening Movie- Setting out on a Journey in the Hoenn Region.mp3 to the Output Directory
+[19:59:51.731] Moved Disc 1\Opening Movie- Double Battles.mp3 to the Output Directory
+[19:59:51.824] Moved Disc 1\Title Screen- Main Theme.mp3 to the Output Directory
+[19:59:51.874] Moved Disc 1\Introductions.mp3 to the Output Directory
+[19:59:51.944] Moved Disc 1\Littleroot Town.mp3 to the Output Directory
+[19:59:52.218] Moved Disc 1\Birch Pokémon Lab.mp3 to the Output Directory
+[19:59:52.426] Moved Disc 1\May.mp3 to the Output Directory
+[19:59:52.629] Moved Disc 1\H-Help Me!.mp3 to the Output Directory
+[19:59:52.799] Moved Disc 1\Battle! (Wild Pokémon).mp3 to the Output Directory
+[19:59:52.868] Moved Disc 1\Victory! (Wild Pokémon).mp3 to the Output Directory
+[19:59:52.922] Moved Disc 1\Route 101.mp3 to the Output Directory
+[19:59:53.021] Moved Disc 1\Oldale Town.mp3 to the Output Directory
+[19:59:53.593] Moved Disc 1\Pokémon Center.mp3 to the Output Directory
+[19:59:53.648] Moved Disc 1\Pokémon Healed.mp3 to the Output Directory
+[19:59:53.679] Moved Disc 1\Trainers' Eyes Meet (Youngster).mp3 to the Output Directory
+[19:59:53.721] Moved Disc 1\Trainers' Eyes Meet (Lass).mp3 to the Output Directory
+[19:59:53.824] Moved Disc 1\Battle! (Trainer Battle).mp3 to the Output Directory
+[19:59:53.894] Moved Disc 1\Victory! (Trainer Battle).mp3 to the Output Directory
+[19:59:53.929] Moved Disc 1\Level Up!.mp3 to the Output Directory
+[19:59:54.018] Moved Disc 1\Petalburg City.mp3 to the Output Directory
+[19:59:54.105] Moved Disc 1\Hurry Along.mp3 to the Output Directory
+[19:59:54.192] Moved Disc 1\Route 104.mp3 to the Output Directory
+[19:59:54.254] Moved Disc 1\Petalburg Forest.mp3 to the Output Directory
+[19:59:54.308] Moved Disc 1\Team Magma Appears!.mp3 to the Output Directory
+[19:59:54.395] Moved Disc 1\Battle! (Team Aqua - Team Magma).mp3 to the Output Directory
+[19:59:54.452] Moved Disc 1\Victory! (Team Aqua - Team Magma).mp3 to the Output Directory
+[19:59:54.531] Moved Disc 1\Rustboro City.mp3 to the Output Directory
+[19:59:54.586] Moved Disc 1\Trainers' School.mp3 to the Output Directory
+[19:59:54.621] Moved Disc 1\Crossing the Sea.mp3 to the Output Directory
+[19:59:54.670] Moved Disc 1\Dewford Town.mp3 to the Output Directory
+[19:59:54.700] Moved Disc 1\Trainers' Eyes Meet (Tuber♀).mp3 to the Output Directory
+[19:59:54.779] Moved Disc 1\Slateport City.mp3 to the Output Directory
+[19:59:54.880] Moved Disc 1\Oceanic Museu.mp3 to the Output Directory
+[19:59:54.958] Moved Disc 1\Route 110.mp3 to the Output Directory
+[19:59:55.548] Moved Disc 1\Cycling.mp3 to the Output Directory
+[19:59:57.407] Moved Disc 1\Game Corner.mp3 to the Output Directory
+[19:59:57.874] Moved Disc 1\Win.mp3 to the Output Directory
+[19:59:57.956] Moved Disc 1\Lose.mp3 to the Output Directory
+[19:59:57.983] Moved Disc 1\Reel Time.mp3 to the Output Directory
+[19:59:58.006] Moved Disc 1\Jackpot.mp3 to the Output Directory
+[19:59:58.072] Moved Disc 1\Verdanturf Town.mp3 to the Output Directory
+[19:59:58.154] Moved Disc 1\Route 113.mp3 to the Output Directory
+[19:59:58.231] Moved Disc 1\Twins.mp3 to the Output Directory
+[19:59:58.289] Moved Disc 1\Fallarbor Town.mp3 to the Output Directory
+[19:59:58.349] Moved Disc 1\Cable Car.mp3 to the Output Directory
+[19:59:58.465] Moved Disc 1\Mt. Chimney.mp3 to the Output Directory
+[19:59:58.507] Moved Disc 1\Trainers' Eyes Meet (Hiker).mp3 to the Output Directory
+[19:59:58.562] Moved Disc 1\Route 111.mp3 to the Output Directory
+[19:59:58.630] Moved Disc 1\Pokémon Gym.mp3 to the Output Directory
+[19:59:58.750] Moved Disc 1\Battle! (Gym Leader).mp3 to the Output Directory
+[19:59:58.865] Moved Disc 1\Victory! (Gym Leader).mp3 to the Output Directory
+[19:59:58.899] Moved Disc 1\Obtained a Badge!.mp3 to the Output Directory
+[19:59:58.959] Moved Disc 1\Obtained a TM!.mp3 to the Output Directory
+[19:59:59.577] Moved Disc 1\Surf.mp3 to the Output Directory
+[19:59:59.738] Moved Disc 2\Route 119.mp3 to the Output Directory
+[19:59:59.790] Moved Disc 2\Fortree City.mp3 to the Output Directory
+[19:59:59.877] Moved Disc 2\Route 120.mp3 to the Output Directory
+[19:59:59.957] Moved Disc 2\Interviewers.mp3 to the Output Directory
+[20:00:00.028] Moved Disc 2\Safari Zone.mp3 to the Output Directory
+[20:00:00.209] Moved Disc 2\Trainers' Eyes Meet (Gentleman).mp3 to the Output Directory
+[20:00:00.428] Moved Disc 2\Lilycove City.mp3 to the Output Directory
+[20:00:00.497] Moved Disc 2\Museum.mp3 to the Output Directory
+[20:00:00.538] Moved Disc 2\Move Deleted.mp3 to the Output Directory
+[20:00:00.602] Moved Disc 2\Brendan.mp3 to the Output Directory
+[20:00:00.769] Moved Disc 2\Battle! (Brendan-May).mp3 to the Output Directory
+[20:00:00.881] Moved Disc 2\Evolution.mp3 to the Output Directory
+[20:00:00.920] Moved Disc 2\Congratulations! Your Pokémon Evolved!.mp3 to the Output Directory
+[20:00:01.005] Moved Disc 2\Poké Mart.mp3 to the Output Directory
+[20:00:01.905] Moved Disc 2\Mt. Pyre.mp3 to the Output Directory
+[20:00:02.020] Moved Disc 2\Trainers' Eyes Meet (Psychic).mp3 to the Output Directory
+[20:00:02.178] Moved Disc 2\Trainers’ Eyes Meet (Hex Maniac).mp3 to the Output Directory
+[20:00:02.413] Moved Disc 2\Mt. Pyre Exterior.mp3 to the Output Directory
+[20:00:02.856] Moved Disc 2\Hideout.mp3 to the Output Directory
+[20:00:03.414] Moved Disc 2\Obtained an Item!.mp3 to the Output Directory
+[20:00:03.835] Moved Disc 2\Team Aqua Appears!.mp3 to the Output Directory
+[20:00:04.104] Moved Disc 2\Battle! (Team Aqua-Team Magma Leaders).mp3 to the Output Directory
+[20:00:04.443] Moved Disc 2\The Super-Ancient Pokémon Awaken!.mp3 to the Output Directory
+[20:00:04.678] Moved Disc 2\Drought.mp3 to the Output Directory
+[20:00:04.959] Moved Disc 2\Heavy Rain.mp3 to the Output Directory
+[20:00:05.698] Moved Disc 2\Dive.mp3 to the Output Directory
+[20:00:06.076] Moved Disc 2\Sootopolis City.mp3 to the Output Directory
+[20:00:06.602] Moved Disc 2\Cave of Origin.mp3 to the Output Directory
+[20:00:06.779] Moved Disc 2\Battle! (Super-Ancient Pokémon).mp3 to the Output Directory
+[20:00:06.966] Moved Disc 2\Trainers’ Eyes Meet (Swimmer♀).mp3 to the Output Directory
+[20:00:07.951] Moved Disc 2\Ever Grande City.mp3 to the Output Directory
+[20:00:08.088] Moved Disc 2\Obtained a Berry!.mp3 to the Output Directory
+[20:00:08.323] Moved Disc 2\Contest Lobby.mp3 to the Output Directory
+[20:00:08.676] Moved Disc 2\Pokémon Contest!.mp3 to the Output Directory
+[20:00:08.815] Moved Disc 2\Results Announcement.mp3 to the Output Directory
+[20:00:08.862] Moved Disc 2\Contest Winner.mp3 to the Output Directory
+[20:00:08.919] Moved Disc 2\Sealed Chamber.mp3 to the Output Directory
+[20:00:09.367] Moved Disc 2\Battle! (Regirock-Regice-Registeel).mp3 to the Output Directory
+[20:00:09.585] Moved Disc 2\The Trick House.mp3 to the Output Directory
+[20:00:09.631] Moved Disc 2\Abandoned Ship.mp3 to the Output Directory
+[20:00:09.680] Moved Disc 2\Battle Tower.mp3 to the Output Directory
+[20:00:09.785] Moved Disc 2\Victory Road.mp3 to the Output Directory
+[20:00:09.854] Moved Disc 2\Trainers’ Eyes Meet (Cooltrainer).mp3 to the Output Directory
+[20:00:09.920] Moved Disc 2\The Elite Four Appear!.mp3 to the Output Directory
+[20:00:10.022] Moved Disc 2\Battle! (Elite Four).mp3 to the Output Directory
+[20:00:10.132] Moved Disc 2\Champion Steven.mp3 to the Output Directory
+[20:00:10.230] Moved Disc 2\Battle! (Steven).mp3 to the Output Directory
+[20:00:10.281] Moved Disc 2\Victory! (Steven).mp3 to the Output Directory
+[20:00:10.371] Moved Disc 2\Room of Glory.mp3 to the Output Directory
+[20:00:10.443] Moved Disc 2\The Hall of Fame.mp3 to the Output Directory
+[20:00:10.583] Moved Disc 2\Ending Theme.mp3 to the Output Directory
+[20:00:10.691] Moved Disc 2\The End.mp3 to the Output Directory
+[20:00:10.799] Moved Disc 2\Trick Master (feat. Karakuri King & Karakuri Chorus).mp3 to the Output Directory
+[20:00:11.023] Moved Disc 2\Slateport City (feat. Hiroko Takano).mp3 to the Output Directory
+[20:00:12.320] Moved Disc 2\Steven Stone.mp3 to the Output Directory
