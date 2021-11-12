@@ -1,4 +1,5 @@
 target/
 .idea/
 temp/
+log-file-*.json
 *.iml
