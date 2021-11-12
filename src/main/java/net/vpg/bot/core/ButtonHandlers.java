@@ -1,8 +1,8 @@
 package net.vpg.bot.core;
 
-import net.dv8tion.jda.api.events.interaction.ButtonClickEvent;
-import net.vpg.bot.framework.ButtonHandler;
 import net.vpg.bot.entities.Dialogue;
+import net.vpg.bot.framework.BotButtonEvent;
+import net.vpg.bot.framework.ButtonHandler;
 
 public interface ButtonHandlers {
     class Area implements ButtonHandler {
@@ -12,9 +12,9 @@ public interface ButtonHandlers {
         }
 
         @Override
-        public void handle(ButtonClickEvent e, String[] args) {
-            if (!args[3].equals(e.getUser().getId())) return;
-            Dialogue.get(args[0]).executeActions(e, args[1], args[2]);
+        public void handle(BotButtonEvent e) {
+            if (!e.getArg(3).equals(e.getUser().getId())) return;
+            Dialogue.get(e.getArg(0)).executeActions(e, e.getArg(1), e.getArg(2));
         }
     }
 }
