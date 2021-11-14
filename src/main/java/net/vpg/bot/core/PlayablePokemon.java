@@ -15,31 +15,27 @@
  */
 package net.vpg.bot.core;
 
-import net.dv8tion.jda.api.utils.data.DataArray;
 import net.dv8tion.jda.api.utils.data.DataObject;
 import net.vpg.bot.database.DatabaseObject;
 import net.vpg.bot.entities.*;
 import net.vpg.bot.framework.Bot;
 
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.stream.Collectors;
 
 @SuppressWarnings("unused")
 public class PlayablePokemon extends DatabaseObject {
     public static final String COLLECTION_NAME = "pokemon";
     public static final Map<String, PlayablePokemon> CACHE = new HashMap<>();
     Pokemon base;
-    int slot;
     String nickname;
     int level;
     int exp;
     boolean shiny;
-    List<PlayableMove> moves;
-    DataObject evs;
-    DataObject ivs;
+    final Moveset moves;
+    final DataObject evs;
+    final DataObject ivs;
     String nature;
     String heldItem;
     String gender;
@@ -47,12 +43,11 @@ public class PlayablePokemon extends DatabaseObject {
     public PlayablePokemon(DataObject data, Bot bot) {
         super(data, bot);
         this.base = Pokemon.get(data.getString("base"));
-        this.slot = data.getInt("slot");
         this.nickname = data.getString("nickname");
         this.level = data.getInt("level");
         this.exp = data.getInt("exp");
         this.shiny = data.getBoolean("shiny");
-        this.moves = data.getArray("moves").stream(DataArray::getObject).map(PlayableMove::new).collect(Collectors.toList());
+        this.moves = new Moveset(data.getArray("moves"));
         this.evs = data.getObject("evs");
         this.ivs = data.getObject("evs");
         this.nature = data.getString("nature");
@@ -63,16 +58,15 @@ public class PlayablePokemon extends DatabaseObject {
     public PlayablePokemon(Pokemon base, String id, Bot bot) {
         super(id, bot);
         this.base = base;
-        this.moves = new ArrayList<>();
+        this.moves = new Moveset();
         this.evs = DataObject.empty();
         this.ivs = DataObject.empty();
         this.data
-            .put("slot", slot)
             .put("nickname", nickname)
             .put("level", level)
             .put("exp", exp)
             .put("shiny", shiny)
-            .put("moves", DataArray.empty().addAll(moves))
+            .put("moves", moves)
             .put("evs", evs)
             .put("ivs", ivs)
             .put("nature", nature)
@@ -85,7 +79,7 @@ public class PlayablePokemon extends DatabaseObject {
     }
 
     public static PlayablePokemon get(String id) {
-        return CACHE.get(id);
+        return id.equals("") ? null : CACHE.get(id);
     }
 
     public List<Pokemon.AbilitySlot> getPossibleAbilities() {
@@ -128,16 +122,6 @@ public class PlayablePokemon extends DatabaseObject {
         return base.getMoveset();
     }
 
-    public int getSlot() {
-        return slot;
-    }
-
-    public PlayablePokemon setSlot(int slot) {
-        this.slot = slot;
-        update("slot", slot);
-        return this;
-    }
-
     public String getNickname() {
         return nickname;
     }
@@ -178,25 +162,12 @@ public class PlayablePokemon extends DatabaseObject {
         return this;
     }
 
-    public List<PlayableMove> getMoves() {
+    public Moveset getMoves() {
         return moves;
     }
 
-    public PlayablePokemon setMoves(List<PlayableMove> moves) {
-        this.moves = moves;
-        update("moves", moves);
-        return this;
-    }
-
     public PlayablePokemon setMove(int slot, Move move) {
-        this.moves.add(slot - 1, new PlayableMove(move, slot));
-        update("slot", slot);
-        return this;
-    }
-
-    public PlayablePokemon setMove(int slot, PlayableMove move) {
-        this.moves.add(slot - 1, move);
-        update("slot", slot);
+        update("moves", moves.setMove(slot, move));
         return this;
     }
 
@@ -204,15 +175,9 @@ public class PlayablePokemon extends DatabaseObject {
         return evs;
     }
 
-    public PlayablePokemon setEvs(DataObject evs) {
-        this.evs = evs;
-        update("slot", slot);
-        return this;
-    }
-
     public PlayablePokemon setEv(String stat, int ev) {
         this.evs.put(stat, ev);
-        update("slot", slot);
+        update("evs", evs);
         return this;
     }
 
@@ -220,15 +185,9 @@ public class PlayablePokemon extends DatabaseObject {
         return ivs;
     }
 
-    public PlayablePokemon setIvs(DataObject ivs) {
-        this.ivs = ivs;
-        update("slot", slot);
-        return this;
-    }
-
     public PlayablePokemon setIv(String stat, int iv) {
         this.ivs.put(stat, iv);
-        update("slot", slot);
+        update("ivs", ivs);
         return this;
     }
 
@@ -238,7 +197,7 @@ public class PlayablePokemon extends DatabaseObject {
 
     public PlayablePokemon setNature(String nature) {
         this.nature = nature;
-        update("slot", slot);
+        update("nature", nature);
         return this;
     }
 
@@ -248,7 +207,7 @@ public class PlayablePokemon extends DatabaseObject {
 
     public PlayablePokemon setHeldItem(String heldItem) {
         this.heldItem = heldItem;
-        update("slot", slot);
+        update("heldItem", heldItem);
         return this;
     }
 
@@ -258,7 +217,7 @@ public class PlayablePokemon extends DatabaseObject {
 
     public PlayablePokemon setGender(String gender) {
         this.gender = gender;
-        update("slot", slot);
+        update("gender", gender);
         return this;
     }
 

@@ -15,7 +15,6 @@
  */
 package net.vpg.bot.core;
 
-import net.dv8tion.jda.api.utils.data.DataArray;
 import net.dv8tion.jda.api.utils.data.DataObject;
 import net.vpg.bot.database.DatabaseObject;
 import net.vpg.bot.entities.EntityInfo;
@@ -39,7 +38,7 @@ public class Player extends DatabaseObject {
         super(data, bot);
         male = data.getInt("male");
         position = data.getString("position");
-        team = new PlayerTeam(data.optArray("team").orElseGet(DataArray::empty));
+        team = new PlayerTeam(data.getArray("team"));
     }
 
     public Player(String id, Bot bot) {

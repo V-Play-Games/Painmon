@@ -19,10 +19,10 @@ import net.dv8tion.jda.api.utils.data.DataObject;
 import net.vpg.bot.entities.Move;
 
 public class PlayableMove extends Move {
-    int slot;
+    final int slot;
 
     public PlayableMove(DataObject data) {
-        this(Move.get(data.getString("move")), data.getInt("slot"));
+        this(Move.get(data.getString("move")), data.getInt("slot"), data.getInt("pp"));
     }
 
     public PlayableMove(Move move, int slot) {
@@ -30,13 +30,30 @@ public class PlayableMove extends Move {
         this.slot = slot;
     }
 
-    public int getSlot() {
-        return slot;
+    public PlayableMove(Move move, int slot, int pp) {
+        this(move, slot);
+        this.pp = pp;
     }
 
-    public PlayableMove setSlot(int slot) {
-        this.slot = slot;
+    public PlayableMove adjust(Move copy) {
+        this.effectChance = copy.getEffectChance();
+        this.description = copy.getDescription();
+        this.effect = copy.getEffect();
+        this.id = copy.getId();
+        this.name = copy.getName();
+        this.pp = copy.getPP();
+        this.accuracy = copy.getAccuracy();
+        this.priority = copy.getPriority();
+        this.power = copy.getPower();
+        this.type = copy.getType();
+        this.target = copy.getTarget();
+        this.category = copy.getCategory();
+        this.metadata = copy.getMetadata();
         return this;
+    }
+
+    public int getSlot() {
+        return slot;
     }
 
     public PlayableMove setPP(int pp) {

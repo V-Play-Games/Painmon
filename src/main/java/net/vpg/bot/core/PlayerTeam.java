@@ -34,7 +34,7 @@ public class PlayerTeam implements SerializableArray {
 
     public PlayerTeam() {
         this.data = DataArray.empty();
-        this.cache = new ArrayList<>();
+        this.cache = new ArrayList<>(6);
     }
 
     @Nonnull
