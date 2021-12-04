@@ -13,12 +13,13 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package net.vpg.bot.core;
+package net.vpg.bot.entities;
 
 import net.dv8tion.jda.api.utils.data.DataObject;
+import net.vpg.bot.pokemon.Moveset;
 import net.vpg.bot.database.DatabaseObject;
-import net.vpg.bot.entities.*;
 import net.vpg.bot.framework.Bot;
+import net.vpg.bot.pokemon.*;
 
 import java.util.HashMap;
 import java.util.List;
@@ -28,31 +29,35 @@ import java.util.Map;
 public class PlayablePokemon extends DatabaseObject {
     public static final String COLLECTION_NAME = "pokemon";
     public static final Map<String, PlayablePokemon> CACHE = new HashMap<>();
-    Pokemon base;
-    String nickname;
-    int level;
-    int exp;
-    boolean shiny;
     final Moveset moves;
     final DataObject evs;
     final DataObject ivs;
-    String nature;
-    String heldItem;
-    String gender;
+    Pokemon base;
+    int slot;
+    String nickname;
+    int playerSpecificId;
+    int level;
+    int exp;
+    boolean shiny;
+    Nature nature;
+    Item heldItem;
+    Gender gender;
 
     public PlayablePokemon(DataObject data, Bot bot) {
         super(data, bot);
         this.base = Pokemon.get(data.getString("base"));
+        this.slot = data.getInt("slot");
+        this.playerSpecificId = Integer.parseInt(id.split(":")[0]);
         this.nickname = data.getString("nickname");
         this.level = data.getInt("level");
         this.exp = data.getInt("exp");
         this.shiny = data.getBoolean("shiny");
         this.moves = new Moveset(data.getArray("moves"));
         this.evs = data.getObject("evs");
-        this.ivs = data.getObject("evs");
-        this.nature = data.getString("nature");
-        this.heldItem = data.getString("heldItem");
-        this.gender = data.getString("gender");
+        this.ivs = data.getObject("ivs");
+        this.nature = Nature.fromKey(data.getString("nature"));
+        this.heldItem = Item.of(data.getString("heldItem"));
+        this.gender = Gender.fromKey(data.getInt("gender"));
     }
 
     public PlayablePokemon(Pokemon base, String id, Bot bot) {
@@ -61,7 +66,9 @@ public class PlayablePokemon extends DatabaseObject {
         this.moves = new Moveset();
         this.evs = DataObject.empty();
         this.ivs = DataObject.empty();
+        this.playerSpecificId = Integer.parseInt(id.split(":")[0]);
         this.data
+            .put("slot", slot)
             .put("nickname", nickname)
             .put("level", level)
             .put("exp", exp)
@@ -82,8 +89,17 @@ public class PlayablePokemon extends DatabaseObject {
         return id.equals("") ? null : CACHE.get(id);
     }
 
+    public int getPlayerSpecificId() {
+        return playerSpecificId;
+    }
+
     public List<Pokemon.AbilitySlot> getPossibleAbilities() {
         return base.getAbilities();
+    }
+
+    public PlayablePokemon randomize() {
+
+        return this;
     }
 
     public boolean isDefault() {
@@ -120,6 +136,16 @@ public class PlayablePokemon extends DatabaseObject {
 
     public Map<String, List<Pokemon.MoveLearningMethod>> getPossibleMoves() {
         return base.getMoveset();
+    }
+
+    public int getSlot() {
+        return slot;
+    }
+
+    public PlayablePokemon setSlot(int slot) {
+        this.slot = slot;
+        update("slot", slot);
+        return this;
     }
 
     public String getNickname() {
@@ -191,33 +217,33 @@ public class PlayablePokemon extends DatabaseObject {
         return this;
     }
 
-    public String getNature() {
+    public Nature getNature() {
         return nature;
     }
 
-    public PlayablePokemon setNature(String nature) {
+    public PlayablePokemon setNature(Nature nature) {
         this.nature = nature;
-        update("nature", nature);
+        update("nature", nature.toString());
         return this;
     }
 
-    public String getHeldItem() {
+    public Item getHeldItem() {
         return heldItem;
     }
 
-    public PlayablePokemon setHeldItem(String heldItem) {
+    public PlayablePokemon setHeldItem(Item heldItem) {
         this.heldItem = heldItem;
-        update("heldItem", heldItem);
+        update("heldItem", heldItem.toString());
         return this;
     }
 
-    public String getGender() {
+    public Gender getGender() {
         return gender;
     }
 
-    public PlayablePokemon setGender(String gender) {
+    public PlayablePokemon setGender(Gender gender) {
         this.gender = gender;
-        update("gender", gender);
+        update("gender", gender.ordinal());
         return this;
     }
 

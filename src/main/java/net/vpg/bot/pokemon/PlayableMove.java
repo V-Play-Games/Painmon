@@ -13,7 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package net.vpg.bot.core;
+package net.vpg.bot.pokemon;
 
 import net.dv8tion.jda.api.utils.data.DataObject;
 import net.vpg.bot.entities.Move;

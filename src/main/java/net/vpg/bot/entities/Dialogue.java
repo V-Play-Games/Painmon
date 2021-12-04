@@ -24,7 +24,6 @@ import net.dv8tion.jda.api.utils.data.DataArray;
 import net.dv8tion.jda.api.utils.data.DataObject;
 import net.vpg.bot.core.ActionHandler;
 import net.vpg.bot.core.Condition;
-import net.vpg.bot.core.Player;
 import net.vpg.bot.framework.Util;
 import net.vpg.bot.framework.commands.CommandReceivedEvent;
 

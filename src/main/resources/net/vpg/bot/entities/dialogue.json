@@ -10,14 +10,14 @@
         "buttons": [
           {
             "id": "male-gender",
-            "emote": "U+D83DU+DEB9",
+            "emote": "\uD83D\uDEB9",
             "actions": [
               "gender:m"
             ]
           },
           {
             "id": "female-gender",
-            "emote": "U+D83DU+DEBA",
+            "emote": "\uD83D\uDEBA",
             "actions": [
               "gender:f"
             ]
@@ -48,7 +48,7 @@
         "id": "xavier-wake-up",
         "priority": 1,
         "conditions": "equals:${welcome-state};start",
-        "text": "Xavier's Mother: Hurry up sweetie, if not you are going to be late\nXavier: Ugh... Yes, I'm coming mom... Just wait for a bit.\nXavier's Mother: I know this is a new experience for you and it might be scary, but I want to see you out and about and happy again, leave all of that behind in the past, besides, ${user} and ${rival} are coming with you, it will be all okay, sweetie.\n\\*Xavier nodded nonchalantly\\*\n\\*Xavier exits the house\\*\nXavier: Oh... I didn't know you two were outside, waiting for me... I'm sorry for delaying the meet up.\n${rival}: It's ok Xavier, we only just got here.\nXavier: Oh... Ok. It's nice to see both of you again.\n${rival}: Yes! How long has it been though... like two years?\nXavier: Yep... I'm sorry for... not meeting up with both of you during that time... both of you must have been so worried haha.\n${rival}: It's nothing Xavier, right now we can make up for lost time.\nXavier: mhm.\n${rival}: Come on, let's go to Professor Orchid's lab.\nXavier: Alright... let's go.",
+        "text": "Xavier's Mother: Hurry up sweetie, if not you are going to be late\nXavier: Ugh... Yes, I'm coming mom... Just wait for a bit.\nXavier's Mother: I know this is a new experience for you and it might be scary, but I want to see you out and about and happy again, leave all of that behind in the past, besides, ${user} and ${rival} are coming with you, it will be all okay, sweetie.\n\\*Xavier nodded nonchalantly\\*\n\\*Xavier exits the house\\*\nXavier: Oh... I didn't know you two were outside, waiting for me... I'm sorry for delaying the meet up.\n${rival}: It's ok Xavier, we only just got here.\nXavier: Oh... Ok. It's nice to see both of you again.\n${rival}: Yes! How long has it been though... like two years?\nXavier: Yep... I'm sorry for... not meeting up with both of you during that time... both of you must have been so worried... haha.\n${rival}: It's nothing Xavier, right now we can make up for lost time.\nXavier: mhm.\n${rival}: Come on, let's go to Professor Orchid's lab.\nXavier: Alright... let's go.",
         "buttons": [
           {
             "id": "to-lab",
@@ -117,7 +117,7 @@
         "id": "after-battle",
         "priority": 3,
         "conditions": "equals:${rafflesia-lab-state};after-battle",
-        "text": "${rival}: That was a really fun battle! I'll be looking forward to battling you again, ${user}. But for now, we should better get going...\nHmm... Let's head to Route 1, shall we?\n\\*You and Xavier nod\\*",
+        "text": "${rival}: That was a really fun battle! I'll be looking forward to battling you again, ${user}, but for now, we should better get going...\nHmm... Let's head to Route 1, shall we?\n\\*You and Xavier nod\\*",
         "buttons": [
           {
             "id": "rafflesia-nav",
@@ -226,7 +226,9 @@
           {
             "id": "catch",
             "label": "Encounter a Pokemon",
-            "actions": []
+            "actions": [
+              "encounter:p.1"
+            ]
           }
         ]
       }
@@ -314,7 +316,7 @@
         "id": "init",
         "priority": 1,
         "conditions": "equals:${mizora-park-status};null",
-        "text": "${rival}: Hmm... I wonder what I should buy, ${m:there are so many new dresses I wanna try! I've even heard that some of these were designed by Elesa and Valerie! Eeeeek! I wonder if I could be as famous as Kalos Queen Serena is by wearing these~ Hehe~;f:I'm currently saving up some money to get a new laptop since my old one's battery got fried, but maybe spending a few pokedollars on the latest horror book series by Shauntal wouldn't hurt either. I heard the latest installment is about a young boy overcoming the grief of losing his younger sister... *sniff sniff* the thought of losing you already makes me worried!!}",
+        "text": "${rival}: Hmm... I wonder what I should buy, {m:there are so many new dresses I wanna try! I've even heard that some of these were designed by Elesa and Valerie! Eek! I wonder if I could be as famous as Kalos Queen Serena is by wearing these~ Hehe~;f:I'm currently saving up some money to get a new laptop since my old one's battery got fried, but maybe spending some money on the latest horror book series by Shauntal wouldn't hurt either. I heard the latest installment is about a young boy overcoming the grief of losing his younger sister... *sniff-sniff* the thought of losing you already makes me worried!}",
         "buttons": [
           {
             "id": "to-city",

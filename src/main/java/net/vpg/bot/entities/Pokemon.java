@@ -18,6 +18,8 @@ package net.vpg.bot.entities;
 import net.dv8tion.jda.api.utils.data.DataArray;
 import net.dv8tion.jda.api.utils.data.DataObject;
 import net.vpg.bot.framework.Util;
+import net.vpg.bot.pokemon.Stats;
+import net.vpg.bot.pokemon.Type;
 
 import java.util.*;
 import java.util.stream.Collectors;

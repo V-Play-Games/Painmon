@@ -32,4 +32,17 @@ public interface ButtonHandlers {
             Dialogue.get(e.getArg(0)).executeActions(e, e.getArg(1), e.getArg(2));
         }
     }
+
+    class Route implements ButtonHandler {
+        @Override
+        public String getName() {
+            return "route";
+        }
+
+        @Override
+        public void handle(BotButtonEvent e) {
+            if (!e.getArg(3).equals(e.getUser().getId())) return;
+            Dialogue.get(e.getArg(0)).executeActions(e, e.getArg(1), e.getArg(2));
+        }
+    }
 }

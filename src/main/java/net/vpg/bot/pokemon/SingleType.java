@@ -13,11 +13,13 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package net.vpg.bot.entities;
+package net.vpg.bot.pokemon;
 
+import net.vpg.bot.core.MiscUtil;
 import net.vpg.bot.framework.Util;
 
 import java.util.List;
+import java.util.Map;
 
 public enum SingleType implements Type {
     NORMAL(new TypeMatchup()
@@ -47,25 +49,58 @@ public enum SingleType implements Type {
         .put("ground", 0)
         .put("flying", 2)
         .put("dragon", 0.5)),
-    GRASS(new TypeMatchup()),
-    ICE(new TypeMatchup()),
-    FIGHTING(new TypeMatchup()),
-    POISON(new TypeMatchup()),
-    GROUND(new TypeMatchup()),
-    FLYING(new TypeMatchup()),
-    PSYCHIC(new TypeMatchup()),
-    BUG(new TypeMatchup()),
-    ROCK(new TypeMatchup()),
+    GRASS(new TypeMatchup()
+        .put("ground", 2)
+        .put("fire", 0.5)
+        .put("water", 2)),
+    ICE(new TypeMatchup()
+        .put("dragon", 2)
+        .put("ground", 2)),
+    FIGHTING(new TypeMatchup()
+        .put("normal", 2)
+        .put("psychic", 0.5)
+        .put("fairy", 0.5)
+        .put("dark", 2)
+        .put("steel", 2)
+        .put("ghost", 0)
+        .put("flying", 0.5)),
+    POISON(new TypeMatchup()
+        .put("steel", 0)),
+    GROUND(new TypeMatchup()
+        .put("electric", 2)
+        .put("steel", 2)
+        .put("poison", 2)
+        .put("flying", 0)),
+    FLYING(new TypeMatchup()
+        .put("ground", 2)
+        .put("fighting", 2)),
+    PSYCHIC(new TypeMatchup()
+        .put("dark", 0)
+        .put("poison", 0)),
+    BUG(new TypeMatchup()
+        .put("psychic", 2)),
+    ROCK(new TypeMatchup()
+        .put("flying", 2)
+        .put("grass", 0.5)),
     GHOST(new TypeMatchup()
         .put("normal", 0)
         .put("ghost", 2)
         .put("dark", 0.5)
         .put("psychic", 2)),
-    DRAGON(new TypeMatchup()),
-    DARK(new TypeMatchup()),
-    STEEL(new TypeMatchup()),
-    FAIRY(new TypeMatchup());
+    DRAGON(new TypeMatchup()
+        .put("dragon", 2)
+        .put("fairy", 0)),
+    DARK(new TypeMatchup()
+        .put("psychic", 2)
+        .put("ghost", 2)),
+    STEEL(new TypeMatchup()
+        .put("fairy", 2)),
+    FAIRY(new TypeMatchup()
+        .put("dragon", 2)
+        .put("dark", 2)
+        .put("fighting", 2));
 
+    static final Map<String, SingleType> map = MiscUtil.getEnumMap(SingleType.class);
     TypeMatchup matchup;
     List<Type> immune;
     List<Type> effective;
@@ -75,12 +110,7 @@ public enum SingleType implements Type {
     }
 
     public static SingleType fromId(String id) {
-        for (SingleType type : values()) {
-            if (type.getId().equals(id)) {
-                return type;
-            }
-        }
-        throw new IllegalArgumentException(id + " type?");
+        return map.get(id);
     }
 
     @Override

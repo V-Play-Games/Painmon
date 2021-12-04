@@ -17,6 +17,7 @@ package net.vpg.bot.core;
 
 import net.dv8tion.jda.api.events.interaction.ButtonClickEvent;
 import net.vpg.bot.entities.Dialogue;
+import net.vpg.bot.entities.Player;
 
 import java.util.HashMap;
 import java.util.Map;

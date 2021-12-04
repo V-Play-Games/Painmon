@@ -13,11 +13,13 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package net.vpg.bot.core;
+package net.vpg.bot.entities;
 
+import com.mongodb.client.model.Updates;
+import net.dv8tion.jda.api.utils.data.DataArray;
 import net.dv8tion.jda.api.utils.data.DataObject;
+import net.vpg.bot.pokemon.PlayerTeam;
 import net.vpg.bot.database.DatabaseObject;
-import net.vpg.bot.entities.EntityInfo;
 import net.vpg.bot.framework.Bot;
 
 import java.util.HashMap;
@@ -33,12 +35,14 @@ public class Player extends DatabaseObject {
     private int male;
     private String position;
     private PlayerTeam team;
+    private int monsCaught;
 
     public Player(DataObject data, Bot bot) {
         super(data, bot);
-        male = data.getInt("male");
-        position = data.getString("position");
-        team = new PlayerTeam(data.getArray("team"));
+        male = data.getInt("male", -1);
+        position = data.getString("position", "");
+        team = new PlayerTeam(data.optArray("team").orElseGet(DataArray::empty));
+        monsCaught = data.getInt("monsCaught", 0);
     }
 
     public Player(String id, Bot bot) {
@@ -46,7 +50,8 @@ public class Player extends DatabaseObject {
         this.male = -1;
         this.team = new PlayerTeam();
         this.data.put("male", male)
-            .put("positions", "")
+            .put("monsCaught", monsCaught)
+            .put("position", "")
             .put("party", team);
     }
 
@@ -63,6 +68,16 @@ public class Player extends DatabaseObject {
         player.ensureInserted();
         CACHE.put(id, player);
         return player;
+    }
+
+    public PlayablePokemon addPokemon(Pokemon base, int level) {
+        PlayablePokemon pokemon = new PlayablePokemon(base, id + ":" + monsCaught, bot);
+        int teamSize = team.getSize() + 1;
+        if (teamSize <= 6) {
+            team.setPokemon(teamSize, pokemon.setSlot(teamSize));
+        }
+        pokemon.setLevel(level);
+        return pokemon;
     }
 
     @Override
@@ -102,6 +117,17 @@ public class Player extends DatabaseObject {
         s = referencePattern.matcher(s).replaceAll(m -> getProperty(m.group(1)));
         s = genderBasedTextSplit.matcher(s).replaceAll(m -> this.isMale() ? m.group(1) : m.group(2));
         return s;
+    }
+
+    public int getMonsCaught() {
+        return monsCaught;
+    }
+
+    public Player incrementMonsCaught() {
+        this.monsCaught++;
+        data.put("monsCaught", monsCaught);
+        getCollection().updateOne(filter, Updates.inc("monsCaught", 1));
+        return this;
     }
 
     public String getProperty(String key) {
