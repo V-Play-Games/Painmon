@@ -23,6 +23,7 @@ import static net.vpg.bot.pokemon.Stat.*;
 
 @SuppressWarnings("unused")
 public enum Nature {
+    //@formatter:off
     //NAME | +++++ | ------ |
     HARDY  (ATTACK,  ATTACK ),
     LONELY (ATTACK,  DEFENSE),
@@ -50,6 +51,7 @@ public enum Nature {
     CAREFUL(SPEED,   SP_DEF ),
     QUIRKY (SPEED,   SPEED  ),
     UNKNOWN(null, null);
+    //@formatter:on
 
     static final Map<String, Nature> map = MiscUtil.getEnumMap(Nature.class);
     final Stat increasedStat;

@@ -25,10 +25,6 @@ import java.util.Map;
 public interface ActionHandler {
     Map<String, ActionHandler> handlers = new HashMap<>();
 
-    String getName();
-
-    void handle(ButtonClickEvent e, String arg);
-
     static void registerHandler(ActionHandler handler) {
         handlers.put(handler.getName(), handler);
     }
@@ -36,6 +32,10 @@ public interface ActionHandler {
     static ActionHandler get(String id) {
         return handlers.get(id);
     }
+
+    String getName();
+
+    void handle(ButtonClickEvent e, String arg);
 
     class Gender implements ActionHandler {
         @Override

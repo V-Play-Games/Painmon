@@ -26,6 +26,7 @@ import java.util.stream.Collectors;
 
 public class Pokemon implements Entity {
     public static final Map<String, Pokemon> CACHE = new HashMap<>();
+    public static final EntityInfo<Pokemon> INFO = new EntityInfo<>(Pokemon.class.getResource("pokemon.json"), Pokemon::new, CACHE);
     List<AbilitySlot> abilities;
     boolean isDefault;
     String species;
@@ -62,7 +63,7 @@ public class Pokemon implements Entity {
     }
 
     public static EntityInfo<Pokemon> getInfo() {
-        return new EntityInfo<>(Pokemon.class.getResource("pokemon.json"), Pokemon::new, CACHE);
+        return INFO;
     }
 
     public static Pokemon get(String id) {

@@ -24,7 +24,7 @@ import java.util.stream.Collectors;
 public class Route implements Entity {
     public static final Map<String, Route> CACHE = new HashMap<>();
     private final String id;
-    private final Map<Pokemon, Integer> rates = new HashMap<>();
+    private final Map<EntityReference<Pokemon>, Integer> rates = new HashMap<>();
 
     public Route(DataObject data) {
         this.id = data.getString("id");
@@ -32,7 +32,7 @@ public class Route implements Entity {
             .toMap()
             .entrySet()
             .stream()
-            .collect(Collectors.toMap(e -> Pokemon.get(e.getKey()), e -> (Integer) e.getValue())));
+            .collect(Collectors.toMap(e -> new EntityReference<>(Pokemon.INFO, e.getKey()), e -> (Integer) e.getValue())));
     }
 
     public static EntityInfo<Route> getInfo() {
@@ -44,7 +44,7 @@ public class Route implements Entity {
         return id;
     }
 
-    public Map<Pokemon, Integer> getRates() {
+    public Map<EntityReference<Pokemon>, Integer> getRates() {
         return rates;
     }
 }

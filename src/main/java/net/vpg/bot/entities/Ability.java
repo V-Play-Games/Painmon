@@ -23,8 +23,8 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class Ability implements Entity {
-    private static EntityInfo<Ability> info;
     public static final Map<String, Ability> CACHE = new HashMap<>();
+    private static EntityInfo<Ability> info;
     String id;
     String name;
     String effect;

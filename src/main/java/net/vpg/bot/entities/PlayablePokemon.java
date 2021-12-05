@@ -16,7 +16,6 @@
 package net.vpg.bot.entities;
 
 import net.dv8tion.jda.api.utils.data.DataObject;
-import net.vpg.bot.pokemon.Moveset;
 import net.vpg.bot.database.DatabaseObject;
 import net.vpg.bot.framework.Bot;
 import net.vpg.bot.pokemon.*;
