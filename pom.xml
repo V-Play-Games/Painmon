@@ -21,11 +21,10 @@
   <parent>
     <groupId>com.github.v-play-games</groupId>
     <artifactId>bot-parent</artifactId>
-    <version>0.0.1</version>
+    <version>0.0.2</version>
   </parent>
   <properties>
     <bot.framework.version>0.0.2-SNAPSHOT</bot.framework.version>
   </properties>
-
   <artifactId>painmon</artifactId>
 </project>
