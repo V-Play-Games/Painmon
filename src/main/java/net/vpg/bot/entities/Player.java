@@ -20,6 +20,8 @@ import net.dv8tion.jda.api.utils.data.DataArray;
 import net.dv8tion.jda.api.utils.data.DataObject;
 import net.vpg.bot.database.DatabaseObject;
 import net.vpg.bot.framework.Bot;
+import net.vpg.bot.pokemon.Bag;
+import net.vpg.bot.pokemon.Gender;
 import net.vpg.bot.pokemon.PlayerTeam;
 
 import java.util.HashMap;
@@ -31,15 +33,17 @@ public class Player extends DatabaseObject {
     public static final Pattern referencePattern = Pattern.compile("\\$\\{([A-Za-z-]+)}");
     public static final Pattern genderBasedTextSplit = Pattern.compile("\\{m:(.+);f:(.+)}");
     public static final Map<String, Player> CACHE = new HashMap<>();
+    private final PlayerTeam team;
+    private final Bag bag;
     // -1 if not set, 0 for female, 1 for male
-    private int male;
+    private Gender gender;
     private String position;
-    private PlayerTeam team;
     private int monsCaught;
 
     public Player(DataObject data, Bot bot) {
         super(data, bot);
-        male = data.getInt("male", -1);
+        gender = Gender.fromKey(data.getInt("gender", -1));
+        bag = new Bag(data.getObject("bag"));
         position = data.getString("position", "");
         team = new PlayerTeam(data.optArray("team").orElseGet(DataArray::empty));
         monsCaught = data.getInt("monsCaught", 0);
@@ -47,9 +51,11 @@ public class Player extends DatabaseObject {
 
     public Player(String id, Bot bot) {
         super(id, bot);
-        this.male = -1;
+        this.gender = Gender.GENDERLESS;
         this.team = new PlayerTeam();
-        this.data.put("male", male)
+        this.bag = new Bag(DataObject.empty());
+        this.data.put("gender", gender.ordinal())
+            .put("bag", bag)
             .put("monsCaught", monsCaught)
             .put("position", "")
             .put("party", team);
@@ -70,6 +76,10 @@ public class Player extends DatabaseObject {
         return player;
     }
 
+    public Bag getBag() {
+        return bag;
+    }
+
     public PlayablePokemon addPokemon(Pokemon base, int level) {
         PlayablePokemon pokemon = new PlayablePokemon(base, id + ":" + monsCaught, bot);
         int teamSize = team.getSize() + 1;
@@ -85,17 +95,13 @@ public class Player extends DatabaseObject {
         return COLLECTION_NAME;
     }
 
-    public int getMale() {
-        return male;
+    public Gender getGender() {
+        return gender;
     }
 
-    public boolean isMale() {
-        return male == 1;
-    }
-
-    public Player setMale(int male) {
-        this.male = male;
-        update("male", male);
+    public Player setGender(Gender gender) {
+        this.gender = gender;
+        update("gender", gender.ordinal());
         return this;
     }
 
@@ -115,7 +121,7 @@ public class Player extends DatabaseObject {
 
     public String resolveReferences(String s) {
         s = referencePattern.matcher(s).replaceAll(m -> getProperty(m.group(1)));
-        s = genderBasedTextSplit.matcher(s).replaceAll(m -> this.isMale() ? m.group(1) : m.group(2));
+        s = genderBasedTextSplit.matcher(s).replaceAll(m -> gender.isMale() ? m.group(1) : m.group(2));
         return s;
     }
 
@@ -133,17 +139,17 @@ public class Player extends DatabaseObject {
     public String getProperty(String key) {
         switch (key) {
             case "rival":
-                return this.isMale() ? "Amy" : "Toby";
+                return gender.isMale() ? "Amy" : "Toby";
             case "rival-he-she":
-                return this.isMale() ? "she" : "he";
+                return gender.isMale() ? "she" : "he";
             case "rival-him-her":
-                return this.isMale() ? "her" : "him";
+                return gender.isMale() ? "her" : "him";
             case "user-he-she":
-                return this.isMale() ? "he" : "she";
+                return gender.isMale() ? "he" : "she";
             case "user-him-her":
-                return this.isMale() ? "him" : "her";
+                return gender.isMale() ? "him" : "her";
             case "user":
-                return this.getMention();
+                return getMention();
             case "user-id":
                 return String.valueOf(id);
             default:

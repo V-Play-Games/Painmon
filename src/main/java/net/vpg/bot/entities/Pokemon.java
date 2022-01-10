@@ -18,7 +18,7 @@ package net.vpg.bot.entities;
 import net.dv8tion.jda.api.utils.data.DataArray;
 import net.dv8tion.jda.api.utils.data.DataObject;
 import net.vpg.bot.framework.Util;
-import net.vpg.bot.pokemon.Stats;
+import net.vpg.bot.pokemon.StatMapping;
 import net.vpg.bot.pokemon.Type;
 
 import java.util.*;
@@ -30,8 +30,8 @@ public class Pokemon implements Entity {
     List<AbilitySlot> abilities;
     boolean isDefault;
     String species;
-    Stats evYield;
-    Stats baseStats;
+    StatMapping evYield;
+    StatMapping baseStats;
     Type type;
     String id;
     int expYield;
@@ -46,8 +46,8 @@ public class Pokemon implements Entity {
             .collect(Collectors.toList());
         isDefault = data.getBoolean("default");
         species = data.getString("species");
-        evYield = new Stats(data.getObject("ev_yield"));
-        baseStats = new Stats(data.getObject("stats"));
+        evYield = new StatMapping(data.getObject("ev_yield"));
+        baseStats = new StatMapping(data.getObject("stats"));
         type = Type.fromId(data.getString("type"));
         id = data.getString("name");
         name = Util.toProperCase(String.join(" ", id.split("-")));
@@ -82,11 +82,11 @@ public class Pokemon implements Entity {
         return species;
     }
 
-    public Stats getEvYield() {
+    public StatMapping getEvYield() {
         return evYield;
     }
 
-    public Stats getBaseStats() {
+    public StatMapping getBaseStats() {
         return baseStats;
     }
 

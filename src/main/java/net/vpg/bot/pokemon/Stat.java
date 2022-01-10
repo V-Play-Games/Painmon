@@ -16,5 +16,20 @@
 package net.vpg.bot.pokemon;
 
 public enum Stat {
-    HP, ATTACK, DEFENSE, SP_ATK, SP_DEF, SPEED;
+    HP("hp"),
+    ATTACK("attack"),
+    DEFENSE("defense"),
+    SP_ATK("special-attack"),
+    SP_DEF("special-defense"),
+    SPEED("speed");
+
+    public final String KEY;
+
+    Stat(String key) {
+        this.KEY = key;
+    }
+
+    public String getKey() {
+        return KEY;
+    }
 }

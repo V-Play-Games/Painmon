@@ -16,7 +16,6 @@
 package net.vpg.bot.entities;
 
 import net.dv8tion.jda.api.entities.Emoji;
-import net.dv8tion.jda.api.events.interaction.ButtonClickEvent;
 import net.dv8tion.jda.api.interactions.Interaction;
 import net.dv8tion.jda.api.interactions.components.ActionRow;
 import net.dv8tion.jda.api.interactions.components.Button;
@@ -25,19 +24,17 @@ import net.dv8tion.jda.api.utils.data.DataObject;
 import net.vpg.bot.commands.CommandReceivedEvent;
 import net.vpg.bot.core.ActionHandler;
 import net.vpg.bot.core.Condition;
+import net.vpg.bot.framework.BotButtonEvent;
 import net.vpg.bot.framework.Util;
 
 import javax.annotation.Nonnull;
-import java.util.Comparator;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 import java.util.stream.Collectors;
 
 public class Dialogue implements Entity {
     public static final Map<String, Dialogue> CACHE = new HashMap<>();
-    private String id;
-    private Map<String, State> states;
+    private final String id;
+    private final Map<String, State> states;
 
     public Dialogue(DataObject data) {
         this.id = data.getString("id");
@@ -96,7 +93,7 @@ public class Dialogue implements Entity {
             .orElseThrow(RuntimeException::new);
     }
 
-    public void executeActions(ButtonClickEvent e, String stateId, String actionId) {
+    public void executeActions(BotButtonEvent e, String stateId, String actionId) {
         getState(stateId).executeActions(e, actionId);
     }
 
@@ -108,36 +105,35 @@ public class Dialogue implements Entity {
     }
 
     public class State implements Entity {
-        private String id;
-        private int priority;
-        private List<String> conditions;
-        private DataArray interaction_actions;
-        private String text;
-        private Map<String, List<String>> buttonActions;
-        private DataArray rawButtons;
-        private List<Button> buttons;
+        private final DataObject data;
+        private final String id;
+        private final int priority;
+        private final List<String> conditions;
+        private final DataArray defaultActions;
+        private final String text;
+        private final Map<String, List<String>> buttonActions;
+        private final List<Button> buttons;
 
         public State(DataObject data) {
+            this.data = data;
             this.id = data.getString("id");
             this.text = data.getString("text");
             this.priority = data.getInt("priority");
             this.conditions = List.of(data.getString("conditions").split(";;;"));
-            this.interaction_actions = data.optArray("interaction-actions").orElseGet(DataArray::empty);
+            this.defaultActions = data.optArray("default-actions").orElseGet(DataArray::empty);
             this.buttonActions = new HashMap<>();
-            this.rawButtons = data.getArray("buttons");
-            this.buttons = this.rawButtons.stream(DataArray::getObject)
-                .map(button -> {
-                    String buttonId = button.getString("id");
-                    buttonActions.put(buttonId, button.getArray("actions")
-                        .stream(DataArray::getString)
-                        .collect(Collectors.toList()));
-                    if (button.hasKey("emote")) {
-                        return Button.primary(buttonId, Emoji.fromMarkdown(button.getString("emote")));
-                    } else {
-                        return Button.primary(buttonId, button.getString("label"));
-                    }
-                })
-                .collect(Collectors.toList());
+            this.buttons = new ArrayList<>();
+            data.getArray("buttons").stream(DataArray::getObject).map(button -> {
+                String buttonId = button.getString("id");
+                buttonActions.put(buttonId, button.getArray("actions")
+                    .stream(DataArray::getString)
+                    .collect(Collectors.toList()));
+                if (button.hasKey("emote")) {
+                    return Button.primary(buttonId, Emoji.fromMarkdown(button.getString("emote")));
+                } else {
+                    return Button.primary(buttonId, button.getString("label"));
+                }
+            }).forEach(buttons::add);
         }
 
         public Dialogue getParent() {
@@ -176,9 +172,9 @@ public class Dialogue implements Entity {
             return buttonActions.get(actionId);
         }
 
-        public void executeActions(ButtonClickEvent e, String actionId) {
+        public void executeActions(BotButtonEvent e, String actionId) {
             getButtonActions(actionId).forEach(s -> ActionHandler.get(Util.getMethod(s)).handle(e, Util.getArgs(s)));
-            interaction_actions.stream(DataArray::getString).forEach(s -> ActionHandler.get(Util.getMethod(s)).handle(e, Util.getArgs(s)));
+            defaultActions.stream(DataArray::getString).forEach(s -> ActionHandler.get(Util.getMethod(s)).handle(e, Util.getArgs(s)));
         }
 
         public ActionRow getActionRow(String userId) {
@@ -196,13 +192,7 @@ public class Dialogue implements Entity {
         @Nonnull
         @Override
         public DataObject toData() {
-            return Entity.super.toData()
-                .put("priority", priority)
-                .put("conditions", String.join(";;;", conditions))
-                .put("interaction_actions", interaction_actions)
-                .put("text", text)
-                .put("buttonActions", buttonActions)
-                .put("buttons", rawButtons);
+            return data;
         }
     }
 }

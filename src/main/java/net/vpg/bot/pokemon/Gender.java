@@ -29,4 +29,16 @@ public enum Gender {
                 return FEMALE;
         }
     }
+
+    public boolean isGenderless() {
+        return this == GENDERLESS;
+    }
+
+    public boolean isMale() {
+        return this == MALE;
+    }
+
+    public boolean isFemale() {
+        return this == FEMALE;
+    }
 }

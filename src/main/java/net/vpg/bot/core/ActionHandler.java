@@ -15,12 +15,20 @@
  */
 package net.vpg.bot.core;
 
-import net.dv8tion.jda.api.events.interaction.ButtonClickEvent;
+import net.dv8tion.jda.api.EmbedBuilder;
 import net.vpg.bot.entities.Dialogue;
 import net.vpg.bot.entities.Player;
+import net.vpg.bot.entities.Route;
+import net.vpg.bot.framework.BotButtonEvent;
+import net.vpg.bot.framework.Ratelimit;
+import net.vpg.bot.framework.Ratelimiter;
+import net.vpg.bot.framework.Sender;
+import net.vpg.bot.pokemon.Gender;
 
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Random;
+import java.util.concurrent.TimeUnit;
 
 public interface ActionHandler {
     Map<String, ActionHandler> handlers = new HashMap<>();
@@ -35,57 +43,100 @@ public interface ActionHandler {
 
     String getName();
 
-    void handle(ButtonClickEvent e, String arg);
+    void handle(BotButtonEvent e, String arg);
 
-    class Gender implements ActionHandler {
+    class GenderHandler implements ActionHandler {
         @Override
         public String getName() {
             return "gender";
         }
 
         @Override
-        public void handle(ButtonClickEvent e, String arg) {
+        public void handle(BotButtonEvent e, String arg) {
             Player player = Player.get(e.getUser().getId());
-            if (player.getMale() == -1) {
-                player.setMale(arg.equals("m") ? 1 : 0);
+            if (player.getGender().isGenderless()) {
+                player.setGender(arg.equals("m") ? Gender.MALE : Gender.FEMALE);
             }
         }
     }
 
-    class Area implements ActionHandler {
+    class AreaHandler implements ActionHandler {
         @Override
         public String getName() {
             return "area";
         }
 
         @Override
-        public void handle(ButtonClickEvent e, String arg) {
+        public void handle(BotButtonEvent e, String arg) {
             Dialogue.get(arg).send(e);
         }
     }
 
-    class Starter implements ActionHandler {
+    class StarterHandler implements ActionHandler {
         @Override
         public String getName() {
             return "starter";
         }
 
         @Override
-        public void handle(ButtonClickEvent e, String arg) {
+        public void handle(BotButtonEvent e, String arg) {
         }
     }
 
-    class Property implements ActionHandler {
+    class PropertyHandler implements ActionHandler {
         @Override
         public String getName() {
             return "property";
         }
 
         @Override
-        public void handle(ButtonClickEvent e, String arg) {
+        public void handle(BotButtonEvent e, String arg) {
             Player player = Player.get(e.getUser().getId());
             String[] args = arg.split(";");
             player.update(args[0], args[1]);
+        }
+    }
+
+    class EncounterHandler implements ActionHandler, Ratelimiter {
+        private final Map<Long, Ratelimit> limits = new HashMap<>();
+        private final long cooldown = TimeUnit.SECONDS.toMillis(30);
+        private final Random random = new Random();
+
+        @Override
+        public String getName() {
+            return "encounter";
+        }
+
+        @Override
+        public void handle(BotButtonEvent e, String arg) {
+            if (ifRatelimited(e.getIdLong(), limit ->
+                e.reply("You have to wait **" + limit.getCooldownString() + "** before encountering another Pokemon!").queue())) {
+                return;
+            }
+            if (random.nextInt(10) != 9) {
+                e.replyEmbeds(new EmbedBuilder()
+                    .setTitle("A wild " + Route.get(arg).spawn().getName() + " appeared!")
+                    .setDescription("Click the buttons to take an action!")
+                    .build()).queue();
+            } else {
+                e.reply("No wild pokemon in sight... Try again later!").queue();
+            }
+            ratelimit(e.getIdLong());
+        }
+
+        @Override
+        public Map<Long, Ratelimit> getRatelimited() {
+            return limits;
+        }
+
+        @Override
+        public long getCooldown() {
+            return cooldown;
+        }
+
+        @Override
+        public void onRatelimit(Sender e, Ratelimit limit) {
+            e.send("You have to wait **" + limit.getCooldownString() + "** before encountering another Pokemon!").queue();
         }
     }
 }

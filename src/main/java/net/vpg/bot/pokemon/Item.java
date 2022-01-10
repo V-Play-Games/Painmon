@@ -15,8 +15,41 @@
  */
 package net.vpg.bot.pokemon;
 
-public class Item {
-    public static Item of(String id) {
-        return null;
+import net.dv8tion.jda.api.utils.data.DataObject;
+import net.vpg.bot.entities.Entity;
+import net.vpg.bot.entities.EntityInfo;
+
+import javax.annotation.Nonnull;
+import java.util.HashMap;
+import java.util.Map;
+
+public class Item implements Entity {
+    private static final Map<String, Item> CACHE = new HashMap<>();
+    private static final EntityInfo<Item> INFO = new EntityInfo<>(Entity.class.getResource("items.json"), Item::new, CACHE);
+    private final DataObject data;
+    private final String id;
+
+    public Item(DataObject data) {
+        this.data = data;
+        this.id = data.getString("id");
+    }
+
+    public static EntityInfo<Item> getInfo() {
+        return INFO;
+    }
+
+    public static Item get(String id) {
+        return CACHE.get(id);
+    }
+
+    @Override
+    public String getId() {
+        return id;
+    }
+
+    @Nonnull
+    @Override
+    public DataObject toData() {
+        return data;
     }
 }

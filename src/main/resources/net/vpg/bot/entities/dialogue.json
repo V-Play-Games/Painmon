@@ -23,7 +23,7 @@
             ]
           }
         ],
-        "interaction-actions": [
+        "default-actions": [
           "property:welcome-state;gender-chosen",
           "area:paseagon.welcome"
         ]
@@ -92,7 +92,7 @@
             ]
           }
         ],
-        "interaction-actions": [
+        "default-actions": [
           "property:rafflesia-lab-state;starter-chosen",
           "area:paseagon.rafflesia.lab"
         ]
@@ -268,7 +268,7 @@
           },
           {
             "id": "to-gym",
-            "label": "Mizora's Gym",
+            "label": "Mizora City Gym",
             "actions": [
               "area:paseagon.mizora.gym"
             ]

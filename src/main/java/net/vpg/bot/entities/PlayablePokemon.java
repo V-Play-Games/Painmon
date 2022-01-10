@@ -28,19 +28,19 @@ import java.util.Map;
 public class PlayablePokemon extends DatabaseObject {
     public static final String COLLECTION_NAME = "pokemon";
     public static final Map<String, PlayablePokemon> CACHE = new HashMap<>();
-    final Moveset moves;
-    final DataObject evs;
-    final DataObject ivs;
-    Pokemon base;
-    int slot;
-    String nickname;
-    int playerSpecificId;
-    int level;
-    int exp;
-    boolean shiny;
-    Nature nature;
-    Item heldItem;
-    Gender gender;
+    protected final Moveset moves;
+    protected final StatMapping evs;
+    protected final StatMapping ivs;
+    protected final Pokemon base;
+    protected final int playerSpecificId;
+    protected int slot;
+    protected String nickname;
+    protected int level;
+    protected int exp;
+    protected boolean shiny;
+    protected Nature nature;
+    protected Item heldItem;
+    protected Gender gender;
 
     public PlayablePokemon(DataObject data, Bot bot) {
         super(data, bot);
@@ -52,10 +52,10 @@ public class PlayablePokemon extends DatabaseObject {
         this.exp = data.getInt("exp");
         this.shiny = data.getBoolean("shiny");
         this.moves = new Moveset(data.getArray("moves"));
-        this.evs = data.getObject("evs");
-        this.ivs = data.getObject("ivs");
+        this.evs = new StatMapping(data.getObject("evs"));
+        this.ivs = new StatMapping(data.getObject("ivs"));
         this.nature = Nature.fromKey(data.getString("nature"));
-        this.heldItem = Item.of(data.getString("heldItem"));
+        this.heldItem = Item.get(data.getString("heldItem"));
         this.gender = Gender.fromKey(data.getInt("gender"));
     }
 
@@ -63,8 +63,8 @@ public class PlayablePokemon extends DatabaseObject {
         super(id, bot);
         this.base = base;
         this.moves = new Moveset();
-        this.evs = DataObject.empty();
-        this.ivs = DataObject.empty();
+        this.evs = new StatMapping();
+        this.ivs = new StatMapping();
         this.playerSpecificId = Integer.parseInt(id.split(":")[0]);
         this.data
             .put("slot", slot)
@@ -109,11 +109,11 @@ public class PlayablePokemon extends DatabaseObject {
         return base.getSpecies();
     }
 
-    public Stats getEvYield() {
+    public StatMapping getEvYield() {
         return base.getEvYield();
     }
 
-    public Stats getBaseStats() {
+    public StatMapping getBaseStats() {
         return base.getBaseStats();
     }
 
@@ -196,22 +196,22 @@ public class PlayablePokemon extends DatabaseObject {
         return this;
     }
 
-    public DataObject getEvs() {
+    public StatMapping getEvs() {
         return evs;
     }
 
-    public PlayablePokemon setEv(String stat, int ev) {
-        this.evs.put(stat, ev);
+    public PlayablePokemon setEv(Stat stat, int ev) {
+        this.evs.setStat(stat, ev);
         update("evs", evs);
         return this;
     }
 
-    public DataObject getIvs() {
+    public StatMapping getIvs() {
         return ivs;
     }
 
-    public PlayablePokemon setIv(String stat, int iv) {
-        this.ivs.put(stat, iv);
+    public PlayablePokemon setIv(Stat stat, int iv) {
+        this.ivs.setStat(stat, iv);
         update("ivs", ivs);
         return this;
     }
