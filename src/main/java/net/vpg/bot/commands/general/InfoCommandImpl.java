@@ -17,7 +17,7 @@ package net.vpg.bot.commands.general;
 
 import net.dv8tion.jda.api.EmbedBuilder;
 import net.dv8tion.jda.api.entities.MessageEmbed;
-import net.vpg.bot.commands.CommandReceivedEvent;
+import net.vpg.bot.commands.event.CommandReceivedEvent;
 import net.vpg.bot.framework.Bot;
 
 import java.time.Instant;

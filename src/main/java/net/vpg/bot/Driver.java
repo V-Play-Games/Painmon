@@ -27,6 +27,7 @@ public class Driver {
         properties.put("token", System.getenv("TOKEN"));
         Bot bot = new Bot(properties);
         properties.getArray("managers").stream(DataArray::getLong).forEach(bot::addManager);
+        // mongodb+srv://<user>:<password>@<cluster-name>.vievu.mongodb.net/<db-name>?retryWrites=true&w=majority
         bot.setDatabase(new Database(System.getenv("DB_URL"), "BotData", bot));
         bot.loadAllInstancesOf(ActionHandler.class, ActionHandler::registerHandler);
         bot.login();

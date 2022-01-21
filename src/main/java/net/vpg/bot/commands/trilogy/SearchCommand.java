@@ -18,7 +18,10 @@ package net.vpg.bot.commands.trilogy;
 import net.dv8tion.jda.api.EmbedBuilder;
 import net.dv8tion.jda.api.interactions.commands.OptionType;
 import net.vpg.bot.commands.BotCommandImpl;
-import net.vpg.bot.commands.CommandReceivedEvent;
+import net.vpg.bot.commands.event.CommandReceivedEvent;
+import net.vpg.bot.commands.event.SlashCommandReceivedEvent;
+import net.vpg.bot.commands.event.TextCommandReceivedEvent;
+import net.vpg.bot.entities.Ability;
 import net.vpg.bot.entities.Move;
 import net.vpg.bot.entities.Pokemon;
 import net.vpg.bot.framework.Bot;
@@ -33,12 +36,12 @@ public class SearchCommand extends BotCommandImpl {
     }
 
     @Override
-    public void onCommandRun(CommandReceivedEvent e) {
+    public void onTextCommandRun(TextCommandReceivedEvent e) {
         execute(e, String.join(" ", e.getArgsFrom(1)));
     }
 
     @Override
-    public void onSlashCommandRun(CommandReceivedEvent e) {
+    public void onSlashCommandRun(SlashCommandReceivedEvent e) {
         execute(e, e.getString("term"));
     }
 
@@ -77,7 +80,7 @@ public class SearchCommand extends BotCommandImpl {
             e.sendEmbeds(
                 new EmbedBuilder()
                     .setTitle(m.getName())
-                    .setDescription("__**General Info:**__" +
+                    .setDescription("__**General Info**__" +
                         "\n**Description**: " + m.getDescription() +
                         "\n**Type**: " + m.getType().getName() +
                         "\n**Effect**: " + m.getEffect() +
@@ -87,8 +90,19 @@ public class SearchCommand extends BotCommandImpl {
                         "\n**Base PP**: " + m.getPP() +
                         "\n**Priority**: " + (m.getPriority() > 0 ? "+" : "") + m.getPriority() +
                         "\n**Target**: " + m.getTarget().getName() +
-                        "\n\n__**Metadata:**__\n" + m.getMetadata().toString()).build()
+                        "\n\n__**Metadata**__\n" + m.getMetadata().toString()).build()
             ).queue();
+            return;
         }
+        Ability a = Ability.get(toSearch);
+        if (a != null) {
+            e.sendEmbeds(new EmbedBuilder()
+                .setTitle(a.getName())
+                .setDescription(String.format("**Description**: %s\n**Effect**: %s", a.getDescription(), a.getEffect()))
+                .build()
+            ).queue();
+            return;
+        }
+        e.send("Could not find data for " + toSearch).queue();
     }
 }

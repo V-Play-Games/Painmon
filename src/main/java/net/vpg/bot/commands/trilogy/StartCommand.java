@@ -16,8 +16,8 @@
 package net.vpg.bot.commands.trilogy;
 
 import net.vpg.bot.commands.BotCommandImpl;
-import net.vpg.bot.commands.CommandReceivedEvent;
 import net.vpg.bot.commands.NoArgsCommand;
+import net.vpg.bot.commands.event.CommandReceivedEvent;
 import net.vpg.bot.entities.Dialogue;
 import net.vpg.bot.entities.Player;
 import net.vpg.bot.framework.Bot;
@@ -30,7 +30,7 @@ public class StartCommand extends BotCommandImpl implements NoArgsCommand {
     @Override
     public boolean runChecks(CommandReceivedEvent e) {
         if (Player.get(e.getUser().getId()) != null) {
-            e.send("You have already started your journey, Go on and play the game using `v!game` command").queue();
+            e.send("You have already started your journey, Go on and play the game using `" + e.getPrefix() + "game` command").queue();
             return false;
         }
         return true;

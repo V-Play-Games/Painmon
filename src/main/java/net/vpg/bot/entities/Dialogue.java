@@ -21,7 +21,7 @@ import net.dv8tion.jda.api.interactions.components.ActionRow;
 import net.dv8tion.jda.api.interactions.components.Button;
 import net.dv8tion.jda.api.utils.data.DataArray;
 import net.dv8tion.jda.api.utils.data.DataObject;
-import net.vpg.bot.commands.CommandReceivedEvent;
+import net.vpg.bot.commands.event.CommandReceivedEvent;
 import net.vpg.bot.core.ActionHandler;
 import net.vpg.bot.core.Condition;
 import net.vpg.bot.framework.BotButtonEvent;
