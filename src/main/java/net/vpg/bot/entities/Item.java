@@ -13,19 +13,17 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package net.vpg.bot.pokemon;
+package net.vpg.bot.entities;
 
 import net.dv8tion.jda.api.utils.data.DataObject;
-import net.vpg.bot.entities.Entity;
-import net.vpg.bot.entities.EntityInfo;
 
 import javax.annotation.Nonnull;
 import java.util.HashMap;
 import java.util.Map;
 
 public class Item implements Entity {
-    private static final Map<String, Item> CACHE = new HashMap<>();
-    private static final EntityInfo<Item> INFO = new EntityInfo<>(Entity.class.getResource("items.json"), Item::new, CACHE);
+    private static final Map<String, Item> cache = new HashMap<>();
+    private static final EntityInfo<Item> INFO = new EntityInfo<>(Entity.class.getResource("item.json"), Item::new, cache);
     private final DataObject data;
     private final String id;
 
@@ -39,7 +37,7 @@ public class Item implements Entity {
     }
 
     public static Item get(String id) {
-        return CACHE.get(id);
+        return cache.get(id);
     }
 
     @Override
