@@ -2,6 +2,7 @@ package net.vpg.bot.pokemon;
 
 import net.dv8tion.jda.api.utils.data.DataObject;
 import net.dv8tion.jda.api.utils.data.SerializableData;
+import net.vpg.bot.entities.Item;
 
 import javax.annotation.Nonnull;
 import java.util.Map;
@@ -33,7 +34,7 @@ public class Bag implements SerializableData {
 
     public void addItemCount(String id, int delta) {
         Item item = Item.get(id);
-        Integer count = items.getOrDefault(item, 0);
+        int count = items.getOrDefault(item, 0);
         items.put(item, count + delta);
     }
 
