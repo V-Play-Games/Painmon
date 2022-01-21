@@ -97,6 +97,20 @@ public interface ActionHandler {
         }
     }
 
+    class BagHandler implements ActionHandler {
+        @Override
+        public String getName() {
+            return "bag";
+        }
+
+        @Override
+        public void handle(BotButtonEvent e, String arg) {
+            Player player = Player.get(e.getUser().getId());
+            String[] args = arg.split(";");
+            player.getBag().addItemCount(args[0], Integer.parseInt(args[1]));
+        }
+    }
+
     class EncounterHandler implements ActionHandler, Ratelimiter {
         private final Map<Long, Ratelimit> limits = new HashMap<>();
         private final long cooldown = TimeUnit.SECONDS.toMillis(30);

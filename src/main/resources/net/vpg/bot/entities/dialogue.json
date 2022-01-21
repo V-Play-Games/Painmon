@@ -198,6 +198,8 @@
             "label": "Explore Route 1",
             "actions": [
               "property:catch-tutorial-passed;true",
+              "bag:pokedex;+1",
+              "bag:pokeball;+20",
               "area:paseagon.route.1"
             ]
           }
