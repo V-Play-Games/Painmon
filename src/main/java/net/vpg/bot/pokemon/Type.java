@@ -15,7 +15,13 @@
  */
 package net.vpg.bot.pokemon;
 
+import org.apache.commons.collections4.map.CaseInsensitiveMap;
+
+import java.util.Collections;
 import java.util.List;
+import java.util.Map;
+import java.util.function.Predicate;
+import java.util.stream.Collectors;
 
 public interface Type {
     static Type fromId(String id) {
@@ -26,15 +32,97 @@ public interface Type {
 
     String getId();
 
-    List<Type> immuneTo();
+    List<Type> immuneAgainst();
 
     List<Type> effectiveAgainst();
 
-    TypeMatchup getMatchup();
+    Matchup getMatchup();
 
-    default double effectivenessAgainst(String type) {
-        return getMatchup().effectivenessAgainst(type);
+    default double multiplierAgainst(Type type) {
+        return multiplierAgainst(type.getId());
+    }
+
+    default double multiplierAgainst(String type) {
+        return getMatchup().multiplierAgainst(type);
     }
 
     double multiplierReceivingDamage(Type type);
+
+    class Matchup {
+        private final Map<String, Multiplier> matchup;
+
+        public Matchup(Map<String, Multiplier> matchup) {
+            this.matchup = Collections.unmodifiableMap(matchup);
+        }
+
+        public double multiplierAgainst(String type) {
+            return matchup.getOrDefault(type, Multiplier.NEUTRAL).value;
+        }
+
+        public Map<String, Multiplier> getMap() {
+            return matchup;
+        }
+
+        public List<Type> filter(Predicate<Multiplier> multiplier) {
+            return matchup.entrySet()
+                .stream()
+                .filter(e -> multiplier.test(e.getValue()))
+                .map(Map.Entry::getKey)
+                .map(SingleType::fromId)
+                .collect(Collectors.toList());
+        }
+
+        public List<Type> filter(Multiplier filter) {
+            return filter(multiplier -> multiplier == filter);
+        }
+
+        public static class Builder {
+            private final Map<String, Multiplier> matchup = new CaseInsensitiveMap<>();
+
+            public Builder put(String type, double multiplier) {
+                return put(type, Multiplier.of(multiplier));
+            }
+
+            public Builder put(String type, Multiplier multiplier) {
+                matchup.put(type, multiplier);
+                return this;
+            }
+
+            public Builder put(Type type, Multiplier multiplier) {
+                return put(type.getId(), multiplier);
+            }
+
+            public Matchup build() {
+                return new Matchup(matchup);
+            }
+        }
+    }
+
+    enum Multiplier {
+        DOUBLE_EFFECTIVE(4),
+        EFFECTIVE(2),
+        NEUTRAL(1),
+        IMMUNE(0),
+        RESISTANT(0.5),
+        DOUBLE_RESISTANT(0.25);
+        private static final Multiplier[] multipliers = values();
+        private final double value;
+
+        Multiplier(double value) {
+            this.value = value;
+        }
+
+        public static Multiplier of(double value) {
+            for (Multiplier multiplier : multipliers) {
+                if (multiplier.value == value) {
+                    return multiplier;
+                }
+            }
+            throw new IllegalArgumentException("No multiplier for " + value);
+        }
+
+        public double getValue() {
+            return value;
+        }
+    }
 }

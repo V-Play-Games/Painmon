@@ -21,96 +21,160 @@ import net.vpg.bot.framework.Util;
 import java.util.List;
 import java.util.Map;
 
+import static net.vpg.bot.pokemon.Type.Multiplier.*;
+
 public enum SingleType implements Type {
-    NORMAL(new TypeMatchup()
-        .put("rock", 0.5)
-        .put("ghost", 0)
-        .put("steel", 0.5)),
-    FIRE(new TypeMatchup()
-        .put("fire", 0.5)
-        .put("water", 0.5)
-        .put("grass", 2)
-        .put("ice", 2)
-        .put("bug", 2)
-        .put("rock", 0.5)
-        .put("dragon", 0.5)
-        .put("steel", 2)),
-    WATER(new TypeMatchup()
-        .put("fire", 2)
-        .put("water", 0.5)
-        .put("grass", 0.5)
-        .put("ground", 2)
-        .put("rock", 2)
-        .put("dragon", 0.5)),
-    ELECTRIC(new TypeMatchup()
-        .put("water", 2)
-        .put("electric", 0.5)
-        .put("grass", 0.5)
-        .put("ground", 0)
-        .put("flying", 2)
-        .put("dragon", 0.5)),
-    GRASS(new TypeMatchup()
-        .put("ground", 2)
-        .put("fire", 0.5)
-        .put("water", 2)),
-    ICE(new TypeMatchup()
-        .put("dragon", 2)
-        .put("ground", 2)),
-    FIGHTING(new TypeMatchup()
-        .put("normal", 2)
-        .put("psychic", 0.5)
-        .put("fairy", 0.5)
-        .put("dark", 2)
-        .put("steel", 2)
-        .put("ghost", 0)
-        .put("flying", 0.5)),
-    POISON(new TypeMatchup()
-        .put("steel", 0)),
-    GROUND(new TypeMatchup()
-        .put("electric", 2)
-        .put("steel", 2)
-        .put("poison", 2)
-        .put("flying", 0)),
-    FLYING(new TypeMatchup()
-        .put("ground", 2)
-        .put("fighting", 2)),
-    PSYCHIC(new TypeMatchup()
-        .put("dark", 0)
-        .put("poison", 0)),
-    BUG(new TypeMatchup()
-        .put("psychic", 2)),
-    ROCK(new TypeMatchup()
-        .put("flying", 2)
-        .put("grass", 0.5)),
-    GHOST(new TypeMatchup()
-        .put("normal", 0)
-        .put("ghost", 2)
-        .put("dark", 0.5)
-        .put("psychic", 2)),
-    DRAGON(new TypeMatchup()
-        .put("dragon", 2)
-        .put("fairy", 0)),
-    DARK(new TypeMatchup()
-        .put("psychic", 2)
-        .put("ghost", 2)),
-    STEEL(new TypeMatchup()
-        .put("fairy", 2)),
-    FAIRY(new TypeMatchup()
-        .put("dragon", 2)
-        .put("dark", 2)
-        .put("fighting", 2));
+    NORMAL(new Matchup.Builder()
+        .put("rock", RESISTANT)
+        .put("ghost", IMMUNE)
+        .put("steel", RESISTANT)),
+    FIRE(new Matchup.Builder()
+        .put("fire", RESISTANT)
+        .put("water", RESISTANT)
+        .put("grass", EFFECTIVE)
+        .put("ice", EFFECTIVE)
+        .put("bug", EFFECTIVE)
+        .put("rock", RESISTANT)
+        .put("dragon", RESISTANT)
+        .put("steel", EFFECTIVE)),
+    WATER(new Matchup.Builder()
+        .put("fire", EFFECTIVE)
+        .put("water", RESISTANT)
+        .put("grass", RESISTANT)
+        .put("ground", EFFECTIVE)
+        .put("rock", EFFECTIVE)
+        .put("dragon", RESISTANT)),
+    ELECTRIC(new Matchup.Builder()
+        .put("water", EFFECTIVE)
+        .put("electric", RESISTANT)
+        .put("grass", RESISTANT)
+        .put("ground", IMMUNE)
+        .put("flying", EFFECTIVE)
+        .put("dragon", RESISTANT)),
+    GRASS(new Matchup.Builder()
+        .put("fire", RESISTANT)
+        .put("water", EFFECTIVE)
+        .put("grass", RESISTANT)
+        .put("poison", RESISTANT)
+        .put("ground", EFFECTIVE)
+        .put("flying", RESISTANT)
+        .put("bug", RESISTANT)
+        .put("rock", EFFECTIVE)
+        .put("dragon", RESISTANT)
+        .put("steel", RESISTANT)),
+    ICE(new Matchup.Builder()
+        .put("fire", RESISTANT)
+        .put("water", RESISTANT)
+        .put("grass", EFFECTIVE)
+        .put("ice", RESISTANT)
+        .put("ground", EFFECTIVE)
+        .put("flying", EFFECTIVE)
+        .put("dragon", EFFECTIVE)
+        .put("steel", RESISTANT)),
+    FIGHTING(new Matchup.Builder()
+        .put("normal", EFFECTIVE)
+        .put("ice", EFFECTIVE)
+        .put("poison", RESISTANT)
+        .put("flying", RESISTANT)
+        .put("psychic", RESISTANT)
+        .put("bug", RESISTANT)
+        .put("rock", EFFECTIVE)
+        .put("ghost", IMMUNE)
+        .put("dark", EFFECTIVE)
+        .put("steel", EFFECTIVE)
+        .put("fairy", RESISTANT)),
+    POISON(new Matchup.Builder()
+        .put("grass", EFFECTIVE)
+        .put("poison", RESISTANT)
+        .put("ground", RESISTANT)
+        .put("rock", RESISTANT)
+        .put("ghost", RESISTANT)
+        .put("steel", IMMUNE)
+        .put("fairy", EFFECTIVE)),
+    GROUND(new Matchup.Builder()
+        .put("fire", EFFECTIVE)
+        .put("electric", EFFECTIVE)
+        .put("grass", RESISTANT)
+        .put("poison", EFFECTIVE)
+        .put("flying", IMMUNE)
+        .put("bug", RESISTANT)
+        .put("rock", EFFECTIVE)
+        .put("steel", EFFECTIVE)),
+    FLYING(new Matchup.Builder()
+        .put("electric", RESISTANT)
+        .put("grass", EFFECTIVE)
+        .put("fighting", EFFECTIVE)
+        .put("bug", EFFECTIVE)
+        .put("rock", RESISTANT)
+        .put("steel", RESISTANT)),
+    PSYCHIC(new Matchup.Builder()
+        .put("fighting", EFFECTIVE)
+        .put("poison", EFFECTIVE)
+        .put("psychic", RESISTANT)
+        .put("dark", IMMUNE)
+        .put("steel", RESISTANT)),
+    BUG(new Matchup.Builder()
+        .put("fire", RESISTANT)
+        .put("grass", EFFECTIVE)
+        .put("fighting", RESISTANT)
+        .put("poison", RESISTANT)
+        .put("flying", RESISTANT)
+        .put("psychic", EFFECTIVE)
+        .put("ghost", RESISTANT)
+        .put("dark", EFFECTIVE)
+        .put("steel", RESISTANT)
+        .put("fairy", RESISTANT)),
+    ROCK(new Matchup.Builder()
+        .put("fire", EFFECTIVE)
+        .put("ice", EFFECTIVE)
+        .put("fighting", RESISTANT)
+        .put("ground", RESISTANT)
+        .put("flying", EFFECTIVE)
+        .put("bug", EFFECTIVE)
+        .put("steel", RESISTANT)),
+    GHOST(new Matchup.Builder()
+        .put("normal", IMMUNE)
+        .put("psychic", EFFECTIVE)
+        .put("ghost", EFFECTIVE)
+        .put("dark", RESISTANT)),
+    DRAGON(new Matchup.Builder()
+        .put("dragon", EFFECTIVE)
+        .put("dark", RESISTANT)
+        .put("fairy", IMMUNE)),
+    DARK(new Matchup.Builder()
+        .put("fighting", RESISTANT)
+        .put("psychic", EFFECTIVE)
+        .put("ghost", EFFECTIVE)
+        .put("dark", RESISTANT)
+        .put("fairy", RESISTANT)),
+    STEEL(new Matchup.Builder()
+        .put("fire", RESISTANT)
+        .put("water", RESISTANT)
+        .put("electric", RESISTANT)
+        .put("ice", EFFECTIVE)
+        .put("rock", EFFECTIVE)
+        .put("steel", RESISTANT)
+        .put("fairy", EFFECTIVE)),
+    FAIRY(new Matchup.Builder()
+        .put("fire", RESISTANT)
+        .put("fighting", EFFECTIVE)
+        .put("poison", RESISTANT)
+        .put("dragon", EFFECTIVE)
+        .put("dark", EFFECTIVE)
+        .put("steel", RESISTANT));
+    private static final Map<String, SingleType> TYPES = MiscUtil.getEnumMap(SingleType.class);
+    private final Matchup matchup;
+    private final List<Type> immune;
+    private final List<Type> effective;
 
-    static final Map<String, SingleType> map = MiscUtil.getEnumMap(SingleType.class);
-    TypeMatchup matchup;
-    List<Type> immune;
-    List<Type> effective;
-
-    SingleType(TypeMatchup matchup) {
-        this.matchup = matchup;
+    SingleType(Matchup.Builder builder) {
+        this.matchup = builder.build();
+        this.immune = matchup.filter(IMMUNE);
+        this.effective = matchup.filter(m -> m.getValue() > 0);
     }
 
     public static SingleType fromId(String id) {
-        return map.get(id);
+        return TYPES.get(id);
     }
 
     @Override
@@ -124,22 +188,22 @@ public enum SingleType implements Type {
     }
 
     @Override
-    public List<Type> immuneTo() {
-        return immune == null ? immune = matchup.filterEquals(0) : immune;
+    public List<Type> immuneAgainst() {
+        return immune;
     }
 
     @Override
     public List<Type> effectiveAgainst() {
-        return effective == null ? effective = matchup.filterMoreThan(0) : effective;
+        return effective;
     }
 
     @Override
-    public TypeMatchup getMatchup() {
+    public Matchup getMatchup() {
         return matchup;
     }
 
     @Override
     public double multiplierReceivingDamage(Type type) {
-        return type.getMatchup().effectivenessAgainst(this.getId());
+        return type.getMatchup().multiplierAgainst(getId());
     }
 }

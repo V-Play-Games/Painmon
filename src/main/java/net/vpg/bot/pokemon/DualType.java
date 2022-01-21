@@ -20,7 +20,12 @@ import java.util.List;
 import java.util.Map;
 
 public class DualType implements Type {
-    static Map<String, Map<String, DualType>> typeMap = new HashMap<>();
+    private static final Map<String, Map<String, DualType>> typeMap = new HashMap<>();
+    private final SingleType primary;
+    private final SingleType secondary;
+    private final Matchup matchup;
+    private final List<Type> immune;
+    private final List<Type> effective;
 
     static {
         for (SingleType primary : SingleType.values()) {
@@ -32,21 +37,19 @@ public class DualType implements Type {
         }
     }
 
-    SingleType primary;
-    SingleType secondary;
-    TypeMatchup matchup;
-    List<Type> immune;
-    List<Type> effective;
-
     DualType(SingleType primary, SingleType secondary) {
         this.primary = primary;
         this.secondary = secondary;
-        matchup = new TypeMatchup();
+        Matchup.Builder builder = new Matchup.Builder();
+        Matchup primaryMatchup = primary.getMatchup();
+        Matchup secondaryMatchup = secondary.getMatchup();
         for (Type type : SingleType.values()) {
-            matchup.put(type.getId(), primary.getMatchup().effectivenessAgainst(type.getId()) * secondary.getMatchup().effectivenessAgainst(type.getId()));
+            String id = type.getId();
+            builder.put(id, primaryMatchup.multiplierAgainst(id) * secondaryMatchup.multiplierAgainst(id));
         }
-        immune = matchup.filterEquals(0);
-        effective = matchup.filterMoreThan(0);
+        matchup = builder.build();
+        immune = matchup.filter(Multiplier.IMMUNE);
+        effective = matchup.filter(m -> m.getValue() > 0);
     }
 
     public static DualType fromId(String id) {
@@ -66,7 +69,7 @@ public class DualType implements Type {
     }
 
     @Override
-    public List<Type> immuneTo() {
+    public List<Type> immuneAgainst() {
         return immune;
     }
 
@@ -76,12 +79,12 @@ public class DualType implements Type {
     }
 
     @Override
-    public TypeMatchup getMatchup() {
+    public Matchup getMatchup() {
         return matchup;
     }
 
     @Override
     public double multiplierReceivingDamage(Type type) {
-        return primary.multiplierReceivingDamage(type) * secondary.multiplierReceivingDamage(type);
+        return type.multiplierAgainst(primary) * type.multiplierAgainst(secondary);
     }
 }
