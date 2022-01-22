@@ -187,12 +187,12 @@ public enum SingleType implements Type {
 
     @Override
     public List<Type> immuneAgainst() {
-        return immune == null ? matchup.filter(IMMUNE) : immune;
+        return immune == null ? immune = matchup.filter(IMMUNE) : immune;
     }
 
     @Override
     public List<Type> effectiveAgainst() {
-        return effective == null ? matchup.filter(m -> m.getValue() > 0) : effective;
+        return effective == null ? effective = matchup.filter(m -> m.getValue() > 0) : effective;
     }
 
     @Override
