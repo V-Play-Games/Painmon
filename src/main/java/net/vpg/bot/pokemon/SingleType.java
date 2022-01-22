@@ -164,13 +164,11 @@ public enum SingleType implements Type {
         .put("steel", RESISTANT));
     private static final Map<String, SingleType> TYPES = MiscUtil.getEnumMap(SingleType.class);
     private final Matchup matchup;
-    private final List<Type> immune;
-    private final List<Type> effective;
+    private List<Type> immune;
+    private List<Type> effective;
 
     SingleType(Matchup.Builder builder) {
         this.matchup = builder.build();
-        this.immune = matchup.filter(IMMUNE);
-        this.effective = matchup.filter(m -> m.getValue() > 0);
     }
 
     public static SingleType fromId(String id) {
@@ -189,12 +187,12 @@ public enum SingleType implements Type {
 
     @Override
     public List<Type> immuneAgainst() {
-        return immune;
+        return immune == null ? matchup.filter(IMMUNE) : immune;
     }
 
     @Override
     public List<Type> effectiveAgainst() {
-        return effective;
+        return effective == null ? matchup.filter(m -> m.getValue() > 0) : effective;
     }
 
     @Override
