@@ -37,7 +37,7 @@ public class SearchCommand extends BotCommandImpl {
 
     @Override
     public void onTextCommandRun(TextCommandReceivedEvent e) {
-        execute(e, String.join(" ", e.getArgsFrom(1)));
+        execute(e, String.join(" ", e.getArgsFrom(0)));
     }
 
     @Override
@@ -103,6 +103,6 @@ public class SearchCommand extends BotCommandImpl {
             ).queue();
             return;
         }
-        e.send("Could not find data for " + toSearch).queue();
+        e.send("Could not find data for " + searchTerm).queue();
     }
 }
