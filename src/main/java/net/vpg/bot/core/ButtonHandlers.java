@@ -18,8 +18,7 @@ package net.vpg.bot.core;
 import net.dv8tion.jda.api.entities.User;
 import net.vpg.bot.commands.trilogy.BagCommand;
 import net.vpg.bot.entities.Dialogue;
-import net.vpg.bot.framework.BotButtonEvent;
-import net.vpg.bot.framework.ButtonHandler;
+import net.vpg.bot.event.BotButtonEvent;
 
 public interface ButtonHandlers {
     class Area implements ButtonHandler {

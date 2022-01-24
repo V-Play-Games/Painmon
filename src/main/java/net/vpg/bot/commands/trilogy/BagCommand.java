@@ -20,12 +20,12 @@ import net.dv8tion.jda.api.entities.Emoji;
 import net.dv8tion.jda.api.entities.User;
 import net.dv8tion.jda.api.interactions.commands.OptionType;
 import net.dv8tion.jda.api.interactions.components.Button;
-import net.vpg.bot.commands.event.SlashCommandReceivedEvent;
-import net.vpg.bot.commands.event.TextCommandReceivedEvent;
+import net.vpg.bot.action.Sender;
+import net.vpg.bot.core.Bot;
 import net.vpg.bot.entities.Item;
 import net.vpg.bot.entities.Player;
-import net.vpg.bot.framework.Bot;
-import net.vpg.bot.framework.Sender;
+import net.vpg.bot.event.SlashCommandReceivedEvent;
+import net.vpg.bot.event.TextCommandReceivedEvent;
 
 import java.util.Map;
 import java.util.stream.Collectors;

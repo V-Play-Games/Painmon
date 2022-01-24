@@ -18,8 +18,8 @@ package net.vpg.bot;
 import net.dv8tion.jda.api.utils.data.DataArray;
 import net.dv8tion.jda.api.utils.data.DataObject;
 import net.vpg.bot.core.ActionHandler;
+import net.vpg.bot.core.Bot;
 import net.vpg.bot.database.Database;
-import net.vpg.bot.framework.Bot;
 
 public class Driver {
     public static void main(String[] args) throws Exception {

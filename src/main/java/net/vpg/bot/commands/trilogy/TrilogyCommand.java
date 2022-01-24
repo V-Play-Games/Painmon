@@ -16,9 +16,9 @@
 package net.vpg.bot.commands.trilogy;
 
 import net.vpg.bot.commands.BotCommandImpl;
-import net.vpg.bot.commands.event.CommandReceivedEvent;
+import net.vpg.bot.core.Bot;
 import net.vpg.bot.entities.Player;
-import net.vpg.bot.framework.Bot;
+import net.vpg.bot.event.CommandReceivedEvent;
 
 public abstract class TrilogyCommand extends BotCommandImpl {
     public TrilogyCommand(Bot bot, String name, String description, String... aliases) {

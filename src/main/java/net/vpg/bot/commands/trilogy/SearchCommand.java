@@ -18,13 +18,13 @@ package net.vpg.bot.commands.trilogy;
 import net.dv8tion.jda.api.EmbedBuilder;
 import net.dv8tion.jda.api.interactions.commands.OptionType;
 import net.vpg.bot.commands.BotCommandImpl;
-import net.vpg.bot.commands.event.CommandReceivedEvent;
-import net.vpg.bot.commands.event.SlashCommandReceivedEvent;
-import net.vpg.bot.commands.event.TextCommandReceivedEvent;
+import net.vpg.bot.core.Bot;
 import net.vpg.bot.entities.Ability;
 import net.vpg.bot.entities.Move;
 import net.vpg.bot.entities.Pokemon;
-import net.vpg.bot.framework.Bot;
+import net.vpg.bot.event.CommandReceivedEvent;
+import net.vpg.bot.event.SlashCommandReceivedEvent;
+import net.vpg.bot.event.TextCommandReceivedEvent;
 
 import java.util.Comparator;
 import java.util.stream.Collectors;

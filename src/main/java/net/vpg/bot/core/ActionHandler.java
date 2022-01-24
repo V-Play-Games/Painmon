@@ -16,14 +16,14 @@
 package net.vpg.bot.core;
 
 import net.dv8tion.jda.api.EmbedBuilder;
+import net.vpg.bot.action.Sender;
 import net.vpg.bot.entities.Dialogue;
 import net.vpg.bot.entities.Player;
 import net.vpg.bot.entities.Route;
-import net.vpg.bot.framework.BotButtonEvent;
-import net.vpg.bot.framework.Ratelimit;
-import net.vpg.bot.framework.Ratelimiter;
-import net.vpg.bot.framework.Sender;
+import net.vpg.bot.event.BotButtonEvent;
 import net.vpg.bot.pokemon.Gender;
+import net.vpg.bot.ratelimit.Ratelimit;
+import net.vpg.bot.ratelimit.Ratelimiter;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -123,8 +123,7 @@ public interface ActionHandler {
 
         @Override
         public void handle(BotButtonEvent e, String arg) {
-            if (ifRatelimited(e.getIdLong(), limit ->
-                e.reply("You have to wait **" + limit.getCooldownString() + "** before encountering another Pokemon!").queue())) {
+            if (checkRatelimited(e.getIdLong(), e)) {
                 return;
             }
             if (random.nextInt(10) != 9) {

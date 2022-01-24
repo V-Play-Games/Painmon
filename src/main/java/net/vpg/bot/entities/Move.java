@@ -16,7 +16,7 @@
 package net.vpg.bot.entities;
 
 import net.dv8tion.jda.api.utils.data.DataObject;
-import net.vpg.bot.framework.Util;
+import net.vpg.bot.core.Util;
 import net.vpg.bot.pokemon.Type;
 
 import javax.annotation.Nonnull;

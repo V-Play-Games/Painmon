@@ -16,7 +16,7 @@
 package net.vpg.bot.pokemon;
 
 import net.vpg.bot.core.MiscUtil;
-import net.vpg.bot.framework.Util;
+import net.vpg.bot.core.Util;
 
 import java.util.List;
 import java.util.Map;
