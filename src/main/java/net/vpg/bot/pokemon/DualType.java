@@ -21,11 +21,6 @@ import java.util.Map;
 
 public class DualType implements Type {
     private static final Map<String, Map<String, DualType>> typeMap = new HashMap<>();
-    private final SingleType primary;
-    private final SingleType secondary;
-    private final Matchup matchup;
-    private final List<Type> immune;
-    private final List<Type> effective;
 
     static {
         for (SingleType primary : SingleType.values()) {
@@ -36,6 +31,12 @@ public class DualType implements Type {
             }
         }
     }
+
+    private final SingleType primary;
+    private final SingleType secondary;
+    private final Matchup matchup;
+    private final List<Type> immune;
+    private final List<Type> effective;
 
     DualType(SingleType primary, SingleType secondary) {
         this.primary = primary;

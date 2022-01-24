@@ -48,6 +48,34 @@ public interface Type {
 
     double multiplierReceivingDamage(Type type);
 
+    enum Multiplier {
+        DOUBLE_EFFECTIVE(4),
+        EFFECTIVE(2),
+        NEUTRAL(1),
+        IMMUNE(0),
+        RESISTANT(0.5),
+        DOUBLE_RESISTANT(0.25);
+        private static final Multiplier[] multipliers = values();
+        private final double value;
+
+        Multiplier(double value) {
+            this.value = value;
+        }
+
+        public static Multiplier of(double value) {
+            for (Multiplier multiplier : multipliers) {
+                if (multiplier.value == value) {
+                    return multiplier;
+                }
+            }
+            throw new IllegalArgumentException("No multiplier for " + value);
+        }
+
+        public double getValue() {
+            return value;
+        }
+    }
+
     class Matchup {
         private final Map<String, Multiplier> matchup;
 
@@ -95,34 +123,6 @@ public interface Type {
             public Matchup build() {
                 return new Matchup(matchup);
             }
-        }
-    }
-
-    enum Multiplier {
-        DOUBLE_EFFECTIVE(4),
-        EFFECTIVE(2),
-        NEUTRAL(1),
-        IMMUNE(0),
-        RESISTANT(0.5),
-        DOUBLE_RESISTANT(0.25);
-        private static final Multiplier[] multipliers = values();
-        private final double value;
-
-        Multiplier(double value) {
-            this.value = value;
-        }
-
-        public static Multiplier of(double value) {
-            for (Multiplier multiplier : multipliers) {
-                if (multiplier.value == value) {
-                    return multiplier;
-                }
-            }
-            throw new IllegalArgumentException("No multiplier for " + value);
-        }
-
-        public double getValue() {
-            return value;
         }
     }
 }
