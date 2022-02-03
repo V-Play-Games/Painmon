@@ -68,7 +68,7 @@ public interface ActionHandler {
 
         @Override
         public void handle(BotButtonEvent e, String arg) {
-            Dialogue.get(arg).send(e);
+            Dialogue.get(arg).send(e, e.getUser());
         }
     }
 

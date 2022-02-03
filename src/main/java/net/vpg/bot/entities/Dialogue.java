@@ -16,16 +16,16 @@
 package net.vpg.bot.entities;
 
 import net.dv8tion.jda.api.entities.Emoji;
-import net.dv8tion.jda.api.interactions.Interaction;
+import net.dv8tion.jda.api.entities.User;
 import net.dv8tion.jda.api.interactions.components.ActionRow;
-import net.dv8tion.jda.api.interactions.components.Button;
+import net.dv8tion.jda.api.interactions.components.buttons.Button;
 import net.dv8tion.jda.api.utils.data.DataArray;
 import net.dv8tion.jda.api.utils.data.DataObject;
+import net.vpg.bot.action.Sender;
 import net.vpg.bot.core.ActionHandler;
 import net.vpg.bot.core.Condition;
 import net.vpg.bot.core.Util;
 import net.vpg.bot.event.BotButtonEvent;
-import net.vpg.bot.event.CommandReceivedEvent;
 
 import javax.annotation.Nonnull;
 import java.util.*;
@@ -34,10 +34,12 @@ import java.util.stream.Collectors;
 public class Dialogue implements Entity {
     public static final Map<String, Dialogue> CACHE = new HashMap<>();
     public static final EntityInfo<Dialogue> INFO = new EntityInfo<>(Dialogue.class.getResource("dialogue.json"), Dialogue::new, CACHE);
+    private final DataObject data;
     private final String id;
     private final Map<String, State> states;
 
     public Dialogue(DataObject data) {
+        this.data = data;
         this.id = data.getString("id");
         this.states = data.getArray("states")
             .stream(DataArray::getObject)
@@ -57,19 +59,11 @@ public class Dialogue implements Entity {
         return getStateFor(player).getText(player);
     }
 
-    public void send(CommandReceivedEvent e) {
-        getStateFor(e.getUser().getId()).send(e);
+    public void send(Sender e, User user) {
+        getStateFor(user.getId()).send(e, user);
     }
 
-    public void send(Interaction e) {
-        getStateFor(e.getUser().getId()).send(e);
-    }
-
-    public void send(CommandReceivedEvent e, Player player) {
-        getStateFor(player).send(e, player);
-    }
-
-    public void send(Interaction e, Player player) {
+    public void send(Sender e, Player player) {
         getStateFor(player).send(e, player);
     }
 
@@ -97,8 +91,7 @@ public class Dialogue implements Entity {
     @Nonnull
     @Override
     public DataObject toData() {
-        return Entity.super.toData()
-            .put("states", DataArray.empty().addAll(states.values()));
+        return data;
     }
 
     public class State implements Entity {
@@ -145,23 +138,13 @@ public class Dialogue implements Entity {
             return player.resolveReferences(text);
         }
 
-        public void send(CommandReceivedEvent e) {
-            send(e, Player.get(e.getUser().getId()));
+        public void send(Sender e, User user) {
+            send(e, Player.get(user.getId()));
         }
 
-        public void send(Interaction e) {
-            send(e, Player.get(e.getUser().getId()));
-        }
-
-        public void send(CommandReceivedEvent e, Player player) {
+        public void send(Sender e, Player player) {
             e.send(getText(player.setPosition(Dialogue.this.id)))
                 .setActionRows(getActionRow(player.getId()))
-                .queue();
-        }
-
-        public void send(Interaction e, Player player) {
-            e.reply(getText(player.setPosition(Dialogue.this.id)))
-                .addActionRows(getActionRow(player.getId()))
                 .queue();
         }
 

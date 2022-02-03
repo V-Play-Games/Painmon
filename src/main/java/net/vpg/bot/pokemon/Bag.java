@@ -20,12 +20,18 @@ import net.dv8tion.jda.api.utils.data.SerializableData;
 import net.vpg.bot.entities.Item;
 
 import javax.annotation.Nonnull;
+import java.util.HashMap;
 import java.util.Map;
 import java.util.stream.Collectors;
 
 public class Bag implements SerializableData {
     private final DataObject data;
     private final Map<Item, Integer> items;
+
+    public Bag() {
+        this.data = DataObject.empty();
+        items = new HashMap<>();
+    }
 
     public Bag(DataObject data) {
         this.data = data;

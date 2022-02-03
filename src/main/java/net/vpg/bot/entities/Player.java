@@ -16,7 +16,6 @@
 package net.vpg.bot.entities;
 
 import com.mongodb.client.model.Updates;
-import net.dv8tion.jda.api.utils.data.DataArray;
 import net.dv8tion.jda.api.utils.data.DataObject;
 import net.vpg.bot.core.Bot;
 import net.vpg.bot.database.DatabaseObject;
@@ -43,23 +42,22 @@ public class Player extends DatabaseObject {
 
     public Player(DataObject data, Bot bot) {
         super(data, bot);
-        gender = Gender.fromKey(data.getInt("gender", -1));
+        gender = Gender.fromKey(data.getInt("gender"));
         bag = new Bag(data.getObject("bag"));
         position = data.getString("position", "");
-        team = new PlayerTeam(data.optArray("team").orElseGet(DataArray::empty));
-        monsCaught = data.getInt("monsCaught", 0);
+        team = new PlayerTeam(data.getArray("team"));
+        monsCaught = data.getInt("monsCaught");
     }
 
     public Player(String id, Bot bot) {
         super(id, bot);
-        this.gender = Gender.GENDERLESS;
-        this.team = new PlayerTeam();
-        this.bag = new Bag(DataObject.empty());
-        this.data.put("gender", gender.ordinal())
+        gender = Gender.GENDERLESS;
+        team = new PlayerTeam();
+        bag = new Bag();
+        data.put("gender", gender.ordinal())
             .put("bag", bag)
             .put("monsCaught", monsCaught)
-            .put("position", "")
-            .put("party", team);
+            .put("team", team);
     }
 
     public static Player get(String id) {
@@ -77,13 +75,15 @@ public class Player extends DatabaseObject {
         return bag;
     }
 
-    public PlayablePokemon addPokemon(Pokemon base, int level) {
+    public PlayablePokemon generatePokemon(Pokemon base, int level) {
         PlayablePokemon pokemon = new PlayablePokemon(base, id + ":" + monsCaught, bot);
         int teamSize = team.getSize() + 1;
         if (teamSize <= 6) {
             team.setPokemon(teamSize, pokemon.setSlot(teamSize));
         }
         pokemon.setLevel(level);
+        // TODO: Add other info like moves, ability, gender etc
+        incrementMonsCaught();
         return pokemon;
     }
 
@@ -126,11 +126,10 @@ public class Player extends DatabaseObject {
         return monsCaught;
     }
 
-    public Player incrementMonsCaught() {
+    public void incrementMonsCaught() {
         this.monsCaught++;
         data.put("monsCaught", monsCaught);
         getCollection().updateOne(filter, Updates.inc("monsCaught", 1));
-        return this;
     }
 
     public String getProperty(String key) {

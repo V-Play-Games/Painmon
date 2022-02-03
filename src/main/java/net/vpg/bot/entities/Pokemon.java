@@ -27,17 +27,17 @@ import java.util.stream.Collectors;
 public class Pokemon implements Entity {
     public static final Map<String, Pokemon> CACHE = new HashMap<>();
     public static final EntityInfo<Pokemon> INFO = new EntityInfo<>(Pokemon.class.getResource("pokemon.json"), Pokemon::new, CACHE);
-    List<AbilitySlot> abilities;
-    boolean isDefault;
-    String species;
-    StatMapping evYield;
-    StatMapping baseStats;
-    Type type;
-    String id;
-    int expYield;
-    List<String> forms;
-    String name;
-    Map<String, List<MoveLearningMethod>> moveset;
+    private final List<AbilitySlot> abilities;
+    private final boolean isDefault;
+    private final String species;
+    private final StatMapping evYield;
+    private final StatMapping baseStats;
+    private final Type type;
+    private final String id;
+    private final int expYield;
+    private final List<String> forms;
+    private final String name;
+    private final Map<String, List<MoveLearningMethod>> moveset;
 
     public Pokemon(DataObject data) {
         abilities = data.getArray("abilities")
@@ -112,10 +112,10 @@ public class Pokemon implements Entity {
     }
 
     public static class AbilitySlot {
-        boolean hidden;
-        EntityReference<Ability> reference;
-        int slot;
-        Ability cachedAbility;
+        private final boolean hidden;
+        private final EntityReference<Ability> reference;
+        private final int slot;
+        private Ability cachedAbility;
 
         public AbilitySlot(DataObject data) {
             this(data.getBoolean("is_hidden"), data.getString("ability"), data.getInt("slot"));
@@ -153,14 +153,14 @@ public class Pokemon implements Entity {
             }
             methods.put("machine;0", new MoveLearningMethod("machine", 0, 1));
             methods.put("egg;0", new MoveLearningMethod("egg", 0, 2));
-            methods.put("tutor;0", new MoveLearningMethod("egg", 0, 3));
+            methods.put("tutor;0", new MoveLearningMethod("tutor", 0, 3));
             methods.put("form-change;0", new MoveLearningMethod("form-change", 0, 4));
             methods.put("light-ball-egg;0", new MoveLearningMethod("light-ball-egg", 0, 5));
         }
 
-        final String method;
-        final int levelRequired;
-        final int orderingKey;
+        private final String method;
+        private final int levelRequired;
+        private final int orderingKey;
 
         MoveLearningMethod(String method, int levelRequired, int orderingKey) {
             this.method = method;
@@ -169,7 +169,7 @@ public class Pokemon implements Entity {
         }
 
         public static MoveLearningMethod of(String id) {
-            return Optional.ofNullable(methods.get(id)).orElseThrow(() -> new IllegalArgumentException(id));
+            return methods.get(id);
         }
 
         public String getMethod() {
@@ -178,6 +178,10 @@ public class Pokemon implements Entity {
 
         public String getOrderingKey() {
             return orderingKey + ";" + (levelRequired < 10 ? "0" : "") + levelRequired + "";
+        }
+
+        public boolean isLevelUp() {
+            return method.equals("level-up");
         }
 
         public String toString() {

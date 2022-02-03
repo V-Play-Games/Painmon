@@ -29,19 +29,19 @@ public class PlayablePokemon extends DatabaseObject {
     public static final String COLLECTION_NAME = "pokemon";
     public static final Map<String, PlayablePokemon> CACHE = new HashMap<>();
     public static final EntityInfo<PlayablePokemon> INFO = new EntityInfo<>(COLLECTION_NAME, PlayablePokemon::new, CACHE);
-    protected final Moveset moves;
-    protected final StatMapping evs;
-    protected final StatMapping ivs;
-    protected final Pokemon base;
-    protected final int playerSpecificId;
-    protected int slot;
-    protected String nickname;
-    protected int level;
-    protected int exp;
-    protected boolean shiny;
-    protected Nature nature;
-    protected Item heldItem;
-    protected Gender gender;
+    private final Moveset moves;
+    private final StatMapping evs;
+    private final StatMapping ivs;
+    private final Pokemon base;
+    private final int playerSpecificId;
+    private int slot;
+    private String nickname;
+    private int level;
+    private int exp;
+    private boolean shiny;
+    private Nature nature;
+    private Item heldItem;
+    private Gender gender;
 
     public PlayablePokemon(DataObject data, Bot bot) {
         super(data, bot);

@@ -28,6 +28,6 @@ public class PlayCommand extends TrilogyCommand implements NoArgsCommand {
 
     public void execute(CommandReceivedEvent e) {
         Player player = Player.get(e.getUser().getId());
-        Dialogue.get(player.getPosition()).send(e);
+        Dialogue.get(player.getPosition()).send(e, e.getUser());
     }
 }

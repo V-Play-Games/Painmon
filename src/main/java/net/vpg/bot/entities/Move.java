@@ -20,27 +20,26 @@ import net.vpg.bot.core.Util;
 import net.vpg.bot.pokemon.Type;
 
 import javax.annotation.Nonnull;
-import java.lang.annotation.Target;
 import java.util.HashMap;
 import java.util.Map;
 
 public class Move implements Entity {
     public static final Map<String, Move> CACHE = new HashMap<>();
     public static final EntityInfo<Move> INFO = new EntityInfo<>(Move.class.getResource("move.json"), Move::new, CACHE);
-    protected DataObject data;
-    protected int pp;
-    protected int accuracy;
-    protected String description;
-    protected int priority;
-    protected Type type;
-    protected Target target;
-    protected String effect;
-    protected String name;
-    protected String id;
-    protected int effectChance;
-    protected int power;
-    protected Category category;
-    protected Metadata metadata;
+    private final DataObject data;
+    private final int pp;
+    private final int accuracy;
+    private final String description;
+    private final int priority;
+    private final Type type;
+    private final Target target;
+    private final String effect;
+    private final String name;
+    private final String id;
+    private final int effectChance;
+    private final int power;
+    private final Category category;
+    private final Metadata metadata;
 
     public Move(Move copy) {
         this.data = copy.data;

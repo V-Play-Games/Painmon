@@ -20,64 +20,44 @@ import net.dv8tion.jda.api.utils.data.SerializableArray;
 import net.vpg.bot.entities.PlayablePokemon;
 
 import javax.annotation.Nonnull;
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.List;
-import java.util.Objects;
-import java.util.stream.Collectors;
 
 public class PlayerTeam implements SerializableArray {
-    final DataArray data;
-    final List<PlayablePokemon> team;
+    private final DataArray data;
+    private final PlayablePokemon[] team = new PlayablePokemon[6];
 
     public PlayerTeam(DataArray data) {
         this.data = data;
-        this.team = data.stream(DataArray::getString).map(PlayablePokemon::get).collect(Collectors.toList());
+        for (int i = 0, size = data.toList().size(); i < size; i++) {
+            team[i] = PlayablePokemon.get(data.getString(i));
+        }
     }
 
     public PlayerTeam() {
         this.data = DataArray.empty();
-        this.team = new ArrayList<>(6);
-        clearTeam();
-    }
-
-    public PlayablePokemon getLead() {
-        return team.get(0);
     }
 
     public PlayablePokemon getPokemon(int slot) {
-        return team.get(slot - 1);
+        return team[slot - 1];
     }
 
-    public List<PlayablePokemon> getTeam() {
+    public PlayablePokemon[] getTeam() {
         return team;
     }
 
-    public void fillGaps() {
-        List<PlayablePokemon> mons = team.stream().filter(Objects::nonNull).collect(Collectors.toList());
-        clearTeam();
-        for (int i = 0; i < mons.size(); i++) {
-            team.set(i, mons.get(i).setSlot(i + 1));
-        }
-    }
-
     public void swap(int from, int to) {
-        Collections.swap(team, from, to);
-        fillGaps();
+        PlayablePokemon old = team[from];
+        team[from] = team[to];
+        team[to] = old;
     }
 
     public void setPokemon(int slot, PlayablePokemon pokemon) {
-        assert 1 <= slot && slot <= 6;
-        team.set(slot - 1, pokemon);
-    }
-
-    public void clearTeam() {
-        team.clear();
-        Collections.addAll(team, null, null, null, null, null, null);
+        team[slot - 1] = pokemon;
     }
 
     public int getSize() {
-        return (int) team.stream().filter(Objects::nonNull).count();
+        int i = 0;
+        while (i < team.length && team[i] != null) i++;
+        return i;
     }
 
     @Nonnull

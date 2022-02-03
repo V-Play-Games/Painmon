@@ -27,7 +27,7 @@ import java.util.stream.Collectors;
 public class Route implements Entity {
     public static final Map<String, Route> CACHE = new HashMap<>();
     private final String id;
-    private final Map<EntityReference<Pokemon>, Integer> rawRates;
+    private Map<EntityReference<Pokemon>, Integer> rawRates;
     private Map<Pokemon, Integer> resolvedRates;
     private Pokemon[] resolvedSpawns;
 
@@ -56,6 +56,7 @@ public class Route implements Entity {
     public Map<Pokemon, Integer> getRates() {
         if (resolvedRates == null) {
             resolvedRates = rawRates.entrySet().stream().collect(Collectors.toMap(e -> e.getKey().get(), Map.Entry::getValue));
+            rawRates = null;
         }
         return resolvedRates;
     }

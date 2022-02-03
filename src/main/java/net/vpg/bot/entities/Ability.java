@@ -25,10 +25,10 @@ import java.util.Map;
 public class Ability implements Entity {
     public static final Map<String, Ability> CACHE = new HashMap<>();
     public static final EntityInfo<Ability> INFO = new EntityInfo<>(Ability.class.getResource("ability.json"), Ability::new, CACHE);
-    protected final String id;
-    protected final String name;
-    protected final String effect;
-    protected final String description;
+    private final String id;
+    private final String name;
+    private final String effect;
+    private final String description;
 
     public Ability(DataObject data) {
         this.id = data.getString("name");

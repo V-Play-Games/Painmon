@@ -16,48 +16,71 @@
 package net.vpg.bot.pokemon;
 
 import net.dv8tion.jda.api.utils.data.DataObject;
+import net.vpg.bot.entities.Entity;
 import net.vpg.bot.entities.Move;
 
-public class PlayableMove extends Move {
-    final int slot;
+import javax.annotation.Nonnull;
+
+public class PlayableMove implements Entity {
+    private final DataObject data;
+    private final int slot;
+    private Move move;
+    private int pp;
 
     public PlayableMove(DataObject data) {
-        this(Move.get(data.getString("move")), data.getInt("slot"), data.getInt("pp"));
+        this.data = data;
+        this.move = Move.get(data.getString("move"));
+        this.slot = data.getInt("slot");
+        this.pp = data.getInt("pp");
     }
 
     public PlayableMove(Move move, int slot) {
-        super(move);
-        this.slot = slot;
+        this(move, slot, move.getPP());
     }
 
     public PlayableMove(Move move, int slot, int pp) {
-        this(move, slot);
+        this.move = move;
+        this.slot = slot;
         this.pp = pp;
+        this.data = DataObject.empty()
+            .put("", move.getId())
+            .put("slot", slot)
+            .put("pp", pp);
     }
 
-    public PlayableMove adjust(Move copy) {
-        this.effectChance = copy.getEffectChance();
-        this.description = copy.getDescription();
-        this.effect = copy.getEffect();
-        this.id = copy.getId();
-        this.name = copy.getName();
-        this.pp = copy.getPP();
-        this.accuracy = copy.getAccuracy();
-        this.priority = copy.getPriority();
-        this.power = copy.getPower();
-        this.type = copy.getType();
-        this.target = copy.getTarget();
-        this.category = copy.getCategory();
-        this.metadata = copy.getMetadata();
+    public PlayableMove setMove(Move move) {
+        return setMove(move, move.getPP());
+    }
+
+    public PlayableMove setMove(Move move, int pp) {
+        this.move = move;
+        data.put("move", move.getId());
+        setPP(pp);
         return this;
+    }
+
+    @Override
+    public String getId() {
+        return move.getId();
     }
 
     public int getSlot() {
         return slot;
     }
 
+    public int getPP() {
+        return pp;
+    }
+
     public PlayableMove setPP(int pp) {
         this.pp = pp;
+        data.put("pp", pp);
         return this;
+    }
+
+    @Nonnull
+    @Override
+    public DataObject toData() {
+        return data;
     }
 }
