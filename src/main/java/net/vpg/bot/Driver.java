@@ -15,21 +15,20 @@
  */
 package net.vpg.bot;
 
-import net.dv8tion.jda.api.utils.data.DataArray;
 import net.dv8tion.jda.api.utils.data.DataObject;
 import net.vpg.bot.core.ActionHandler;
 import net.vpg.bot.core.Bot;
+import net.vpg.bot.core.BotBuilder;
 import net.vpg.bot.database.Database;
 
 public class Driver {
     public static void main(String[] args) throws Exception {
-        DataObject properties = DataObject.fromJson(Driver.class.getResourceAsStream("properties.json"));
-        properties.put("token", System.getenv("TOKEN"));
-        Bot bot = new Bot(properties);
-        properties.getArray("managers").stream(DataArray::getLong).forEach(bot::addManager);
-        // mongodb+srv://<user>:<password>@<cluster-name>.vievu.mongodb.net/<db-name>?retryWrites=true&w=majority
-        bot.setDatabase(new Database(System.getenv("DB_URL"), "BotData", bot));
-        bot.loadAllInstancesOf(ActionHandler.class, ActionHandler::registerHandler);
-        bot.login();
+        Bot bot = BotBuilder.createDefault("trilogy", System.getenv("TOKEN"))
+            .putProperties(DataObject.fromJson(Driver.class.getResourceAsStream("properties.json")))
+            .setDatabase(new Database(System.getenv("DB_URL"), "BotData"))
+            .build();
+        bot.getEntityLoader()
+            .getLoader()
+            .loadAllInstances(ActionHandler.class, ActionHandler::registerHandler, (c, t) -> t.printStackTrace());
     }
 }
