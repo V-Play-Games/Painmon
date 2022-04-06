@@ -23,13 +23,13 @@ public enum Stat {
     SP_DEF("special-defense"),
     SPEED("speed");
 
-    public final String KEY;
+    public final String key;
 
     Stat(String key) {
-        this.KEY = key;
+        this.key = key;
     }
 
     public String getKey() {
-        return KEY;
+        return key;
     }
 }

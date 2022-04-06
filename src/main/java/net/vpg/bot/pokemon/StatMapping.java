@@ -26,12 +26,12 @@ public class StatMapping {
     private int speed;
 
     public StatMapping(DataObject data) {
-        this(data.getInt(Stat.HP.KEY),
-            data.getInt(Stat.ATTACK.KEY),
-            data.getInt(Stat.DEFENSE.KEY),
-            data.getInt(Stat.SP_ATK.KEY),
-            data.getInt(Stat.SP_DEF.KEY),
-            data.getInt(Stat.SPEED.KEY));
+        this(data.getInt(Stat.HP.key),
+            data.getInt(Stat.ATTACK.key),
+            data.getInt(Stat.DEFENSE.key),
+            data.getInt(Stat.SP_ATK.key),
+            data.getInt(Stat.SP_DEF.key),
+            data.getInt(Stat.SPEED.key));
     }
 
     public StatMapping(int hp, int attack, int defense, int spAtk, int spDef, int speed) {
