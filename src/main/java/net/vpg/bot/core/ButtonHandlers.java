@@ -50,4 +50,45 @@ public interface ButtonHandlers {
             BagCommand.execute(e, user, page);
         }
     }
+
+    class Battle implements ButtonHandler {
+        @Override
+        public String getName() {
+            return "battle";
+        }
+
+        @Override
+        public void handle(BotButtonEvent e) {
+            User user = e.getUser();
+            if (!e.getArg(0).equals(user.getId())) {
+                return;
+            }
+            switch (e.getArg(1)) {
+                case "trainer":
+                    e.send("Trainer Battles not supported yet").queue();
+                    break;
+                case "spawn":
+                    // battle:user-id:spawn:route:pokemon
+                    String route = e.getArg(2);
+                    String pokemon = e.getArg(3);
+            }
+            e.send("Insert Battle").queue();
+        }
+    }
+
+    class Catch implements ButtonHandler {
+        @Override
+        public String getName() {
+            return "catch";
+        }
+
+        @Override
+        public void handle(BotButtonEvent e) {
+            User user = e.getUser();
+            if (!e.getArg(0).equals(user.getId())) {
+                return;
+            }
+            e.send("Insert Catch, tutuk, tutuk, tutuk, TADA CAUGHT!").queue();
+        }
+    }
 }

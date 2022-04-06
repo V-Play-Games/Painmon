@@ -16,12 +16,14 @@
 package net.vpg.bot.core;
 
 import net.dv8tion.jda.api.EmbedBuilder;
+import net.dv8tion.jda.api.interactions.components.buttons.Button;
 import net.vpg.bot.action.Sender;
 import net.vpg.bot.entities.Dialogue;
 import net.vpg.bot.entities.Player;
 import net.vpg.bot.entities.Route;
 import net.vpg.bot.event.BotButtonEvent;
 import net.vpg.bot.pokemon.Gender;
+import net.vpg.bot.pokemon.Spawn;
 import net.vpg.bot.ratelimit.Ratelimit;
 import net.vpg.bot.ratelimit.Ratelimiter;
 
@@ -126,13 +128,20 @@ public interface ActionHandler {
             if (checkRatelimited(e.getIdLong(), e)) {
                 return;
             }
-            if (random.nextInt(10) != 9) {
-                e.replyEmbeds(new EmbedBuilder()
-                    .setTitle("A wild " + Route.get(arg).spawn().getName() + " appeared!")
-                    .setDescription("Click the buttons to take an action!")
-                    .build()).queue();
+            Spawn spawn = Route.get(arg).spawn();
+            if (spawn != null && random.nextInt(10) != 7) {
+                String buttonIdTail = e.getUser().getId() + ":spawn:" + arg + ":" + spawn.getId();
+                e.replyEmbeds(
+                    new EmbedBuilder()
+                        .setTitle("A wild " + spawn.getName() + " appeared!")
+                        .setDescription("Click the buttons to take an action!")
+                        .build()
+                ).addActionRow(
+                    Button.primary("battle:" + buttonIdTail, "Battle"),
+                    Button.primary("catch:" + buttonIdTail, "Throw a Pokeball")
+                ).queue();
             } else {
-                e.reply("No wild pokemon in sight... Try again later!").queue();
+                e.reply("No wild pokemon in sight. Try again later!").queue();
             }
             ratelimit(e.getIdLong());
         }

@@ -43,15 +43,16 @@ public class BagCommand extends TrilogyCommand {
         long actualPage = Math.min(maxPages, Math.max(1, page));
         String list = items.entrySet()
             .stream()
-            .skip(10 * actualPage)
+            .skip(10 * (actualPage - 1))
             .limit(10)
-            .map(entry -> entry.getKey() + " x" + entry.getValue())
+            .map(entry -> entry.getKey().getId() + " x" + entry.getValue())
             .collect(Collectors.joining("\n"));
-        e.sendEmbeds(new EmbedBuilder()
-            .setTitle(user.getName() + "'s bag")
-            .setDescription(list)
-            .setFooter("Page " + actualPage + "/" + maxPages)
-            .build())
+        e.sendEmbeds(
+            new EmbedBuilder()
+                .setTitle(user.getName() + "'s bag")
+                .setDescription(list)
+                .setFooter("Page " + actualPage + "/" + maxPages)
+                .build())
             .setActionRow(
                 Button.primary("bag:" + user.getId() + ":" + ++actualPage, Emoji.fromUnicode("")),
                 Button.primary("bag:" + user.getId() + ":" + --actualPage, Emoji.fromUnicode("")),

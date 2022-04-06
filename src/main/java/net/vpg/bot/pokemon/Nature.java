@@ -49,8 +49,7 @@ public enum Nature {
     GENTLE (SPEED,   DEFENSE),
     SASSY  (SPEED,   SP_ATK ),
     CAREFUL(SPEED,   SP_DEF ),
-    QUIRKY (SPEED,   SPEED  ),
-    UNKNOWN(null, null);
+    QUIRKY (SPEED,   SPEED  );
     //@formatter:on
 
     static final Map<String, Nature> map = MiscUtil.getEnumMap(Nature.class);
@@ -63,6 +62,6 @@ public enum Nature {
     }
 
     public static Nature fromKey(String key) {
-        return map.getOrDefault(key, UNKNOWN);
+        return map.getOrDefault(key, null);
     }
 }

@@ -39,6 +39,7 @@ public class PlayablePokemon extends DatabaseObject {
     private int level;
     private int exp;
     private boolean shiny;
+    private Ability ability;
     private Nature nature;
     private Item heldItem;
     private Gender gender;
@@ -55,6 +56,7 @@ public class PlayablePokemon extends DatabaseObject {
         this.moves = new Moveset(data.getArray("moves"));
         this.evs = new StatMapping(data.getObject("evs"));
         this.ivs = new StatMapping(data.getObject("ivs"));
+        this.ability = Ability.get(data.getString("ability"));
         this.nature = Nature.fromKey(data.getString("nature"));
         this.heldItem = Item.get(data.getString("heldItem"));
         this.gender = Gender.fromKey(data.getInt("gender"));
@@ -68,6 +70,7 @@ public class PlayablePokemon extends DatabaseObject {
         this.ivs = new StatMapping();
         this.playerSpecificId = Integer.parseInt(id.split(":")[0]);
         this.data
+            .put("base", base.getId())
             .put("slot", slot)
             .put("nickname", nickname)
             .put("level", level)
@@ -181,6 +184,15 @@ public class PlayablePokemon extends DatabaseObject {
     public PlayablePokemon setShiny(boolean shiny) {
         this.shiny = shiny;
         update("shiny", shiny);
+        return this;
+    }
+
+    public Ability getAbility() {
+        return ability;
+    }
+
+    public PlayablePokemon setAbility(Ability ability) {
+        this.ability = ability;
         return this;
     }
 

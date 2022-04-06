@@ -1,10 +1,37 @@
 [
   {
     "id": "p.1",
-    "rates": {
-      "pidgeot": 1,
-      "starly": 1,
-      "fletchling": 1
-    }
+    "table": [
+      {
+        "id": "pidgeot",
+        "rate": "33",
+        "level_range": "2-6",
+        "move_range": "1-2",
+        "moves_list": [
+          "peck",
+          "leer"
+        ]
+      },
+      {
+        "id": "starly",
+        "rate": "33",
+        "levels": "2-6",
+        "move_range": "1-2",
+        "moves_list": [
+          "peck",
+          "leer"
+        ]
+      },
+      {
+        "id": "fletchling",
+        "rate": "33",
+        "levels": "2-6",
+        "move_range": "1-2",
+        "moves_list": [
+          "peck",
+          "leer"
+        ]
+      }
+    ]
   }
 ]
