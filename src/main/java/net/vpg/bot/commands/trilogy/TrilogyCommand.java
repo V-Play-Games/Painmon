@@ -31,8 +31,8 @@ public abstract class TrilogyCommand extends BotCommandImpl {
         Player player = Player.get(e.getUser().getId());
         if (player == null) {
             e.send("Please start your journey with `" + e.getPrefix() + "start` command first").setEphemeral(true).queue();
-            return true;
+            return false;
         }
-        return false;
+        return true;
     }
 }
