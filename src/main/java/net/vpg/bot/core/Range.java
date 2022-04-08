@@ -41,6 +41,7 @@ public class Range {
         return upper;
     }
 
+    // lower and upper inclusive
     public int random() {
         return (int) Math.round(Math.random() * (upper - lower) + lower);
     }

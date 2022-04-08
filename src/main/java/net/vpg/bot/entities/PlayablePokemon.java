@@ -105,7 +105,7 @@ public class PlayablePokemon extends DatabaseObject {
         return base.isDefault();
     }
 
-    public String getSpecies() {
+    public EntityReference<PokemonSpecies> getSpecies() {
         return base.getSpecies();
     }
 

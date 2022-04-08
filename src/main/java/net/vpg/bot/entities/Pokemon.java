@@ -21,7 +21,10 @@ import net.vpg.bot.core.Util;
 import net.vpg.bot.pokemon.StatMapping;
 import net.vpg.bot.pokemon.Type;
 
-import java.util.*;
+import java.util.Arrays;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 import java.util.stream.Collectors;
 
 public class Pokemon implements Entity {
@@ -29,7 +32,7 @@ public class Pokemon implements Entity {
     public static final EntityInfo<Pokemon> INFO = new EntityInfo<>(Pokemon.class.getResource("pokemon.json"), Pokemon::new, CACHE);
     private final List<AbilitySlot> abilities;
     private final boolean isDefault;
-    private final String species;
+    private final EntityReference<PokemonSpecies> species;
     private final StatMapping evYield;
     private final StatMapping baseStats;
     private final Type type;
@@ -45,7 +48,7 @@ public class Pokemon implements Entity {
             .map(AbilitySlot::new)
             .collect(Collectors.toList());
         isDefault = data.getBoolean("default");
-        species = data.getString("species");
+        species = new EntityReference<>(PokemonSpecies.INFO, data.getString("species"));
         evYield = new StatMapping(data.getObject("ev_yield"));
         baseStats = new StatMapping(data.getObject("stats"));
         type = Type.fromId(data.getString("type"));
@@ -74,7 +77,7 @@ public class Pokemon implements Entity {
         return isDefault;
     }
 
-    public String getSpecies() {
+    public EntityReference<PokemonSpecies> getSpecies() {
         return species;
     }
 
@@ -115,7 +118,6 @@ public class Pokemon implements Entity {
         private final boolean hidden;
         private final EntityReference<Ability> reference;
         private final int slot;
-        private Ability cachedAbility;
 
         public AbilitySlot(DataObject data) {
             this(data.getBoolean("is_hidden"), data.getString("ability"), data.getInt("slot"));
@@ -132,7 +134,7 @@ public class Pokemon implements Entity {
         }
 
         public Ability getAbility() {
-            return cachedAbility == null ? cachedAbility = reference.get() : cachedAbility;
+            return reference.get();
         }
 
         public boolean isHidden() {
@@ -145,17 +147,18 @@ public class Pokemon implements Entity {
     }
 
     public static class MoveLearningMethod {
-        static Map<String, MoveLearningMethod> methods = new HashMap<>();
+        private static final Map<String, MoveLearningMethod> METHODS = new HashMap<>();
 
         static {
-            for (int i = 0; i <= 100; i++) {
-                methods.put("level-up;" + i, new MoveLearningMethod("level-up", i, 0));
+            for (int i = 1; i <= 100; i++) {
+                METHODS.put("level-up;" + i, new MoveLearningMethod("level-up", i, 0));
             }
-            methods.put("machine;0", new MoveLearningMethod("machine", 0, 1));
-            methods.put("egg;0", new MoveLearningMethod("egg", 0, 2));
-            methods.put("tutor;0", new MoveLearningMethod("tutor", 0, 3));
-            methods.put("form-change;0", new MoveLearningMethod("form-change", 0, 4));
-            methods.put("light-ball-egg;0", new MoveLearningMethod("light-ball-egg", 0, 5));
+            METHODS.put("level-up", new MoveLearningMethod("level-up", 0, 0));
+            METHODS.put("machine", new MoveLearningMethod("machine", 0, 1));
+            METHODS.put("egg", new MoveLearningMethod("egg", 0, 2));
+            METHODS.put("tutor", new MoveLearningMethod("tutor", 0, 3));
+            METHODS.put("form-change", new MoveLearningMethod("form-change", 0, 4));
+            METHODS.put("light-ball-egg", new MoveLearningMethod("light-ball-egg", 0, 5));
         }
 
         private final String method;
@@ -169,7 +172,7 @@ public class Pokemon implements Entity {
         }
 
         public static MoveLearningMethod of(String id) {
-            return methods.get(id);
+            return METHODS.get(id);
         }
 
         public String getMethod() {
@@ -177,13 +180,18 @@ public class Pokemon implements Entity {
         }
 
         public String getOrderingKey() {
-            return orderingKey + ";" + (levelRequired < 10 ? "0" : "") + levelRequired + "";
+            return orderingKey + ";" + (levelRequired < 10 ? "0" : "") + levelRequired;
         }
 
         public boolean isLevelUp() {
             return method.equals("level-up");
         }
 
+        public int getLevelRequired() {
+            return levelRequired;
+        }
+
+        @Override
         public String toString() {
             switch (method) {
                 case "level-up":
@@ -201,10 +209,6 @@ public class Pokemon implements Entity {
                 default:
                     return "by no idea how";
             }
-        }
-
-        public int getLevelRequired() {
-            return levelRequired;
         }
     }
 }
