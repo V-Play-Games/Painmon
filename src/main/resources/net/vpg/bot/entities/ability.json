@@ -1058,7 +1058,7 @@
   {
     "effect": "Raises flying moves' priority by one stage.",
     "name": "gale-wings",
-    "description": "Gives priority to Flying-type moves when the  Pokémon’s HP is full.",
+    "description": "Gives priority to Flying-type moves when the Pokémon’s HP is full.",
     "id": 177
   },
   {
