@@ -77,8 +77,8 @@ public class Pokemon implements Entity {
         return isDefault;
     }
 
-    public EntityReference<PokemonSpecies> getSpecies() {
-        return species;
+    public PokemonSpecies getSpecies() {
+        return species.get();
     }
 
     public StatMapping getEvYield() {
