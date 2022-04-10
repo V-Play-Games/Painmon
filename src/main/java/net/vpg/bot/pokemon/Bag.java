@@ -17,32 +17,27 @@ package net.vpg.bot.pokemon;
 
 import net.dv8tion.jda.api.utils.data.DataObject;
 import net.dv8tion.jda.api.utils.data.SerializableData;
-import net.vpg.bot.entities.Item;
 
 import javax.annotation.Nonnull;
-import java.util.HashMap;
 import java.util.Map;
 import java.util.stream.Collectors;
 
 public class Bag implements SerializableData {
     private final DataObject data;
-    private final Map<Item, Integer> items;
 
     public Bag() {
         this.data = DataObject.empty();
-        items = new HashMap<>();
     }
 
     public Bag(DataObject data) {
         this.data = data;
-        items = data.toMap()
-            .entrySet()
-            .stream()
-            .collect(Collectors.toMap(e -> Item.get(e.getKey()), e -> (Integer) e.getValue()));
     }
 
-    public Map<Item, Integer> getItems() {
-        return items;
+    public Map<String, Integer> getItems() {
+        return data.toMap()
+            .entrySet()
+            .stream()
+            .collect(Collectors.toMap(Map.Entry::getKey, e -> (Integer) e.getValue()));
     }
 
     public void incrementItemCount(String id) {
@@ -54,13 +49,11 @@ public class Bag implements SerializableData {
     }
 
     public void addItemCount(String id, int delta) {
-        Item item = Item.get(id);
-        int count = items.getOrDefault(item, 0);
-        items.put(item, count + delta);
+        setItemCount(id, data.getInt(id, 0) + delta);
     }
 
     public void setItemCount(String id, int value) {
-        items.put(Item.get(id), value);
+        data.put(id, value);
     }
 
     @Nonnull

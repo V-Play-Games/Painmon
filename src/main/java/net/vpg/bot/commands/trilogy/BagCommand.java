@@ -38,14 +38,14 @@ public class BagCommand extends TrilogyCommand {
     }
 
     public static void execute(Sender e, User user, long page) {
-        Map<Item, Integer> items = Player.get(user.getId()).getBag().getItems();
+        Map<String, Integer> items = Player.get(user.getId()).getBag().getItems();
         long maxPages = (long) Math.ceil(items.size() / 10.0);
         long actualPage = Math.min(maxPages, Math.max(1, page));
         String list = items.entrySet()
             .stream()
             .skip(10 * (actualPage - 1))
             .limit(10)
-            .map(entry -> entry.getKey().getId() + " x" + entry.getValue())
+            .map(entry -> entry.getKey() + " x" + entry.getValue())
             .collect(Collectors.joining("\n"));
         e.sendEmbeds(
             new EmbedBuilder()
