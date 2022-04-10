@@ -24,8 +24,8 @@ import net.vpg.bot.entities.Pokemon;
 import net.vpg.bot.entities.Route.WildPokemon;
 
 public class Spawn extends PlayablePokemon {
-    private static final Range shiny = Range.of(0, 4096);
-    private static final Range evRange = Range.of(0, 31);
+    private static final Range SHINY_RANGE = Range.of(0, 4096);
+    private static final Range EV_RANGE = Range.of(0, 31);
     private final WildPokemon wild;
 
     public Spawn(String id, WildPokemon pokemon) {
@@ -44,10 +44,10 @@ public class Spawn extends PlayablePokemon {
         for (int i = 1, fence = wild.getMoveRange().random(); i <= fence; i++) {
             setMove(i, Move.get(possibleMoves[i - 1]));
         }
-        setShiny(shiny.random() == 0);
+        setShiny(SHINY_RANGE.random() == 0);
         setNature(Util.getRandom(Nature.values()));
         for (Stat stat : Stat.values()) {
-            setIv(stat, evRange.random());
+            setIv(stat, EV_RANGE.random());
         }
         Ability[] abilities = getPossibleAbilities()
             .stream()

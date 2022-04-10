@@ -41,8 +41,12 @@ public class Range {
         return upper;
     }
 
-    // lower and upper inclusive
     public int random() {
+        return random(upper, lower);
+    }
+
+    // lower and upper inclusive
+    public static int random(int upper, int lower) {
         return (int) Math.round(Math.random() * (upper - lower) + lower);
     }
 
