@@ -38,6 +38,8 @@ public class Pokemon implements Entity {
     private final Type type;
     private final String id;
     private final int expYield;
+    private final double weight; // in kg.
+    private final int height; // in cm.
     private final List<String> forms;
     private final String name;
     private final Map<String, List<MoveLearningMethod>> moveset;
@@ -55,6 +57,8 @@ public class Pokemon implements Entity {
         id = data.getString("name");
         name = Util.toProperCase(String.join(" ", id.split("-")));
         expYield = data.getInt("exp");
+        height = data.getInt("exp") * 10; // it's originally given in (height in cm)/10
+        weight = data.getInt("exp") / 10.0; // it's originally given in (weight in kg)*10
         forms = data.getArray("forms").stream(DataArray::getString).collect(Collectors.toList());
         moveset = data.getObject("moves")
             .toMap()
@@ -95,6 +99,14 @@ public class Pokemon implements Entity {
 
     public int getExpYield() {
         return expYield;
+    }
+
+    public double getWeight() {
+        return weight;
+    }
+
+    public int getHeight() {
+        return height;
     }
 
     public List<String> getForms() {

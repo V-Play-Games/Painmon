@@ -28,6 +28,7 @@ public class Capture {
         }
         switch (ball.getId()) {
             case "master-ball": // shouldn't happen but putting here just in case
+            case "beast-ball": // special handling later on
             case "poke-ball":
             case "premier-ball":
             case "luxury-ball":
@@ -51,7 +52,13 @@ public class Capture {
                     rate *= 4;
                 break;
             case "heavy-ball":
-                // TODO: add weight to pokemon and implement this
+                double weight = pokemon.getWeight();
+                if (weight > 300)
+                    rate += 30;
+                else if (weight > 200)
+                    rate += 20;
+                else if (weight < 100)
+                    rate -= 20;
                 break;
             case "net-ball":
                 String type = pokemon.getType().getName();
@@ -80,18 +87,21 @@ public class Capture {
                 if (turn == 1)
                     rate *= 5;
                 break;
-            case "beast-ball":
-                if (pokemon.getAbilities()
-                    .stream()
-                    .map(Pokemon.AbilitySlot::getId)
-                    .anyMatch(id -> id.equals("beast-boost")))
-                    rate *= 5;
-                else
-                    rate *= 0.1;
-                break;
             default:
                 throw new IllegalStateException(ball + " is not supported as a poke ball.");
         }
+        boolean ub = pokemon.getAbilities().stream().map(Pokemon.AbilitySlot::getId).anyMatch(id -> id.equals("beast-boost"));
+        boolean beastBall = ball.getId().equals("beast-ball");
+        if (ub) {
+            if (beastBall) {
+                rate *= 5;
+            } else {
+                rate *= 0.1;
+            }
+        } else if (beastBall) {
+            rate *= 0.1;
+        }
+        rate = Math.max((int) rate, 1);
         // TODO: Figure out about critical captures
         int shakeRange = (int) (65536 / Math.pow(255 / rate, 0.1875));
         int i = 0;

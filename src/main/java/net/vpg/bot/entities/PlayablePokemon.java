@@ -101,40 +101,8 @@ public class PlayablePokemon extends DatabaseObject {
         return this;
     }
 
-    public boolean isDefault() {
-        return base.isDefault();
-    }
-
-    public PokemonSpecies getSpecies() {
-        return base.getSpecies();
-    }
-
-    public StatMapping getEvYield() {
-        return base.getEvYield();
-    }
-
-    public StatMapping getBaseStats() {
-        return base.getBaseStats();
-    }
-
-    public Type getType() {
-        return base.getType();
-    }
-
-    public int getExpYield() {
-        return base.getExpYield();
-    }
-
-    public List<String> getForms() {
-        return base.getForms();
-    }
-
-    public String getName() {
-        return base.getName();
-    }
-
-    public Map<String, List<Pokemon.MoveLearningMethod>> getPossibleMoves() {
-        return base.getMoveset();
+    public Pokemon getBase() {
+        return base;
     }
 
     public int getSlot() {
