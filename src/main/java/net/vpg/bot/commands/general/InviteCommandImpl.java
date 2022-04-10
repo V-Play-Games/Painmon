@@ -15,7 +15,6 @@
  */
 package net.vpg.bot.commands.general;
 
-
 import net.vpg.bot.core.Bot;
 
 public class InviteCommandImpl extends InviteCommand {

@@ -26,10 +26,12 @@ public class Item implements Entity {
     private static final EntityInfo<Item> INFO = new EntityInfo<>(Entity.class.getResource("item.json"), Item::new, CACHE);
     private final DataObject data;
     private final String id;
+    private final Type type;
 
     public Item(DataObject data) {
         this.data = data;
         this.id = data.getString("id");
+        this.type = Type.of(data.getInt("type"));
     }
 
     public static EntityInfo<Item> getInfo() {
@@ -45,9 +47,33 @@ public class Item implements Entity {
         return id;
     }
 
+    public Type getType() {
+        return type;
+    }
+
     @Nonnull
     @Override
     public DataObject toData() {
         return data;
+    }
+
+    public enum Type {
+        KEY_ITEM(1),
+        POKE_BALL(2);
+
+        private final int id;
+
+        Type(int id) {
+            this.id = id;
+        }
+
+        public static Type of(int id) {
+            for (Type type : values()) {
+                if (type.id == id) {
+                    return type;
+                }
+            }
+            return null;
+        }
     }
 }

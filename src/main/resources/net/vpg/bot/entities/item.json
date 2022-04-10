@@ -1,8 +1,74 @@
 [
   {
-    "id": "pokedex"
+    "id": "pokedex",
+    "type": 1
   },
   {
-    "id": "pokeball"
+    "id": "poke-ball",
+    "type": 2
+  },
+  {
+    "id": "great-ball",
+    "type": 2
+  },
+  {
+    "id": "ultra-ball",
+    "type": 2
+  },
+  {
+    "id": "master-ball",
+    "type": 2
+  },
+  {
+    "id": "level-ball",
+    "type": 2
+  },
+  {
+    "id": "lure-ball",
+    "type": 2
+  },
+  {
+    "id": "heavy-ball",
+    "type": 2
+  },
+  {
+    "id": "net-ball",
+    "type": 2
+  },
+  {
+    "id": "nest-ball",
+    "type": 2
+  },
+  {
+    "id": "repeat-ball",
+    "type": 2
+  },
+  {
+    "id": "timer-ball",
+    "type": 2
+  },
+  {
+    "id": "premier-ball",
+    "type": 2
+  },
+  {
+    "id": "luxury-ball",
+    "type": 2
+  },
+  {
+    "id": "dive-ball",
+    "type": 2
+  },
+  {
+    "id": "dusk-ball",
+    "type": 2
+  },
+  {
+    "id": "quick-ball",
+    "type": 2
+  },
+  {
+    "id": "beast-ball",
+    "type": 2
   }
 ]
