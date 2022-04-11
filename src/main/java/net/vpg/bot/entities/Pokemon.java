@@ -55,7 +55,7 @@ public class Pokemon implements Entity {
         baseStats = new StatMapping(data.getObject("stats"));
         type = Type.fromId(data.getString("type"));
         id = data.getString("name");
-        name = Util.toProperCase(String.join(" ", id.split("-")));
+        name = Util.toProperCase(id.replaceAll("-", " "));
         expYield = data.getInt("exp");
         height = data.getInt("exp") * 10; // it's originally given in (height in cm)/10
         weight = data.getInt("exp") / 10.0; // it's originally given in (weight in kg)*10

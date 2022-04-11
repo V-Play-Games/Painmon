@@ -133,7 +133,7 @@ public interface ActionHandler {
                 String buttonIdTail = e.getUser().getId() + ":spawn:" + arg + ":" + spawn.getId();
                 e.replyEmbeds(
                     new EmbedBuilder()
-                        .setTitle("A wild " + spawn.getName() + " appeared!")
+                        .setTitle("A wild " + spawn.getEffectiveName() + " appeared!")
                         .setDescription("Click the buttons to take an action!")
                         .build()
                 ).addActionRow(

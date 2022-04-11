@@ -16,11 +16,15 @@
 package net.vpg.bot.entities;
 
 import net.dv8tion.jda.api.utils.data.DataObject;
+import net.vpg.bot.core.MiscUtil;
 import net.vpg.bot.core.Util;
+import net.vpg.bot.pokemon.GrowthRate;
+import net.vpg.bot.pokemon.Stat;
 import net.vpg.bot.pokemon.Type;
 
 import javax.annotation.Nonnull;
 import java.util.HashMap;
+import java.util.Locale;
 import java.util.Map;
 
 public class Move implements Entity {
@@ -156,8 +160,9 @@ public class Move implements Entity {
         SPECIFIC_MOVE("Specific Move"),
         ;
 
-        String key;
-        String name;
+        private static final Map<String, Target> LOOKUP = MiscUtil.getEnumMap(Target.class, Target::getKey);
+        private final String key;
+        private final String name;
 
         Target(String name) {
             this.name = name;
@@ -165,12 +170,7 @@ public class Move implements Entity {
         }
 
         public static Target fromKey(String key) {
-            for (Target target : values()) {
-                if (target.getKey().equals(key)) {
-                    return target;
-                }
-            }
-            throw new IllegalArgumentException(key + " target?");
+            return LOOKUP.get(key);
         }
 
         public String getName() {
@@ -199,8 +199,9 @@ public class Move implements Entity {
         FIELD_EFFECT("Field Effect", "field-effect"),
         ;
 
-        String key;
-        String name;
+        private static final Map<String, EffectCategory> LOOKUP = MiscUtil.getEnumMap(EffectCategory.class, EffectCategory::getKey);
+        private final String key;
+        private final String name;
 
         EffectCategory(String name, String key) {
             this.name = name;
@@ -208,12 +209,7 @@ public class Move implements Entity {
         }
 
         public static EffectCategory fromKey(String key) {
-            for (EffectCategory category : values()) {
-                if (category.getKey().equals(key)) {
-                    return category;
-                }
-            }
-            throw new IllegalArgumentException(key + " category?");
+            return LOOKUP.get(key);
         }
 
         public String getName() {
@@ -228,32 +224,16 @@ public class Move implements Entity {
     public enum Category {
         PHYSICAL,
         SPECIAL,
-        STATUS,
-        ;
+        STATUS;
 
-        String key;
-        String name;
-
-        Category() {
-            this.name = Util.toProperCase(toString());
-            this.key = toString().toLowerCase();
-        }
+        private static final Map<String, Category> LOOKUP = MiscUtil.getEnumMap(Category.class, category -> category.name().toLowerCase());
 
         public static Category fromKey(String key) {
-            for (Category category : values()) {
-                if (category.getKey().equals(key)) {
-                    return category;
-                }
-            }
-            throw new IllegalArgumentException(key + " category?");
+            return LOOKUP.get(key);
         }
 
         public String getName() {
-            return Util.toProperCase(name);
-        }
-
-        public String getKey() {
-            return key;
+            return Util.toProperCase(toString());
         }
     }
 
@@ -284,21 +264,17 @@ public class Move implements Entity {
         NO_GROUND_IMMUNITY("No Ground Immunity"),
         ;
 
-        String id;
-        String name;
+        private static final Map<String, Ailment> LOOKUP = MiscUtil.getEnumMap(Ailment.class, Ailment::getId);
+        private final String id;
+        private final String name;
 
         Ailment(String name) {
             this.name = name;
             this.id = toString().toLowerCase().replaceAll("_", "-");
         }
 
-        public static Ailment fromId(String key) {
-            for (Ailment ailment : values()) {
-                if (ailment.getId().equals(key)) {
-                    return ailment;
-                }
-            }
-            throw new IllegalArgumentException(key + " ailment?");
+        public static Ailment fromId(String id) {
+            return LOOKUP.get(id);
         }
 
         public String getName() {
@@ -311,18 +287,18 @@ public class Move implements Entity {
     }
 
     public static class Metadata {
-        int healing;
-        int minHits;
-        int maxHits;
-        int minTurns;
-        int maxTurns;
-        int critRate;
-        int drain;
-        int ailmentChance;
-        int flinchChance;
-        int statChance;
-        Ailment ailment;
-        EffectCategory category;
+        private final int healing;
+        private final int minHits;
+        private final int maxHits;
+        private final int minTurns;
+        private final int maxTurns;
+        private final int critRate;
+        private final int drain;
+        private final int ailmentChance;
+        private final int flinchChance;
+        private final int statChance;
+        private final Ailment ailment;
+        private final EffectCategory category;
 
         public Metadata(DataObject data) {
             this.healing = data.getInt("healing", 0);

@@ -15,10 +15,9 @@
  */
 package net.vpg.bot.core;
 
-import org.apache.commons.collections4.map.CaseInsensitiveMap;
-
 import java.util.EnumSet;
 import java.util.Map;
+import java.util.function.Function;
 import java.util.function.UnaryOperator;
 import java.util.stream.Collectors;
 
@@ -27,12 +26,13 @@ public class MiscUtil {
         // the private constructor to prevent instantiation
     }
 
-    public static <T extends Enum<T>> Map<String, T> getEnumMap(Class<T> clazz) {
+    public static <K, V extends Enum<V>> Map<K, V> getEnumMap(Class<V> clazz, Function<V, K> keyFunction) {
         return EnumSet.allOf(clazz)
             .stream()
-            .collect(Collectors.toMap(Enum::name, UnaryOperator.identity(),
-                (n1, n2) -> {
-                    throw new Error();
-                }, CaseInsensitiveMap::new));
+            .collect(Collectors.toMap(keyFunction, UnaryOperator.identity()));
+    }
+
+    public static <V extends Enum<V>> Map<String, V> getEnumMap(Class<V> clazz) {
+        return getEnumMap(clazz, obj -> obj.name().toLowerCase());
     }
 }

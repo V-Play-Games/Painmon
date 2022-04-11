@@ -1,5 +1,7 @@
 package net.vpg.bot.pokemon;
 
+import net.vpg.bot.core.MiscUtil;
+
 import java.util.HashMap;
 import java.util.Map;
 import java.util.function.IntToDoubleFunction;
@@ -28,6 +30,7 @@ public enum GrowthRate {
             return Math.pow(x, 3) * (x + 64) / 100;
     });
 
+    private static final Map<String, GrowthRate> LOOKUP = MiscUtil.getEnumMap(GrowthRate.class, GrowthRate::getId);
     private final String id;
     private final Map<Integer, Integer> expLookupTable;
 
@@ -40,13 +43,8 @@ public enum GrowthRate {
         }
     }
 
-    public static GrowthRate get(String id) {
-        for (GrowthRate rate : values()) {
-            if (rate.id.equals(id)) {
-                return rate;
-            }
-        }
-        return null;
+    public static GrowthRate fromId(String id) {
+        return LOOKUP.get(id);
     }
 
     public String getId() {

@@ -55,6 +55,6 @@ public class Spawn extends PlayablePokemon {
             .map(Pokemon.AbilitySlot::getAbility)
             .toArray(Ability[]::new);
         setAbility(Util.getRandom(abilities));
-        setGender(getSpecies().getGenderRate().generate());
+        setGender(getBase().getSpecies().getGenderRate().generate());
     }
 }

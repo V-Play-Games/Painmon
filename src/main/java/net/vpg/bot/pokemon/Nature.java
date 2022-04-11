@@ -52,9 +52,9 @@ public enum Nature {
     QUIRKY (SPEED,   SPEED  );
     //@formatter:on
 
-    static final Map<String, Nature> map = MiscUtil.getEnumMap(Nature.class);
-    final Stat increasedStat;
-    final Stat decreasedStat;
+    private static final Map<String, Nature> LOOKUP = MiscUtil.getEnumMap(Nature.class);
+    private final Stat increasedStat;
+    private final Stat decreasedStat;
 
     Nature(Stat increasedStat, Stat decreasedStat) {
         this.increasedStat = increasedStat;
@@ -62,6 +62,14 @@ public enum Nature {
     }
 
     public static Nature fromKey(String key) {
-        return map.getOrDefault(key, null);
+        return LOOKUP.getOrDefault(key, null);
+    }
+
+    public Stat getIncreasedStat() {
+        return increasedStat;
+    }
+
+    public Stat getDecreasedStat() {
+        return decreasedStat;
     }
 }

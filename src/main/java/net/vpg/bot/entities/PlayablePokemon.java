@@ -125,6 +125,10 @@ public class PlayablePokemon extends DatabaseObject {
         return this;
     }
 
+    public String getEffectiveName() {
+        return nickname != null ? nickname : base.getName();
+    }
+
     public int getLevel() {
         return level;
     }

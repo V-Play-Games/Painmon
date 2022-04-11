@@ -30,7 +30,7 @@ public class PokemonSpecies implements Entity {
         this.evolutionChain = data.getInt("evolutionChain");
         this.baseHappiness = data.getInt("baseHappiness");
         this.captureRate = data.getInt("captureRate");
-        this.growthRate = GrowthRate.get(data.getString("growthRate"));
+        this.growthRate = GrowthRate.fromId(data.getString("growthRate"));
         this.genderRate = GenderRate.of(data.getInt("genderRate"));
         this.eggGroups = data.getArray("eggGroups").stream(DataArray::getString).collect(Collectors.toList());
         this.tags = data.getArray("tags").stream(DataArray::getString).collect(Collectors.toList());

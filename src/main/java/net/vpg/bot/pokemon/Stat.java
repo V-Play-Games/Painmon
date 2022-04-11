@@ -15,6 +15,10 @@
  */
 package net.vpg.bot.pokemon;
 
+import net.vpg.bot.core.MiscUtil;
+
+import java.util.Map;
+
 public enum Stat {
     HP("hp"),
     ATTACK("attack"),
@@ -23,10 +27,15 @@ public enum Stat {
     SP_DEF("special-defense"),
     SPEED("speed");
 
-    public final String key;
+    private static final Map<String, Stat> LOOKUP = MiscUtil.getEnumMap(Stat.class, Stat::getKey);
+    final String key;
 
     Stat(String key) {
         this.key = key;
+    }
+
+    public static Stat fromKey(String id) {
+        return LOOKUP.get(id);
     }
 
     public String getKey() {
