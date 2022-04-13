@@ -24,6 +24,7 @@ import net.vpg.bot.entities.Route;
 import net.vpg.bot.event.BotButtonEvent;
 import net.vpg.bot.pokemon.Gender;
 import net.vpg.bot.pokemon.Spawn;
+import net.vpg.bot.ratelimit.AbstractRatelimiter;
 import net.vpg.bot.ratelimit.Ratelimit;
 import net.vpg.bot.ratelimit.Ratelimiter;
 
@@ -113,10 +114,10 @@ public interface ActionHandler {
         }
     }
 
-    class EncounterHandler implements ActionHandler, Ratelimiter {
-        private final Map<Long, Ratelimit> limits = new HashMap<>();
-        private final long cooldown = TimeUnit.SECONDS.toMillis(30);
-        private final Random random = new Random();
+    class EncounterHandler extends AbstractRatelimiter implements ActionHandler {
+        public EncounterHandler() {
+            super(30, TimeUnit.SECONDS);
+        }
 
         @Override
         public String getName() {
@@ -129,31 +130,19 @@ public interface ActionHandler {
                 return;
             }
             Spawn spawn = Route.get(arg).spawn();
-            if (spawn != null && random.nextInt(10) != 7) {
-                String buttonIdTail = e.getUser().getId() + ":spawn:" + arg + ":" + spawn.getId();
+            if (spawn != null && Range.random(0, 10) != 0) {
                 e.replyEmbeds(
                     new EmbedBuilder()
                         .setTitle("A wild " + spawn.getEffectiveName() + " appeared!")
                         .setDescription("Click the buttons to take an action!")
                         .build()
                 ).addActionRow(
-                    Button.primary("battle:" + buttonIdTail, "Battle"),
-                    Button.primary("catch:" + buttonIdTail, "Throw a Pokeball")
+                    Button.primary("battle:" + e.getUser().getId() + ":spawn:" + arg + ":" + spawn.getId(), "Battle")
                 ).queue();
             } else {
                 e.reply("No wild pokemon in sight. Try again later!").queue();
             }
             ratelimit(e.getIdLong());
-        }
-
-        @Override
-        public Map<Long, Ratelimit> getRatelimited() {
-            return limits;
-        }
-
-        @Override
-        public long getCooldown() {
-            return cooldown;
         }
 
         @Override
