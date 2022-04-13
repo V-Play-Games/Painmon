@@ -66,8 +66,7 @@ public class Route implements Entity {
                 break;
             }
         }
-        if (pokemon == null) return null;
-        return new Spawn("spawn" + System.nanoTime(), pokemon);
+        return pokemon == null ? null : new Spawn(pokemon);
     }
 
     public class WildPokemon {
@@ -75,20 +74,23 @@ public class Route implements Entity {
         private final int rate;
         private final Range levelRange;
         private final Range moveRange;
-        private final String[] possibleMoves;
+        private final List<EntityReference<Move>> possibleMoves;
 
         public WildPokemon(DataObject data) {
             reference = new EntityReference<>(Pokemon.INFO, data.getString("id"));
             rate = data.getInt("rate");
             levelRange = Range.of(data.getString("level_range"));
             moveRange = Range.of(data.getString("move_count"));
-            possibleMoves = data.getArray("moves_list").stream(DataArray::getString).toArray(String[]::new);
+            possibleMoves = data.getArray("moves_list")
+                .stream(DataArray::getString)
+                .map(move -> new EntityReference<>(Move.INFO, id))
+                .collect(Collectors.toList());
 
-            assert possibleMoves.length >= moveRange.getUpper();
+            assert possibleMoves.size() >= moveRange.getUpper();
         }
 
-        public EntityReference<Pokemon> getReference() {
-            return reference;
+        public Pokemon getPokemon() {
+            return reference.get();
         }
 
         public int getRate() {
@@ -103,7 +105,7 @@ public class Route implements Entity {
             return moveRange;
         }
 
-        public String[] getPossibleMoves() {
+        public List<EntityReference<Move>> getPossibleMoves() {
             return possibleMoves;
         }
 

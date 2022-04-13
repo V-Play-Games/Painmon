@@ -143,7 +143,8 @@ public class Dialogue implements Entity {
         }
 
         public void send(Sender e, Player player) {
-            e.send(getText(player.setPosition(Dialogue.this.id)))
+            player.setPosition(Dialogue.this.id);
+            e.send(getText(player))
                 .setActionRows(getActionRow(player.getId()))
                 .queue();
         }

@@ -18,7 +18,10 @@ package net.vpg.bot.core;
 import net.dv8tion.jda.api.entities.User;
 import net.vpg.bot.commands.trilogy.BagCommand;
 import net.vpg.bot.entities.Dialogue;
+import net.vpg.bot.entities.PlayablePokemon;
+import net.vpg.bot.entities.Player;
 import net.vpg.bot.event.BotButtonEvent;
+import net.vpg.bot.pokemon.Spawn;
 
 public interface ButtonHandlers {
     class Area implements ButtonHandler {
@@ -59,36 +62,22 @@ public interface ButtonHandlers {
 
         @Override
         public void handle(BotButtonEvent e) {
-            User user = e.getUser();
-            if (!e.getArg(0).equals(user.getId())) {
+            String userId = e.getUser().getId();
+            if (!e.getArg(0).equals(userId)) {
                 return;
             }
+            Player player = Player.get(userId);
             switch (e.getArg(1)) {
                 case "trainer":
                     e.send("Trainer Battles not supported yet").queue();
                     break;
                 case "spawn":
-                    // battle:user-id:spawn:route:pokemon
-                    String route = e.getArg(2);
-                    String pokemon = e.getArg(3);
+                    // battle:<user-id>:spawn:<spawn-id>
+                    Spawn spawn = Spawn.get(e.getArg(2));
+                    spawn.randomize();
+                    PlayablePokemon firstMon = player.getTeam().getPokemon(1);
+                    // TODO: Initialize Battle and start it
             }
-            e.send("Insert Battle").queue();
-        }
-    }
-
-    class Catch implements ButtonHandler {
-        @Override
-        public String getName() {
-            return "catch";
-        }
-
-        @Override
-        public void handle(BotButtonEvent e) {
-            User user = e.getUser();
-            if (!e.getArg(0).equals(user.getId())) {
-                return;
-            }
-            e.send("Insert Catch, tutuk, tutuk, tutuk, TADA CAUGHT!").queue();
         }
     }
 }

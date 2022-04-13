@@ -137,7 +137,7 @@ public interface ActionHandler {
                         .setDescription("Click the buttons to take an action!")
                         .build()
                 ).addActionRow(
-                    Button.primary("battle:" + e.getUser().getId() + ":spawn:" + arg + ":" + spawn.getId(), "Battle")
+                    Button.primary("battle:" + e.getUser().getId() + ":spawn:" + spawn.getId(), "Battle")
                 ).queue();
             } else {
                 e.reply("No wild pokemon in sight. Try again later!").queue();

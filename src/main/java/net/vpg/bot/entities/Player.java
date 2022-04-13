@@ -96,24 +96,26 @@ public class Player extends DatabaseObject {
         return gender;
     }
 
-    public Player setGender(Gender gender) {
+    public void setGender(Gender gender) {
         this.gender = gender;
         update("gender", gender.ordinal());
-        return this;
     }
 
     public String getPosition() {
         return position;
     }
 
-    public Player setPosition(String position) {
+    public void setPosition(String position) {
         this.position = position;
         update("position", position);
-        return this;
     }
 
     public String getMention() {
         return "<@" + id + ">";
+    }
+
+    public PlayerTeam getTeam() {
+        return team;
     }
 
     public String resolveReferences(String s) {

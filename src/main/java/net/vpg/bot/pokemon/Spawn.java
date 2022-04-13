@@ -15,46 +15,38 @@
  */
 package net.vpg.bot.pokemon;
 
-import net.vpg.bot.core.Range;
-import net.vpg.bot.core.Util;
-import net.vpg.bot.entities.Ability;
+import net.vpg.bot.entities.EntityReference;
 import net.vpg.bot.entities.Move;
 import net.vpg.bot.entities.PlayablePokemon;
-import net.vpg.bot.entities.Pokemon;
 import net.vpg.bot.entities.Route.WildPokemon;
 
+import java.util.List;
+
 public class Spawn extends PlayablePokemon {
-    private static final Range SHINY_RANGE = Range.of(0, 4096);
-    private static final Range EV_RANGE = Range.of(0, 31);
     private final WildPokemon wild;
 
-    public Spawn(String id, WildPokemon pokemon) {
-        super(pokemon.getReference().get(), id, null);
+    public Spawn(WildPokemon pokemon) {
+        super(pokemon.getPokemon(), "spawn" + System.nanoTime(), null);
         this.wild = pokemon;
+        CACHE.put(id, this);
+    }
+
+    public static Spawn get(String id) {
+        assert id.startsWith("spawn");
+        return (Spawn) CACHE.get(id);
     }
 
     public WildPokemon asWildPokemon() {
         return wild;
     }
 
-    public void fillIn() {
+    @Override
+    public void randomize() {
         if (getLevel() != 0) return;
         setLevel(wild.getLevelRange().random());
-        String[] possibleMoves = wild.getPossibleMoves();
+        List<EntityReference<Move>> possibleMoves = wild.getPossibleMoves();
         for (int i = 1, fence = wild.getMoveRange().random(); i <= fence; i++) {
-            setMove(i, Move.get(possibleMoves[i - 1]));
+            setMove(i, possibleMoves.get(i - 1).get());
         }
-        setShiny(SHINY_RANGE.random() == 0);
-        setNature(Util.getRandom(Nature.values()));
-        for (Stat stat : Stat.values()) {
-            setIv(stat, EV_RANGE.random());
-        }
-        Ability[] abilities = getPossibleAbilities()
-            .stream()
-            .filter(a -> !a.isHidden())
-            .map(Pokemon.AbilitySlot::getAbility)
-            .toArray(Ability[]::new);
-        setAbility(Util.getRandom(abilities));
-        setGender(getBase().getSpecies().getGenderRate().generate());
     }
 }

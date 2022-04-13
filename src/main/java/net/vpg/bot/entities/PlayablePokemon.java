@@ -17,6 +17,8 @@ package net.vpg.bot.entities;
 
 import net.dv8tion.jda.api.utils.data.DataObject;
 import net.vpg.bot.core.Bot;
+import net.vpg.bot.core.Range;
+import net.vpg.bot.core.Util;
 import net.vpg.bot.database.DatabaseObject;
 import net.vpg.bot.pokemon.*;
 
@@ -29,6 +31,8 @@ public class PlayablePokemon extends DatabaseObject {
     public static final String COLLECTION_NAME = "pokemon";
     public static final Map<String, PlayablePokemon> CACHE = new HashMap<>();
     public static final EntityInfo<PlayablePokemon> INFO = new EntityInfo<>(COLLECTION_NAME, PlayablePokemon::new, CACHE);
+    private static final Range SHINY_RANGE = Range.of(0, 4096);
+    private static final Range EV_RANGE = Range.of(0, 31);
     private final Moveset moves;
     private final StatMapping evs;
     private final StatMapping ivs;
@@ -88,17 +92,27 @@ public class PlayablePokemon extends DatabaseObject {
         return id.equals("") ? null : CACHE.get(id);
     }
 
+    public void randomize() {
+        setShiny(SHINY_RANGE.random() == 0);
+        setNature(Util.getRandom(Nature.values()));
+        for (Stat stat : Stat.values()) {
+            setIv(stat, EV_RANGE.random());
+        }
+        Ability[] abilities = getPossibleAbilities()
+            .stream()
+            .filter(a -> !a.isHidden())
+            .map(Pokemon.AbilitySlot::getAbility)
+            .toArray(Ability[]::new);
+        setAbility(Util.getRandom(abilities));
+        setGender(getBase().getSpecies().getGenderRate().generate());
+    }
+
     public int getPlayerSpecificId() {
         return playerSpecificId;
     }
 
     public List<Pokemon.AbilitySlot> getPossibleAbilities() {
         return base.getAbilities();
-    }
-
-    public PlayablePokemon randomize() {
-
-        return this;
     }
 
     public Pokemon getBase() {
