@@ -18,7 +18,7 @@ package net.vpg.bot.core;
 import net.dv8tion.jda.api.EmbedBuilder;
 import net.dv8tion.jda.api.interactions.components.buttons.Button;
 import net.vpg.bot.action.Sender;
-import net.vpg.bot.entities.Dialogue;
+import net.vpg.bot.entities.Area;
 import net.vpg.bot.entities.Player;
 import net.vpg.bot.entities.Route;
 import net.vpg.bot.event.BotButtonEvent;
@@ -26,11 +26,9 @@ import net.vpg.bot.pokemon.Gender;
 import net.vpg.bot.pokemon.Spawn;
 import net.vpg.bot.ratelimit.AbstractRatelimiter;
 import net.vpg.bot.ratelimit.Ratelimit;
-import net.vpg.bot.ratelimit.Ratelimiter;
 
 import java.util.HashMap;
 import java.util.Map;
-import java.util.Random;
 import java.util.concurrent.TimeUnit;
 
 public interface ActionHandler {
@@ -71,7 +69,7 @@ public interface ActionHandler {
 
         @Override
         public void handle(BotButtonEvent e, String arg) {
-            Dialogue.get(arg).send(e, e.getUser());
+            Area.get(arg).send(e, e.getUser());
         }
     }
 

@@ -17,7 +17,6 @@ package net.vpg.bot.core;
 
 import net.dv8tion.jda.api.entities.User;
 import net.vpg.bot.commands.trilogy.BagCommand;
-import net.vpg.bot.entities.Dialogue;
 import net.vpg.bot.entities.PlayablePokemon;
 import net.vpg.bot.entities.Player;
 import net.vpg.bot.event.BotButtonEvent;
@@ -33,7 +32,7 @@ public interface ButtonHandlers {
         @Override
         public void handle(BotButtonEvent e) {
             if (!e.getArg(3).equals(e.getUser().getId())) return;
-            Dialogue.get(e.getArg(0)).executeActions(e, e.getArg(1), e.getArg(2));
+            net.vpg.bot.entities.Area.get(e.getArg(0)).executeActions(e, e.getArg(1), e.getArg(2));
         }
     }
 

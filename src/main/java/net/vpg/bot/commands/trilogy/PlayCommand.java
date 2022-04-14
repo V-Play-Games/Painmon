@@ -17,7 +17,7 @@ package net.vpg.bot.commands.trilogy;
 
 import net.vpg.bot.commands.NoArgsCommand;
 import net.vpg.bot.core.Bot;
-import net.vpg.bot.entities.Dialogue;
+import net.vpg.bot.entities.Area;
 import net.vpg.bot.entities.Player;
 import net.vpg.bot.event.CommandReceivedEvent;
 
@@ -28,6 +28,6 @@ public class PlayCommand extends TrilogyCommand implements NoArgsCommand {
 
     public void execute(CommandReceivedEvent e) {
         Player player = Player.get(e.getUser().getId());
-        Dialogue.get(player.getPosition()).send(e, e.getUser());
+        Area.get(player.getPosition()).send(e, e.getUser());
     }
 }

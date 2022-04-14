@@ -31,14 +31,14 @@ import javax.annotation.Nonnull;
 import java.util.*;
 import java.util.stream.Collectors;
 
-public class Dialogue implements Entity {
-    public static final Map<String, Dialogue> CACHE = new HashMap<>();
-    public static final EntityInfo<Dialogue> INFO = new EntityInfo<>(Dialogue.class.getResource("dialogue.json"), Dialogue::new, CACHE);
+public class Area implements Entity {
+    public static final Map<String, Area> CACHE = new HashMap<>();
+    public static final EntityInfo<Area> INFO = new EntityInfo<>(Area.class.getResource("area.json"), Area::new, CACHE);
     private final DataObject data;
     private final String id;
     private final Map<String, State> states;
 
-    public Dialogue(DataObject data) {
+    public Area(DataObject data) {
         this.data = data;
         this.id = data.getString("id");
         this.states = data.getArray("states")
@@ -47,7 +47,7 @@ public class Dialogue implements Entity {
             .collect(Util.groupingBy(State::getId));
     }
 
-    public static Dialogue get(String id) {
+    public static Area get(String id) {
         return CACHE.get(id);
     }
 
@@ -126,8 +126,8 @@ public class Dialogue implements Entity {
             }).forEach(buttons::add);
         }
 
-        public Dialogue getParent() {
-            return Dialogue.this;
+        public Area getParent() {
+            return Area.this;
         }
 
         public String getId() {
@@ -143,7 +143,7 @@ public class Dialogue implements Entity {
         }
 
         public void send(Sender e, Player player) {
-            player.setPosition(Dialogue.this.id);
+            player.setPosition(Area.this.id);
             e.send(getText(player))
                 .setActionRows(getActionRow(player.getId()))
                 .queue();
@@ -159,7 +159,7 @@ public class Dialogue implements Entity {
         }
 
         public ActionRow getActionRow(String userId) {
-            return ActionRow.of(buttons.stream().map(b -> b.withId("area:" + Dialogue.this.id + ":" + this.id + ":" + b.getId() + ":" + userId)).collect(Collectors.toList()));
+            return ActionRow.of(buttons.stream().map(b -> b.withId("area:" + Area.this.id + ":" + this.id + ":" + b.getId() + ":" + userId)).collect(Collectors.toList()));
         }
 
         public List<String> getConditions() {

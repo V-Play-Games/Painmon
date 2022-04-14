@@ -18,7 +18,7 @@ package net.vpg.bot.commands.trilogy;
 import net.vpg.bot.commands.BotCommandImpl;
 import net.vpg.bot.commands.NoArgsCommand;
 import net.vpg.bot.core.Bot;
-import net.vpg.bot.entities.Dialogue;
+import net.vpg.bot.entities.Area;
 import net.vpg.bot.entities.Player;
 import net.vpg.bot.event.CommandReceivedEvent;
 
@@ -38,7 +38,6 @@ public class StartCommand extends BotCommandImpl implements NoArgsCommand {
 
     public void execute(CommandReceivedEvent e) {
         Player player = Player.createNew(e.getUser().getId(), bot);
-        player.setPosition("paseagon.welcome");
-        Dialogue.get("paseagon.welcome").send(e, player);
+        Area.get("paseagon.welcome").send(e, player);
     }
 }
