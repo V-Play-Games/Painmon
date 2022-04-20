@@ -18,13 +18,10 @@ package net.vpg.bot.entities;
 import net.dv8tion.jda.api.utils.data.DataObject;
 import net.vpg.bot.core.MiscUtil;
 import net.vpg.bot.core.Util;
-import net.vpg.bot.pokemon.GrowthRate;
-import net.vpg.bot.pokemon.Stat;
 import net.vpg.bot.pokemon.Type;
 
 import javax.annotation.Nonnull;
 import java.util.HashMap;
-import java.util.Locale;
 import java.util.Map;
 
 public class Move implements Entity {

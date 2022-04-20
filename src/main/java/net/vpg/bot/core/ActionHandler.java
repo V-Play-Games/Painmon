@@ -55,7 +55,7 @@ public interface ActionHandler {
         @Override
         public void handle(BotButtonEvent e, String arg) {
             Player player = Player.get(e.getUser().getId());
-            if (player.getGender().isGenderless()) {
+            if (player.getGender() == null) {
                 player.setGender(arg.equals("m") ? Gender.MALE : Gender.FEMALE);
             }
         }
@@ -113,6 +113,8 @@ public interface ActionHandler {
     }
 
     class EncounterHandler extends AbstractRatelimiter implements ActionHandler {
+        public static final Range WILD_MON_RANGE = Range.of(0, 10);
+
         public EncounterHandler() {
             super(30, TimeUnit.SECONDS);
         }
@@ -128,7 +130,7 @@ public interface ActionHandler {
                 return;
             }
             Spawn spawn = Route.get(arg).spawn();
-            if (spawn != null && Range.random(0, 10) != 0) {
+            if (spawn != null && WILD_MON_RANGE.random() != 0) {
                 e.replyEmbeds(
                     new EmbedBuilder()
                         .setTitle("A wild " + spawn.getEffectiveName() + " appeared!")

@@ -51,8 +51,18 @@ public enum GrowthRate {
         return id;
     }
 
-    public int getTotalExpAtLevel(int level) {
+    public int getExpAtLevel(int level) {
         assert 1 <= level && level <= 100;
         return expLookupTable.get(level);
+    }
+
+    public int getLevelAtExp(int exp) {
+        if (exp <= 1) return 1;
+        for (Map.Entry<Integer, Integer> entry : expLookupTable.entrySet()) {
+            if (entry.getValue() > exp) {
+                return entry.getKey() - 1;
+            }
+        }
+        return 100;
     }
 }

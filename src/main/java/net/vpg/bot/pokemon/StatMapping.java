@@ -17,21 +17,29 @@ package net.vpg.bot.pokemon;
 
 import net.dv8tion.jda.api.utils.data.DataObject;
 
+import java.util.Map;
+
+import static net.vpg.bot.pokemon.Stat.*;
+
 public class StatMapping {
-    private int hp;
-    private int attack;
-    private int defense;
-    private int spAtk;
-    private int spDef;
-    private int speed;
+    protected int hp;
+    protected int attack;
+    protected int defense;
+    protected int spAtk;
+    protected int spDef;
+    protected int speed;
+
+    public StatMapping(StatMapping stats) {
+        this(stats.hp, stats.attack, stats.defense, stats.spAtk, stats.spDef, stats.speed);
+    }
 
     public StatMapping(DataObject data) {
-        this(data.getInt(Stat.HP.key),
-            data.getInt(Stat.ATTACK.key),
-            data.getInt(Stat.DEFENSE.key),
-            data.getInt(Stat.SP_ATK.key),
-            data.getInt(Stat.SP_DEF.key),
-            data.getInt(Stat.SPEED.key));
+        this(data.getInt(HP.key, 0),
+            data.getInt(ATTACK.key, 0),
+            data.getInt(DEFENSE.key, 0),
+            data.getInt(SP_ATK.key, 0),
+            data.getInt(SP_DEF.key, 0),
+            data.getInt(SPEED.key, 0));
     }
 
     public StatMapping(int hp, int attack, int defense, int spAtk, int spDef, int speed) {
@@ -109,31 +117,45 @@ public class StatMapping {
                 return spDef;
             case SPEED:
                 return speed;
+            default:
+                throw new IllegalArgumentException("trying to get battle stats in permanent stat mapping");
         }
-        return -1;
     }
 
     public void setStat(Stat stat, int value) {
         switch (stat) {
             case HP:
-                hp = value;
+                setHP(value);
                 break;
             case ATTACK:
-                attack = value;
+                setAttack(value);
                 break;
             case DEFENSE:
-                defense = value;
+                setDefense(value);
                 break;
             case SP_ATK:
-                spAtk = value;
+                setSpAtk(value);
                 break;
             case SP_DEF:
-                spDef = value;
+                setSpDef(value);
                 break;
             case SPEED:
-                speed = value;
+                setSpeed(value);
                 break;
+            default:
+                throw new IllegalArgumentException("Setting battle stats in permanent stat mapping");
         }
+    }
+
+    public Map<Stat, Integer> toMap() {
+        return Map.of(
+            HP, hp,
+            ATTACK, attack,
+            DEFENSE, defense,
+            SP_ATK, spAtk,
+            SP_DEF, spDef,
+            SPEED, speed
+        );
     }
 
     public String toString() {

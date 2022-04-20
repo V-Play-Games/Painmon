@@ -32,8 +32,8 @@ public class PlayablePokemon extends DatabaseObject {
     public static final Map<String, PlayablePokemon> CACHE = new HashMap<>();
     public static final EntityInfo<PlayablePokemon> INFO = new EntityInfo<>(COLLECTION_NAME, PlayablePokemon::new, CACHE);
     private static final Range SHINY_RANGE = Range.of(0, 4096);
-    private static final Range EV_RANGE = Range.of(0, 31);
-    private final Moveset moves;
+    private static final Range IV_RANGE = Range.of(0, 31);
+    private final Moveset moveset;
     private final StatMapping evs;
     private final StatMapping ivs;
     private final Pokemon base;
@@ -51,25 +51,25 @@ public class PlayablePokemon extends DatabaseObject {
     public PlayablePokemon(DataObject data, Bot bot) {
         super(data, bot);
         this.base = Pokemon.get(data.getString("base"));
-        this.slot = data.getInt("slot");
+        this.slot = data.getInt("slot", 0);
         this.playerSpecificId = Integer.parseInt(id.split(":")[0]);
-        this.nickname = data.getString("nickname");
-        this.level = data.getInt("level");
-        this.exp = data.getInt("exp");
-        this.shiny = data.getBoolean("shiny");
-        this.moves = new Moveset(data.getArray("moves"));
-        this.evs = new StatMapping(data.getObject("evs"));
-        this.ivs = new StatMapping(data.getObject("ivs"));
-        this.ability = Ability.get(data.getString("ability"));
-        this.nature = Nature.fromKey(data.getString("nature"));
-        this.heldItem = Item.get(data.getString("heldItem"));
-        this.gender = Gender.fromKey(data.getInt("gender"));
+        this.nickname = data.getString("nickname", null);
+        this.level = data.getInt("level", 0);
+        this.exp = data.getInt("exp", 0);
+        this.shiny = data.getBoolean("shiny", false);
+        this.moveset = new Moveset(data.getArray("moves"));
+        this.evs = new StatMapping(data.optObject("evs").orElseGet(DataObject::empty));
+        this.ivs = new StatMapping(data.optObject("ivs").orElseGet(DataObject::empty));
+        this.ability = Ability.get(data.getString("ability", ""));
+        this.nature = Nature.fromKey(data.getString("nature", ""));
+        this.heldItem = Item.get(data.getString("heldItem", ""));
+        this.gender = Gender.fromKey(data.getInt("gender", -1));
     }
 
     public PlayablePokemon(Pokemon base, String id, Bot bot) {
         super(id, bot);
         this.base = base;
-        this.moves = new Moveset();
+        this.moveset = new Moveset();
         this.evs = new StatMapping();
         this.ivs = new StatMapping();
         this.playerSpecificId = Integer.parseInt(id.split(":")[0]);
@@ -80,7 +80,7 @@ public class PlayablePokemon extends DatabaseObject {
             .put("level", level)
             .put("exp", exp)
             .put("shiny", shiny)
-            .put("moves", moves)
+            .put("moves", moveset)
             .put("evs", evs)
             .put("ivs", ivs)
             .put("nature", nature)
@@ -90,21 +90,6 @@ public class PlayablePokemon extends DatabaseObject {
 
     public static PlayablePokemon get(String id) {
         return id.equals("") ? null : CACHE.get(id);
-    }
-
-    public void randomize() {
-        setShiny(SHINY_RANGE.random() == 0);
-        setNature(Util.getRandom(Nature.values()));
-        for (Stat stat : Stat.values()) {
-            setIv(stat, EV_RANGE.random());
-        }
-        Ability[] abilities = getPossibleAbilities()
-            .stream()
-            .filter(a -> !a.isHidden())
-            .map(Pokemon.AbilitySlot::getAbility)
-            .toArray(Ability[]::new);
-        setAbility(Util.getRandom(abilities));
-        setGender(getBase().getSpecies().getGenderRate().generate());
     }
 
     public int getPlayerSpecificId() {
@@ -153,6 +138,10 @@ public class PlayablePokemon extends DatabaseObject {
         return this;
     }
 
+    public PlayablePokemon setLevelAccordingToExp() {
+        return setLevel(base.getSpecies().getGrowthRate().getLevelAtExp(exp));
+    }
+
     public int getExp() {
         return exp;
     }
@@ -161,6 +150,10 @@ public class PlayablePokemon extends DatabaseObject {
         this.exp = exp;
         update("exp", exp);
         return this;
+    }
+
+    public PlayablePokemon setExpAccordingToLevel() {
+        return setExp(base.getSpecies().getGrowthRate().getExpAtLevel(level));
     }
 
     public boolean isShiny() {
@@ -182,13 +175,8 @@ public class PlayablePokemon extends DatabaseObject {
         return this;
     }
 
-    public Moveset getMoves() {
-        return moves;
-    }
-
-    public PlayablePokemon setMove(int slot, Move move) {
-        update("moves", moves.setMove(slot, move));
-        return this;
+    public Moveset getMoveset() {
+        return moveset;
     }
 
     public StatMapping getEvs() {
@@ -244,5 +232,37 @@ public class PlayablePokemon extends DatabaseObject {
     @Override
     public String getCollectionName() {
         return COLLECTION_NAME;
+    }
+
+    public void randomize() {
+        setShiny(SHINY_RANGE.random() == 0);
+        setNature(Util.getRandom(Nature.values()));
+        for (Stat stat : Stat.values()) {
+            setIv(stat, IV_RANGE.random());
+        }
+        Ability[] abilities = getPossibleAbilities()
+            .stream()
+            .filter(a -> !a.isHidden())
+            .map(Pokemon.AbilitySlot::getAbility)
+            .toArray(Ability[]::new);
+        setAbility(Util.getRandom(abilities));
+        setGender(base.getSpecies().getGenderRate().generate());
+    }
+
+    public StatMapping getStats() {
+        StatMapping stats = new StatMapping(base.getBaseStats());
+        for (Stat stat : Stat.values()) {
+            if (stat.isPermanent()) {
+                int value = (2 * stats.getStat(stat) + ivs.getHP() + (evs.getHP() / 4)) * level / 100;
+                if (stat == Stat.HP) {
+                    if (stats.getHP() != 1) {
+                        stats.setHP(value + level + 10);
+                    }
+                } else {
+                    stats.setStat(stat, (int) ((value + 5) * nature.getMultiplierForStat(stat)));
+                }
+            }
+        }
+        return stats;
     }
 }

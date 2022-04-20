@@ -62,7 +62,11 @@ public enum Nature {
     }
 
     public static Nature fromKey(String key) {
-        return LOOKUP.getOrDefault(key, null);
+        return LOOKUP.get(key);
+    }
+
+    public double getMultiplierForStat(Stat stat) {
+        return stat == increasedStat ? 1.1 : stat == decreasedStat ? 0.9 : 1;
     }
 
     public Stat getIncreasedStat() {

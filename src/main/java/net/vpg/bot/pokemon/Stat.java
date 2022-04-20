@@ -20,18 +20,23 @@ import net.vpg.bot.core.MiscUtil;
 import java.util.Map;
 
 public enum Stat {
-    HP("hp"),
-    ATTACK("attack"),
-    DEFENSE("defense"),
-    SP_ATK("special-attack"),
-    SP_DEF("special-defense"),
-    SPEED("speed");
+    HP("hp", true),
+    ATTACK("attack", true),
+    DEFENSE("defense", true),
+    SP_ATK("special-attack", true),
+    SP_DEF("special-defense", true),
+    SPEED("speed", true),
+    EVASION("evasion", false),
+    ACCURACY("accuracy", false),
+    CRIT_RATE("crit-rate", false);
 
     private static final Map<String, Stat> LOOKUP = MiscUtil.getEnumMap(Stat.class, Stat::getKey);
     final String key;
+    final boolean isPermanent;
 
-    Stat(String key) {
+    Stat(String key, boolean isPermanent) {
         this.key = key;
+        this.isPermanent = isPermanent;
     }
 
     public static Stat fromKey(String id) {
@@ -40,5 +45,9 @@ public enum Stat {
 
     public String getKey() {
         return key;
+    }
+
+    public boolean isPermanent() {
+        return isPermanent;
     }
 }

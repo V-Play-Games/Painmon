@@ -21,7 +21,7 @@ import net.vpg.bot.core.Bot;
 import net.vpg.bot.database.DatabaseObject;
 import net.vpg.bot.pokemon.Bag;
 import net.vpg.bot.pokemon.Gender;
-import net.vpg.bot.pokemon.PlayerTeam;
+import net.vpg.bot.pokemon.PokemonTeam;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -33,7 +33,7 @@ public class Player extends DatabaseObject {
     public static final EntityInfo<Player> INFO = new EntityInfo<>(COLLECTION_NAME, Player::new, CACHE);
     public static final Pattern REFERENCE_PATTERN = Pattern.compile("\\$\\{([A-Za-z-]+)}");
     public static final Pattern GENDER_SPLIT = Pattern.compile("\\{m:(.+);f:(.+)}");
-    private final PlayerTeam team;
+    private final PokemonTeam team;
     private final Bag bag;
     // -1 if not set, 0 for female, 1 for male
     private Gender gender;
@@ -42,19 +42,18 @@ public class Player extends DatabaseObject {
 
     public Player(DataObject data, Bot bot) {
         super(data, bot);
-        gender = Gender.fromKey(data.getInt("gender"));
+        gender = Gender.fromKey(data.getInt("gender", -1));
         bag = new Bag(data.getObject("bag"));
         position = data.getString("position", "");
-        team = new PlayerTeam(data.getArray("team"));
+        team = new PokemonTeam(data.getArray("team"));
         monsCaught = data.getInt("monsCaught");
     }
 
     public Player(String id, Bot bot) {
         super(id, bot);
-        gender = Gender.GENDERLESS;
-        team = new PlayerTeam();
+        team = new PokemonTeam();
         bag = new Bag();
-        data.put("gender", gender.ordinal())
+        data.put("gender", -1)
             .put("bag", bag)
             .put("monsCaught", monsCaught)
             .put("team", team);
@@ -114,7 +113,7 @@ public class Player extends DatabaseObject {
         return "<@" + id + ">";
     }
 
-    public PlayerTeam getTeam() {
+    public PokemonTeam getTeam() {
         return team;
     }
 

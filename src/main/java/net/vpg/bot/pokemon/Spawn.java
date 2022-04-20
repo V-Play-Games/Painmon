@@ -42,11 +42,12 @@ public class Spawn extends PlayablePokemon {
 
     @Override
     public void randomize() {
-        if (getLevel() != 0) return;
+        super.randomize();
         setLevel(wild.getLevelRange().random());
+        Moveset moveset = getMoveset();
         List<EntityReference<Move>> possibleMoves = wild.getPossibleMoves();
         for (int i = 1, fence = wild.getMoveRange().random(); i <= fence; i++) {
-            setMove(i, possibleMoves.get(i - 1).get());
+            moveset.setMove(i, possibleMoves.get(i - 1).get());
         }
     }
 }

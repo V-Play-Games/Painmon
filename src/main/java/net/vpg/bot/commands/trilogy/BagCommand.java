@@ -22,7 +22,6 @@ import net.dv8tion.jda.api.interactions.commands.OptionType;
 import net.dv8tion.jda.api.interactions.components.buttons.Button;
 import net.vpg.bot.action.Sender;
 import net.vpg.bot.core.Bot;
-import net.vpg.bot.entities.Item;
 import net.vpg.bot.entities.Player;
 import net.vpg.bot.event.SlashCommandReceivedEvent;
 import net.vpg.bot.event.TextCommandReceivedEvent;

@@ -17,7 +17,6 @@ package net.vpg.bot.core;
 
 import net.dv8tion.jda.api.entities.User;
 import net.vpg.bot.commands.trilogy.BagCommand;
-import net.vpg.bot.entities.PlayablePokemon;
 import net.vpg.bot.entities.Player;
 import net.vpg.bot.event.BotButtonEvent;
 import net.vpg.bot.pokemon.Spawn;
@@ -54,6 +53,10 @@ public interface ButtonHandlers {
     }
 
     class Battle implements ButtonHandler {
+        public static void executeBattle() {
+
+        }
+
         @Override
         public String getName() {
             return "battle";
@@ -72,9 +75,11 @@ public interface ButtonHandlers {
                     break;
                 case "spawn":
                     // battle:<user-id>:spawn:<spawn-id>
-                    Spawn spawn = Spawn.get(e.getArg(2));
+                    String spawnId = e.getArg(2);
+                    Spawn spawn = Spawn.get(spawnId);
+                    if (spawn == null) return;
+                    Spawn.CACHE.remove(spawnId);
                     spawn.randomize();
-                    PlayablePokemon firstMon = player.getTeam().getPokemon(1);
                     // TODO: Initialize Battle and start it
             }
         }

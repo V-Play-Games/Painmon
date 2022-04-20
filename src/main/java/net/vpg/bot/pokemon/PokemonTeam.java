@@ -21,18 +21,18 @@ import net.vpg.bot.entities.PlayablePokemon;
 
 import javax.annotation.Nonnull;
 
-public class PlayerTeam implements SerializableArray {
+public class PokemonTeam implements SerializableArray {
     private final DataArray data;
     private final PlayablePokemon[] team = new PlayablePokemon[6];
 
-    public PlayerTeam(DataArray data) {
+    public PokemonTeam(DataArray data) {
         this.data = data;
         for (int i = 0, size = data.toList().size(); i < size; i++) {
             team[i] = PlayablePokemon.get(data.getString(i));
         }
     }
 
-    public PlayerTeam() {
+    public PokemonTeam() {
         this.data = DataArray.empty();
     }
 

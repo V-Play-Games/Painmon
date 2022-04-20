@@ -138,6 +138,6 @@ public class Capture {
         CAVE,
         SURF,
         DIVE,
-        FISH;
+        FISH
     }
 }

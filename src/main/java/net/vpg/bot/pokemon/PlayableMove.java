@@ -25,27 +25,33 @@ public class PlayableMove implements Entity {
     private final DataObject data;
     private final int slot;
     private Move move;
-    private int pp;
+    private int currentPP;
+    private int maxPP;
 
     public PlayableMove(DataObject data) {
         this.data = data;
         this.move = Move.get(data.getString("move"));
         this.slot = data.getInt("slot");
-        this.pp = data.getInt("pp");
+        this.currentPP = data.getInt("currentPP");
+        this.maxPP = data.getInt("maxPP");
     }
 
     public PlayableMove(Move move, int slot) {
         this(move, slot, move.getPP());
     }
 
-    public PlayableMove(Move move, int slot, int pp) {
-        this.move = move;
+    public PlayableMove(Move move, int slot, int maxPP) {
+        this.data = DataObject.empty().put("slot", slot);
         this.slot = slot;
-        this.pp = pp;
-        this.data = DataObject.empty()
-            .put("", move.getId())
-            .put("slot", slot)
-            .put("pp", pp);
+        setMove(move);
+        if (this.maxPP != maxPP) {
+            setMaxPP(maxPP);
+            setCurrentPP(maxPP);
+        }
+    }
+
+    public Move getMove() {
+        return move;
     }
 
     public PlayableMove setMove(Move move) {
@@ -55,8 +61,27 @@ public class PlayableMove implements Entity {
     public PlayableMove setMove(Move move, int pp) {
         this.move = move;
         data.put("move", move.getId());
-        setPP(pp);
+        setCurrentPP(pp);
+        setMaxPP(pp);
         return this;
+    }
+
+    public int getCurrentPP() {
+        return currentPP;
+    }
+
+    public void setCurrentPP(int currentPP) {
+        this.currentPP = currentPP;
+        data.put("currentPP", currentPP);
+    }
+
+    public int getMaxPP() {
+        return maxPP;
+    }
+
+    public void setMaxPP(int maxPP) {
+        this.maxPP = maxPP;
+        data.put("maxPP", maxPP);
     }
 
     @Override
@@ -66,16 +91,6 @@ public class PlayableMove implements Entity {
 
     public int getSlot() {
         return slot;
-    }
-
-    public int getPP() {
-        return pp;
-    }
-
-    public PlayableMove setPP(int pp) {
-        this.pp = pp;
-        data.put("pp", pp);
-        return this;
     }
 
     @Nonnull
