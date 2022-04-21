@@ -74,18 +74,6 @@ public class Player extends DatabaseObject {
         return bag;
     }
 
-    public PlayablePokemon generatePokemon(Pokemon base, int level) {
-        PlayablePokemon pokemon = new PlayablePokemon(base, id + ":" + monsCaught, bot);
-        int teamSize = team.getSize() + 1;
-        if (teamSize <= 6) {
-            team.setPokemon(teamSize, pokemon.setSlot(teamSize));
-        }
-        pokemon.setLevel(level);
-        // TODO: Add other info like moves, ability, gender etc
-        incrementMonsCaught();
-        return pokemon;
-    }
-
     @Override
     public String getCollectionName() {
         return COLLECTION_NAME;

@@ -18,6 +18,7 @@ package net.vpg.bot.pokemon;
 import net.vpg.bot.core.MiscUtil;
 
 import java.util.Map;
+import java.util.function.Consumer;
 
 public enum Stat {
     HP("hp", true),
@@ -49,5 +50,13 @@ public enum Stat {
 
     public boolean isPermanent() {
         return isPermanent;
+    }
+
+    public static void forEach(boolean onlyPermanent, Consumer<Stat> action) {
+        for (Stat stat : values()) {
+            if (stat.isPermanent() || !onlyPermanent) {
+                action.accept(stat);
+            }
+        }
     }
 }

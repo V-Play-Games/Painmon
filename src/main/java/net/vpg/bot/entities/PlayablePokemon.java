@@ -47,6 +47,8 @@ public class PlayablePokemon extends DatabaseObject {
     private Nature nature;
     private Item heldItem;
     private Gender gender;
+    private int currentHP;
+    private StatusCondition status;
 
     public PlayablePokemon(DataObject data, Bot bot) {
         super(data, bot);
@@ -64,6 +66,8 @@ public class PlayablePokemon extends DatabaseObject {
         this.nature = Nature.fromKey(data.getString("nature", ""));
         this.heldItem = Item.get(data.getString("heldItem", ""));
         this.gender = Gender.fromKey(data.getInt("gender", -1));
+        this.currentHP = data.getInt("currentHP", getStats().getHP());
+        this.status = StatusCondition.fromKey(data.getInt("status", -1));
     }
 
     public PlayablePokemon(Pokemon base, String id, Bot bot) {
@@ -73,6 +77,8 @@ public class PlayablePokemon extends DatabaseObject {
         this.evs = new StatMapping();
         this.ivs = new StatMapping();
         this.playerSpecificId = Integer.parseInt(id.split(":")[0]);
+        this.currentHP = getStats().getHP();
+        this.status = StatusCondition.NONE;
         this.data
             .put("base", base.getId())
             .put("slot", slot)
@@ -83,9 +89,12 @@ public class PlayablePokemon extends DatabaseObject {
             .put("moves", moveset)
             .put("evs", evs)
             .put("ivs", ivs)
-            .put("nature", nature)
-            .put("heldItem", heldItem)
-            .put("gender", gender);
+            .put("ability", "")
+            .put("nature", "")
+            .put("heldItem", "")
+            .put("gender", -1)
+            .put("currentHP", currentHP)
+            .put("status", status.ordinal());
     }
 
     public static PlayablePokemon get(String id) {
@@ -108,20 +117,18 @@ public class PlayablePokemon extends DatabaseObject {
         return slot;
     }
 
-    public PlayablePokemon setSlot(int slot) {
+    public void setSlot(int slot) {
         this.slot = slot;
         update("slot", slot);
-        return this;
     }
 
     public String getNickname() {
         return nickname;
     }
 
-    public PlayablePokemon setNickname(String nickname) {
+    public void setNickname(String nickname) {
         this.nickname = nickname;
         update("nickname", nickname);
-        return this;
     }
 
     public String getEffectiveName() {
@@ -132,47 +139,44 @@ public class PlayablePokemon extends DatabaseObject {
         return level;
     }
 
-    public PlayablePokemon setLevel(int level) {
+    public void setLevel(int level) {
         this.level = level;
         update("level", level);
-        return this;
     }
 
-    public PlayablePokemon setLevelAccordingToExp() {
-        return setLevel(base.getSpecies().getGrowthRate().getLevelAtExp(exp));
+    public void setLevelAccordingToExp() {
+        setLevel(base.getSpecies().getGrowthRate().getLevelAtExp(exp));
     }
 
     public int getExp() {
         return exp;
     }
 
-    public PlayablePokemon setExp(int exp) {
+    public void setExp(int exp) {
         this.exp = exp;
         update("exp", exp);
-        return this;
     }
 
-    public PlayablePokemon setExpAccordingToLevel() {
-        return setExp(base.getSpecies().getGrowthRate().getExpAtLevel(level));
+    public void setExpAccordingToLevel() {
+        setExp(base.getSpecies().getGrowthRate().getExpAtLevel(level));
     }
 
     public boolean isShiny() {
         return shiny;
     }
 
-    public PlayablePokemon setShiny(boolean shiny) {
+    public void setShiny(boolean shiny) {
         this.shiny = shiny;
         update("shiny", shiny);
-        return this;
     }
 
     public Ability getAbility() {
         return ability;
     }
 
-    public PlayablePokemon setAbility(Ability ability) {
+    public void setAbility(Ability ability) {
         this.ability = ability;
-        return this;
+        update("ability", ability.getId());
     }
 
     public Moveset getMoveset() {
@@ -183,50 +187,53 @@ public class PlayablePokemon extends DatabaseObject {
         return evs;
     }
 
-    public PlayablePokemon setEv(Stat stat, int ev) {
-        this.evs.setStat(stat, ev);
-        update("evs", evs);
-        return this;
-    }
-
     public StatMapping getIvs() {
         return ivs;
-    }
-
-    public PlayablePokemon setIv(Stat stat, int iv) {
-        this.ivs.setStat(stat, iv);
-        update("ivs", ivs);
-        return this;
     }
 
     public Nature getNature() {
         return nature;
     }
 
-    public PlayablePokemon setNature(Nature nature) {
+    public void setNature(Nature nature) {
         this.nature = nature;
-        update("nature", nature.toString());
-        return this;
+        update("nature", nature.name());
     }
 
     public Item getHeldItem() {
         return heldItem;
     }
 
-    public PlayablePokemon setHeldItem(Item heldItem) {
+    public void setHeldItem(Item heldItem) {
         this.heldItem = heldItem;
-        update("heldItem", heldItem.toString());
-        return this;
+        update("heldItem", heldItem.getId());
     }
 
     public Gender getGender() {
         return gender;
     }
 
-    public PlayablePokemon setGender(Gender gender) {
+    public void setGender(Gender gender) {
         this.gender = gender;
         update("gender", gender.ordinal());
-        return this;
+    }
+
+    public int getCurrentHP() {
+        return currentHP;
+    }
+
+    public void setCurrentHP(int currentHP) {
+        this.currentHP = currentHP;
+        update("currentHP", currentHP);
+    }
+
+    public StatusCondition getStatus() {
+        return status;
+    }
+
+    public void setStatus(StatusCondition status) {
+        this.status = status;
+        update("status", status.ordinal());
     }
 
     @Override
@@ -238,7 +245,7 @@ public class PlayablePokemon extends DatabaseObject {
         setShiny(SHINY_RANGE.random() == 0);
         setNature(Util.getRandom(Nature.values()));
         for (Stat stat : Stat.values()) {
-            setIv(stat, IV_RANGE.random());
+            getIvs().setStat(stat, IV_RANGE.random());
         }
         Ability[] abilities = getPossibleAbilities()
             .stream()
@@ -251,18 +258,16 @@ public class PlayablePokemon extends DatabaseObject {
 
     public StatMapping getStats() {
         StatMapping stats = new StatMapping(base.getBaseStats());
-        for (Stat stat : Stat.values()) {
-            if (stat.isPermanent()) {
-                int value = (2 * stats.getStat(stat) + ivs.getHP() + (evs.getHP() / 4)) * level / 100;
-                if (stat == Stat.HP) {
-                    if (stats.getHP() != 1) {
-                        stats.setHP(value + level + 10);
-                    }
-                } else {
-                    stats.setStat(stat, (int) ((value + 5) * nature.getMultiplierForStat(stat)));
+        Stat.forEach(true, stat -> {
+            int value = (2 * stats.getStat(stat) + ivs.getHP() + (evs.getHP() / 4)) * level / 100;
+            if (stat == Stat.HP) {
+                if (stats.getHP() != 1) {
+                    stats.setHP(value + level + 10);
                 }
+            } else {
+                stats.setStat(stat, (int) ((value + 5) * nature.getMultiplierForStat(stat)));
             }
-        }
+        });
         return stats;
     }
 }

@@ -16,12 +16,14 @@
 package net.vpg.bot.pokemon;
 
 import net.dv8tion.jda.api.utils.data.DataObject;
+import net.dv8tion.jda.api.utils.data.SerializableData;
+import org.jetbrains.annotations.NotNull;
 
 import java.util.Map;
 
 import static net.vpg.bot.pokemon.Stat.*;
 
-public class StatMapping {
+public class StatMapping implements SerializableData {
     protected int hp;
     protected int attack;
     protected int defense;
@@ -160,5 +162,13 @@ public class StatMapping {
 
     public String toString() {
         return "HP: " + hp + " | Attack: " + attack + " | Defense: " + defense + " | Sp. Atk: " + spAtk + " | Sp. Def: " + spDef + " | Speed: " + speed;
+    }
+
+    @NotNull
+    @Override
+    public DataObject toData() {
+        DataObject tor = DataObject.empty();
+        toMap().forEach((stat, value) -> tor.put(stat.getKey(), value));
+        return tor;
     }
 }
