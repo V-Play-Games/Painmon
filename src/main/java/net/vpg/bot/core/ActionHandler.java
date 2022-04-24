@@ -23,7 +23,7 @@ import net.vpg.bot.entities.Player;
 import net.vpg.bot.entities.Route;
 import net.vpg.bot.event.BotButtonEvent;
 import net.vpg.bot.pokemon.Gender;
-import net.vpg.bot.pokemon.Spawn;
+import net.vpg.bot.pokemon.WildPokemon;
 import net.vpg.bot.ratelimit.AbstractRatelimiter;
 import net.vpg.bot.ratelimit.Ratelimit;
 
@@ -55,7 +55,7 @@ public interface ActionHandler {
         @Override
         public void handle(BotButtonEvent e, String arg) {
             Player player = Player.get(e.getUser().getId());
-            if (player.getGender() == null) {
+            if (player.getGender().isGenderless()) {
                 player.setGender(arg.equals("m") ? Gender.MALE : Gender.FEMALE);
             }
         }
@@ -129,7 +129,7 @@ public interface ActionHandler {
             if (checkRatelimited(e.getIdLong(), e)) {
                 return;
             }
-            Spawn spawn = Route.get(arg).spawn();
+            WildPokemon spawn = Route.get(arg).spawn();
             if (spawn != null && WILD_MON_RANGE.random() != 0) {
                 e.replyEmbeds(
                     new EmbedBuilder()

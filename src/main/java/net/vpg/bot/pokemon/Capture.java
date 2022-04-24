@@ -103,9 +103,9 @@ public class Capture {
         }
         rate = Math.max((int) rate, 1);
         // TODO: Figure out about critical captures
-        int shakeRange = (int) (65536 / Math.pow(255 / rate, 0.1875));
+        int shakeThreshold = (int) (65536 / Math.pow(255 / rate, 0.1875));
         int i = 0;
-        while (i < 4 && SHAKE_RANGE.random() < shakeRange) i++;
+        while (i < 4 && SHAKE_RANGE.random() < shakeThreshold) i++;
         return Message.values()[i];
     }
 

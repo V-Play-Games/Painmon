@@ -44,19 +44,19 @@ public enum Stat {
         return LOOKUP.get(id);
     }
 
-    public String getKey() {
-        return key;
-    }
-
-    public boolean isPermanent() {
-        return isPermanent;
-    }
-
     public static void forEach(boolean onlyPermanent, Consumer<Stat> action) {
         for (Stat stat : values()) {
             if (stat.isPermanent() || !onlyPermanent) {
                 action.accept(stat);
             }
         }
+    }
+
+    public String getKey() {
+        return key;
+    }
+
+    public boolean isPermanent() {
+        return isPermanent;
     }
 }

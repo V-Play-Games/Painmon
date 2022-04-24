@@ -17,18 +17,17 @@ package net.vpg.bot.pokemon;
 
 import net.dv8tion.jda.api.utils.data.DataArray;
 import net.dv8tion.jda.api.utils.data.SerializableArray;
-import net.vpg.bot.entities.PlayablePokemon;
 
 import javax.annotation.Nonnull;
 
 public class PokemonTeam implements SerializableArray {
     private final DataArray data;
-    private final PlayablePokemon[] team = new PlayablePokemon[6];
+    private final PlayerPokemon[] team = new PlayerPokemon[6];
 
     public PokemonTeam(DataArray data) {
         this.data = data;
         for (int i = 0, size = data.toList().size(); i < size; i++) {
-            team[i] = PlayablePokemon.get(data.getString(i));
+            team[i] = PlayerPokemon.get(data.getString(i));
         }
     }
 
@@ -36,21 +35,21 @@ public class PokemonTeam implements SerializableArray {
         this.data = DataArray.empty();
     }
 
-    public PlayablePokemon getPokemon(int slot) {
+    public PlayerPokemon getPokemon(int slot) {
         return team[slot - 1];
     }
 
-    public PlayablePokemon[] getTeam() {
+    public PlayerPokemon[] getTeam() {
         return team;
     }
 
     public void swap(int from, int to) {
-        PlayablePokemon old = team[from];
+        PlayerPokemon old = team[from];
         team[from] = team[to];
         team[to] = old;
     }
 
-    public void setPokemon(int slot, PlayablePokemon pokemon) {
+    public void setPokemon(int slot, PlayerPokemon pokemon) {
         team[slot - 1] = pokemon;
     }
 

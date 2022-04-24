@@ -17,36 +17,38 @@ package net.vpg.bot.pokemon;
 
 import net.vpg.bot.entities.EntityReference;
 import net.vpg.bot.entities.Move;
-import net.vpg.bot.entities.PlayablePokemon;
-import net.vpg.bot.entities.Route.WildPokemon;
+import net.vpg.bot.entities.Route.SpawnData;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
-public class Spawn extends PlayablePokemon {
-    private final WildPokemon wild;
+public class WildPokemon extends PokemonData {
+    public static final Map<String, WildPokemon> CACHE = new HashMap<>();
+    private final SpawnData spawnData;
 
-    public Spawn(WildPokemon pokemon) {
-        super(pokemon.getPokemon(), "spawn" + System.nanoTime(), null);
-        this.wild = pokemon;
+    public WildPokemon(SpawnData spawnData) {
+        super(spawnData.getPokemon(), "spawn" + System.nanoTime());
+        this.spawnData = spawnData;
         CACHE.put(id, this);
     }
 
-    public static Spawn get(String id) {
+    public static WildPokemon get(String id) {
         assert id.startsWith("spawn");
-        return (Spawn) CACHE.get(id);
+        return CACHE.get(id);
     }
 
-    public WildPokemon asWildPokemon() {
-        return wild;
+    public SpawnData getSpawnData() {
+        return spawnData;
     }
 
     @Override
     public void randomize() {
         super.randomize();
-        setLevel(wild.getLevelRange().random());
+        setLevel(spawnData.getLevelRange().random());
         Moveset moveset = getMoveset();
-        List<EntityReference<Move>> possibleMoves = wild.getPossibleMoves();
-        for (int i = 1, fence = wild.getMoveRange().random(); i <= fence; i++) {
+        List<EntityReference<Move>> possibleMoves = spawnData.getPossibleMoves();
+        for (int i = 1, fence = spawnData.getMoveRange().random(); i <= fence; i++) {
             moveset.setMove(i, possibleMoves.get(i - 1).get());
         }
     }

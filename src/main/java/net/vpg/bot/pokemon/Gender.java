@@ -20,14 +20,13 @@ public enum Gender {
 
     public static Gender fromKey(int key) {
         switch (key) {
+            default:
             case 0:
                 return GENDERLESS;
             case 1:
                 return MALE;
             case 2:
                 return FEMALE;
-            default:
-                return null;
         }
     }
 

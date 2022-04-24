@@ -18,7 +18,7 @@ package net.vpg.bot.entities;
 import net.dv8tion.jda.api.utils.data.DataArray;
 import net.dv8tion.jda.api.utils.data.DataObject;
 import net.vpg.bot.core.Range;
-import net.vpg.bot.pokemon.Spawn;
+import net.vpg.bot.pokemon.WildPokemon;
 
 import java.util.HashMap;
 import java.util.List;
@@ -27,16 +27,16 @@ import java.util.stream.Collectors;
 
 public class Route implements Entity {
     public static final Map<String, Route> CACHE = new HashMap<>();
-    private static final Range range = Range.of(0, 100);
+    private static final Range SPAWN_RANGE = Range.of(1, 100);
     private final String id;
-    private final List<WildPokemon> encounterList;
+    private final SpawnData[] encounterList;
 
     public Route(DataObject data) {
         this.id = data.getString("id");
         this.encounterList = data.getArray("table")
             .stream(DataArray::getObject)
-            .map(WildPokemon::new)
-            .collect(Collectors.toList());
+            .map(SpawnData::new)
+            .toArray(SpawnData[]::new);
     }
 
     public static EntityInfo<Route> getInfo() {
@@ -52,31 +52,31 @@ public class Route implements Entity {
         return id;
     }
 
-    public List<WildPokemon> getEncounterList() {
+    public SpawnData[] getEncounterList() {
         return encounterList;
     }
 
-    public Spawn spawn() {
-        int spawn = range.random();
-        WildPokemon pokemon = null;
-        for (WildPokemon wildPokemon : encounterList) {
+    public WildPokemon spawn() {
+        int spawn = SPAWN_RANGE.random();
+        SpawnData pokemon = null;
+        for (SpawnData wildPokemon : encounterList) {
             spawn -= wildPokemon.getRate();
             if (spawn < 0) {
                 pokemon = wildPokemon;
                 break;
             }
         }
-        return pokemon == null ? null : new Spawn(pokemon);
+        return pokemon == null ? null : new WildPokemon(pokemon);
     }
 
-    public class WildPokemon {
+    public class SpawnData {
         private final EntityReference<Pokemon> reference;
         private final int rate;
         private final Range levelRange;
         private final Range moveRange;
         private final List<EntityReference<Move>> possibleMoves;
 
-        public WildPokemon(DataObject data) {
+        public SpawnData(DataObject data) {
             reference = new EntityReference<>(Pokemon.INFO, data.getString("id"));
             rate = data.getInt("rate");
             levelRange = Range.of(data.getString("level_range"));

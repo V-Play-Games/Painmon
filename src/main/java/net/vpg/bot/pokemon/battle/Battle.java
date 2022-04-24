@@ -1,7 +1,7 @@
 package net.vpg.bot.pokemon.battle;
 
 import net.vpg.bot.entities.Player;
-import net.vpg.bot.pokemon.Spawn;
+import net.vpg.bot.pokemon.WildPokemon;
 import net.vpg.bot.pokemon.battle.field.EntireField;
 import net.vpg.bot.pokemon.battle.field.Field;
 
@@ -10,10 +10,11 @@ import java.util.Map;
 
 public class Battle {
     private final Map<String, BattlePokemon> pokemon = new HashMap<>();
+    private final Map<String, Field.Type> fieldOwners = new HashMap<>();
     private final Map<Field.Type, Field> fields = createFields();
     private final EntireField entireField = new EntireField();
 
-    public static Battle between(Player player, Spawn spawn) {
+    public static Battle between(Player player, WildPokemon spawn) {
         return new Battle(); // TODO: figure out the rest of initialization stuff
     }
 

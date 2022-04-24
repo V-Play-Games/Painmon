@@ -19,7 +19,7 @@ import net.dv8tion.jda.api.entities.User;
 import net.vpg.bot.commands.trilogy.BagCommand;
 import net.vpg.bot.entities.Player;
 import net.vpg.bot.event.BotButtonEvent;
-import net.vpg.bot.pokemon.Spawn;
+import net.vpg.bot.pokemon.WildPokemon;
 
 public interface ButtonHandlers {
     class Area implements ButtonHandler {
@@ -76,9 +76,9 @@ public interface ButtonHandlers {
                 case "spawn":
                     // battle:<user-id>:spawn:<spawn-id>
                     String spawnId = e.getArg(2);
-                    Spawn spawn = Spawn.get(spawnId);
+                    WildPokemon spawn = WildPokemon.get(spawnId);
                     if (spawn == null) return;
-                    Spawn.CACHE.remove(spawnId);
+                    WildPokemon.CACHE.remove(spawnId);
                     spawn.randomize();
                     // TODO: Initialize Battle and start it
             }
