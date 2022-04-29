@@ -3,18 +3,21 @@ package net.vpg.bot.pokemon;
 import net.vpg.bot.core.Range;
 import net.vpg.bot.entities.Item;
 import net.vpg.bot.entities.Pokemon;
+import net.vpg.bot.pokemon.battle.BattlePokemon;
 
 public class Capture {
     private static final Range SHAKE_RANGE = Range.of(0, 255);
 
-    public static Message getShakeMessage(Pokemon pokemon, int selfLevel, int level, int maxHp, int currentHp, int turn, Item ball, StatusCondition status, Method method) {
+    public static Message getShakeMessage(int selfLevel, int turn, BattlePokemon pokemon, Item ball, Method method) {
         if (ball.getId().equals("master-ball"))
             return Message.SHAKE_4;
-        double hpModifier = 1 - (2.0 * currentHp) / (3 * maxHp);
-        int baseRate = pokemon.getSpecies().getCaptureRate();
+        double hpModifier = 1 - (2.0 * pokemon.getCurrentHP()) / (3 * pokemon.getMaxHP());
+        Pokemon basePokemon = pokemon.getPokemonData().getBase();
+        int baseRate = basePokemon.getSpecies().getCaptureRate();
+        int level = pokemon.getPokemonData().getLevel();
         double levelModifier = level > 20 ? 1 : (30 - level) / 10.0;
         double rate = baseRate * hpModifier * levelModifier;
-        switch (status) {
+        switch (pokemon.getStatus()) {
             case SLEEP:
             case FREEZE:
                 rate *= 2.5;
@@ -52,7 +55,7 @@ public class Capture {
                     rate *= 4;
                 break;
             case "heavy-ball":
-                double weight = pokemon.getWeight();
+                double weight = basePokemon.getWeight();
                 if (weight > 300)
                     rate += 30;
                 else if (weight > 200)
@@ -61,7 +64,7 @@ public class Capture {
                     rate -= 20;
                 break;
             case "net-ball":
-                String type = pokemon.getType().getName();
+                String type = basePokemon.getType().getName();
                 if (type.contains("bug") || type.contains("water"))
                     rate *= 3.5;
                 break;
@@ -90,17 +93,9 @@ public class Capture {
             default:
                 throw new IllegalStateException(ball + " is not supported as a poke ball.");
         }
-        boolean ub = pokemon.getAbilities().stream().map(Pokemon.AbilitySlot::getId).anyMatch(id -> id.equals("beast-boost"));
+        boolean ub = basePokemon.getAbilities().stream().map(Pokemon.AbilitySlot::getId).anyMatch(id -> id.equals("beast-boost"));
         boolean beastBall = ball.getId().equals("beast-ball");
-        if (ub) {
-            if (beastBall) {
-                rate *= 5;
-            } else {
-                rate *= 0.1;
-            }
-        } else if (beastBall) {
-            rate *= 0.1;
-        }
+        rate *= ub && beastBall ? 5 : ub || beastBall ? 0.1 : 1;
         rate = Math.max((int) rate, 1);
         // TODO: Figure out about critical captures
         int shakeThreshold = (int) (65536 / Math.pow(255 / rate, 0.1875));

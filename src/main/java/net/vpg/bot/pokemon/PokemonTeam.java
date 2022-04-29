@@ -22,7 +22,7 @@ import javax.annotation.Nonnull;
 
 public class PokemonTeam implements SerializableArray {
     private final DataArray data;
-    private final PlayerPokemon[] team = new PlayerPokemon[6];
+    private final TrainerPokemon[] team = new TrainerPokemon[6];
 
     public PokemonTeam(DataArray data) {
         this.data = data;
@@ -35,21 +35,21 @@ public class PokemonTeam implements SerializableArray {
         this.data = DataArray.empty();
     }
 
-    public PlayerPokemon getPokemon(int slot) {
+    public TrainerPokemon getPokemon(int slot) {
         return team[slot - 1];
     }
 
-    public PlayerPokemon[] getTeam() {
+    public TrainerPokemon[] getTeam() {
         return team;
     }
 
     public void swap(int from, int to) {
-        PlayerPokemon old = team[from];
+        TrainerPokemon old = team[from];
         team[from] = team[to];
         team[to] = old;
     }
 
-    public void setPokemon(int slot, PlayerPokemon pokemon) {
+    public void setPokemon(int slot, TrainerPokemon pokemon) {
         team[slot - 1] = pokemon;
     }
 

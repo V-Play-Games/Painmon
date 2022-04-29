@@ -1,8 +1,6 @@
 package net.vpg.bot.pokemon.battle.field;
 
-import java.util.Collections;
-import java.util.HashSet;
-import java.util.Set;
+import java.util.*;
 
 public class Field {
     private final Set<Effect> effects = new HashSet<>();
@@ -10,6 +8,14 @@ public class Field {
 
     public Field(Type type) {
         this.type = type;
+    }
+
+    public static Map<Type, Field> makeFieldMap(Type... types) {
+        Map<Type, Field> map = new HashMap<>();
+        for (Type type : types) {
+            map.put(type, new Field(type));
+        }
+        return map;
     }
 
     public Type getType() {
@@ -37,7 +43,7 @@ public class Field {
     }
 
     public enum Type {
-        ENTIRE_FIELD, PLAYER, NPC, PLAYER_1, PLAYER_2;
+        ENTIRE_FIELD, PLAYER, NPC;
 
         public boolean isEntireField() {
             return this == ENTIRE_FIELD;

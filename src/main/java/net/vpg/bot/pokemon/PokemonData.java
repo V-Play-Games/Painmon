@@ -7,10 +7,11 @@ import net.vpg.bot.entities.Ability;
 import net.vpg.bot.entities.Entity;
 import net.vpg.bot.entities.Item;
 import net.vpg.bot.entities.Pokemon;
+import net.vpg.bot.pokemon.battle.BattlePokemon;
 
 import javax.annotation.Nonnull;
 
-public class PokemonData implements Entity {
+public abstract class PokemonData implements Entity {
     public static final Range SHINY_RANGE = Range.of(0, 4096);
     public static final Range IV_RANGE = Range.of(0, 31);
     protected final DataObject data;
@@ -53,6 +54,12 @@ public class PokemonData implements Entity {
             .put("evs", evs)
             .put("ivs", ivs);
     }
+
+    public BattlePokemon prepareForBattle() {
+        return new BattlePokemon(this);
+    }
+
+    public abstract Type getType();
 
     @Override
     public String getId() {
@@ -139,18 +146,21 @@ public class PokemonData implements Entity {
         return base.getName();
     }
 
+    public int getMaxHP() {
+        int baseHP = base.getBaseStats().getHP();
+        return baseHP == 1 ? 1 : (2 * baseHP + ivs.getHP() + (evs.getHP() / 4)) * level / 100 + level + 10;
+    }
+
     public StatMapping getStats() {
         StatMapping stats = new StatMapping(base.getBaseStats());
         Stat.forEach(true, stat -> {
-            int value = (2 * stats.getStat(stat) + ivs.getHP() + (evs.getHP() / 4)) * level / 100;
-            if (stat == Stat.HP) {
-                if (stats.getHP() != 1) {
-                    stats.setHP(value + level + 10);
-                }
-            } else {
-                stats.setStat(stat, (int) ((value + 5) * nature.getMultiplierForStat(stat)));
+            if (stat != Stat.HP) {
+                stats.setStat(stat,
+                    (int) (((2 * stats.getStat(stat) + ivs.getHP() + (evs.getHP() / 4)) * level / 100 + 5)
+                        * nature.getMultiplierForStat(stat)));
             }
         });
+        stats.setHP(getMaxHP());
         return stats;
     }
 
@@ -167,5 +177,9 @@ public class PokemonData implements Entity {
             .toArray(Ability[]::new);
         setAbility(Util.getRandom(abilities));
         setGender(base.getSpecies().getGenderRate().generate());
+    }
+
+    public enum Type {
+        WILD, TRAINER, PLAYER
     }
 }

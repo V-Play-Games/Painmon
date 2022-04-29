@@ -4,6 +4,7 @@ import net.dv8tion.jda.api.utils.data.DataObject;
 import net.vpg.bot.core.Bot;
 import net.vpg.bot.database.DatabaseObject;
 import net.vpg.bot.entities.EntityInfo;
+import net.vpg.bot.entities.Player;
 import net.vpg.bot.entities.Pokemon;
 
 import java.util.HashMap;
@@ -23,8 +24,12 @@ public class PlayerPokemon extends TrainerPokemon {
         this(Pokemon.get(data.getString("base")), data.getString("id"), data, bot);
     }
 
-    public PlayerPokemon(Pokemon base, String id, Bot bot) {
-        this(base, id, DataObject.empty().put("id", id).put("base", base.getId()), bot);
+    public PlayerPokemon(Pokemon base, String id, Player player, Bot bot) {
+        this(base, id, DataObject.empty()
+            .put("id", id)
+            .put("base", base.getId())
+            .put("playerSpecificId", player.incrementMonsCaught())
+            .put("trainerId", player.getId()), bot);
     }
 
     public PlayerPokemon(Pokemon base, String id, DataObject data, Bot bot) {
@@ -36,14 +41,19 @@ public class PlayerPokemon extends TrainerPokemon {
             }
         };
         this.playerSpecificId = data.getInt("playerSpecificId");
-        this.slot = data.getInt("slot");
-        this.exp = data.getInt("exp");
-        this.currentHP = data.getInt("currentHP");
-        this.status = StatusCondition.fromKey(data.getInt("status"));
+        setSlot(data.getInt("slot", 0));
+        setExp(data.getInt("exp", 0));
+        setCurrentHP(data.getInt("currentHP", getMaxHP()));
+        setStatus(StatusCondition.fromKey(data.getInt("status", 0)));
     }
 
     public static PlayerPokemon get(String id) {
         return CACHE.get(id);
+    }
+
+    @Override
+    public Type getType() {
+        return Type.PLAYER;
     }
 
     public DatabaseObject asDatabaseObject() {

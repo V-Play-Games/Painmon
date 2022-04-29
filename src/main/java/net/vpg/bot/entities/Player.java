@@ -115,10 +115,10 @@ public class Player extends DatabaseObject {
         return monsCaught;
     }
 
-    public void incrementMonsCaught() {
-        this.monsCaught++;
-        data.put("monsCaught", monsCaught);
+    public int incrementMonsCaught() {
+        data.put("monsCaught", ++monsCaught);
         getCollection().updateOne(filter, Updates.inc("monsCaught", 1));
+        return monsCaught;
     }
 
     public String getProperty(String key) {

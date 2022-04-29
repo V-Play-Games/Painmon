@@ -36,9 +36,12 @@ public class BattleStatMapping extends StatMapping {
     }
 
     @Override
+    public int getHP() {
+        return 0;
+    }
+
+    @Override
     public void setHP(int hp) {
-        checkStatRange(HP, hp);
-        super.setHP(hp);
     }
 
     @Override

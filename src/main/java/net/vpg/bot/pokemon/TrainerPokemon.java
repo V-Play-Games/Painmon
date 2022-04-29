@@ -8,6 +8,7 @@ import java.util.Map;
 
 public class TrainerPokemon extends PokemonData {
     public static final Map<String, PlayerPokemon> CACHE = new HashMap<>();
+    protected final String trainerId;
     protected String nickname;
 
     public TrainerPokemon(DataObject data) {
@@ -22,7 +23,17 @@ public class TrainerPokemon extends PokemonData {
 
     public TrainerPokemon(Pokemon base, String id, DataObject data) {
         super(base, id, data);
-        this.nickname = data.getString("nickname", null);
+        this.trainerId = data.getString("trainerId");
+        setNickname(data.getString("nickname", null));
+    }
+
+    @Override
+    public Type getType() {
+        return Type.TRAINER;
+    }
+
+    public String getTrainerId() {
+        return trainerId;
     }
 
     public String getNickname() {

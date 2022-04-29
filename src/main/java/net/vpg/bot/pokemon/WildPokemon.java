@@ -43,6 +43,11 @@ public class WildPokemon extends PokemonData {
     }
 
     @Override
+    public Type getType() {
+        return Type.WILD;
+    }
+
+    @Override
     public void randomize() {
         super.randomize();
         setLevel(spawnData.getLevelRange().random());
