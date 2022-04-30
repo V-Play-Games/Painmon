@@ -23,6 +23,7 @@ import net.vpg.bot.entities.Player;
 import net.vpg.bot.entities.Route;
 import net.vpg.bot.event.BotButtonEvent;
 import net.vpg.bot.pokemon.Gender;
+import net.vpg.bot.pokemon.GiftPokemon;
 import net.vpg.bot.pokemon.WildPokemon;
 import net.vpg.bot.ratelimit.AbstractRatelimiter;
 import net.vpg.bot.ratelimit.Ratelimit;
@@ -42,9 +43,15 @@ public interface ActionHandler {
         return handlers.get(id);
     }
 
+    static void handleRaw(BotButtonEvent e, Player player, String raw) {
+        ActionHandler handler = get(Util.getMethod(raw));
+        assert handler != null;
+        handler.handle(e, player, Util.getArgs(raw));
+    }
+
     String getName();
 
-    void handle(BotButtonEvent e, String arg);
+    void handle(BotButtonEvent e, Player player, String arg);
 
     class GenderHandler implements ActionHandler {
         @Override
@@ -53,8 +60,7 @@ public interface ActionHandler {
         }
 
         @Override
-        public void handle(BotButtonEvent e, String arg) {
-            Player player = Player.get(e.getUser().getId());
+        public void handle(BotButtonEvent e, Player player, String arg) {
             if (player.getGender().isGenderless()) {
                 player.setGender(arg.equals("m") ? Gender.MALE : Gender.FEMALE);
             }
@@ -68,19 +74,22 @@ public interface ActionHandler {
         }
 
         @Override
-        public void handle(BotButtonEvent e, String arg) {
+        public void handle(BotButtonEvent e, Player player, String arg) {
             Area.get(arg).send(e, e.getUser());
         }
     }
 
-    class StarterHandler implements ActionHandler {
+    class GiftHandler implements ActionHandler {
         @Override
         public String getName() {
             return "starter";
         }
 
         @Override
-        public void handle(BotButtonEvent e, String arg) {
+        public void handle(BotButtonEvent e, Player player, String arg) {
+            String id = player.getId() + "_" + System.nanoTime();
+            GiftPokemon.get(arg).giveTo(player, id, e.getBot());
+            player.addPokemonOwned(id);
         }
     }
 
@@ -91,8 +100,7 @@ public interface ActionHandler {
         }
 
         @Override
-        public void handle(BotButtonEvent e, String arg) {
-            Player player = Player.get(e.getUser().getId());
+        public void handle(BotButtonEvent e, Player player, String arg) {
             String[] args = arg.split(";");
             player.update(args[0], args[1]);
         }
@@ -105,8 +113,7 @@ public interface ActionHandler {
         }
 
         @Override
-        public void handle(BotButtonEvent e, String arg) {
-            Player player = Player.get(e.getUser().getId());
+        public void handle(BotButtonEvent e, Player player, String arg) {
             String[] args = arg.split(";");
             player.getBag().addItemCount(args[0], Integer.parseInt(args[1]));
         }
@@ -125,7 +132,7 @@ public interface ActionHandler {
         }
 
         @Override
-        public void handle(BotButtonEvent e, String arg) {
+        public void handle(BotButtonEvent e, Player player, String arg) {
             if (checkRatelimited(e.getIdLong(), e)) {
                 return;
             }

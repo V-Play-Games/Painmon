@@ -15,17 +15,19 @@
  */
 package net.vpg.bot.entities;
 
-import com.mongodb.client.model.Updates;
+import net.dv8tion.jda.api.utils.data.DataArray;
 import net.dv8tion.jda.api.utils.data.DataObject;
 import net.vpg.bot.core.Bot;
 import net.vpg.bot.database.DatabaseObject;
 import net.vpg.bot.pokemon.Bag;
 import net.vpg.bot.pokemon.Gender;
-import net.vpg.bot.pokemon.PokemonTeam;
+import net.vpg.bot.pokemon.PlayerTeam;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 import java.util.regex.Pattern;
+import java.util.stream.Collectors;
 
 public class Player extends DatabaseObject {
     public static final String COLLECTION_NAME = "players";
@@ -33,29 +35,31 @@ public class Player extends DatabaseObject {
     public static final EntityInfo<Player> INFO = new EntityInfo<>(COLLECTION_NAME, Player::new, CACHE);
     public static final Pattern REFERENCE_PATTERN = Pattern.compile("\\$\\{([A-Za-z-]+)}");
     public static final Pattern GENDER_SPLIT = Pattern.compile("\\{m:(.+);f:(.+)}");
-    private final PokemonTeam team;
+    private final DataArray pokemonOwned;
+    private final PlayerTeam team;
     private final Bag bag;
-    // -1 if not set, 0 for female, 1 for male
     private Gender gender;
+    private int nextPokemonId;
     private String position;
-    private int monsCaught;
 
     public Player(DataObject data, Bot bot) {
         super(data, bot);
         gender = Gender.fromKey(data.getInt("gender", -1));
         bag = new Bag(data.getObject("bag"));
         position = data.getString("position", "");
-        team = new PokemonTeam(data.getArray("team"));
-        monsCaught = data.getInt("monsCaught");
+        team = new PlayerTeam(data.getArray("team"));
+        pokemonOwned = data.getArray("pokemonOwned");
+        nextPokemonId = data.getInt("nextPokemonId", 0);
     }
 
     public Player(String id, Bot bot) {
         super(id, bot);
-        team = new PokemonTeam();
+        team = new PlayerTeam();
         bag = new Bag();
+        pokemonOwned = DataArray.empty();
         data.put("gender", -1)
             .put("bag", bag)
-            .put("monsCaught", monsCaught)
+            .put("pokemonOwned", pokemonOwned)
             .put("team", team);
     }
 
@@ -101,7 +105,7 @@ public class Player extends DatabaseObject {
         return "<@" + id + ">";
     }
 
-    public PokemonTeam getTeam() {
+    public PlayerTeam getTeam() {
         return team;
     }
 
@@ -111,14 +115,24 @@ public class Player extends DatabaseObject {
         return s;
     }
 
-    public int getMonsCaught() {
-        return monsCaught;
+    public List<String> getPokemonOwned() {
+        return pokemonOwned.stream(DataArray::getString).collect(Collectors.toUnmodifiableList());
     }
 
-    public int incrementMonsCaught() {
-        data.put("monsCaught", ++monsCaught);
-        getCollection().updateOne(filter, Updates.inc("monsCaught", 1));
-        return monsCaught;
+    public int getNextPokemonId() {
+        data.put("nextPokemonId", ++nextPokemonId);
+        update("nextPokemonId", nextPokemonId);
+        return nextPokemonId;
+    }
+
+    public void addPokemonOwned(String id) {
+        pokemonOwned.add(id);
+        update("pokemonOwned", pokemonOwned);
+    }
+
+    public void removePokemonOwned(String id) {
+        pokemonOwned.remove(id);
+        update("pokemonOwned", pokemonOwned);
     }
 
     public String getProperty(String key) {

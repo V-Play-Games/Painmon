@@ -15,53 +15,28 @@
  */
 package net.vpg.bot.pokemon;
 
-import net.dv8tion.jda.api.utils.data.DataArray;
-import net.dv8tion.jda.api.utils.data.SerializableArray;
+public class PokemonTeam {
+    protected final TrainerPokemon[] pokemons = new TrainerPokemon[6];
 
-import javax.annotation.Nonnull;
-
-public class PokemonTeam implements SerializableArray {
-    private final DataArray data;
-    private final TrainerPokemon[] team = new TrainerPokemon[6];
-
-    public PokemonTeam(DataArray data) {
-        this.data = data;
-        for (int i = 0, size = data.toList().size(); i < size; i++) {
-            team[i] = PlayerPokemon.get(data.getString(i));
-        }
+    public TrainerPokemon[] getPokemon() {
+        return pokemons;
     }
 
-    public PokemonTeam() {
-        this.data = DataArray.empty();
+    public TrainerPokemon getPokemon(int index) {
+        return pokemons[index];
     }
 
-    public TrainerPokemon getPokemon(int slot) {
-        return team[slot - 1];
+    public void setPokemon(int index, TrainerPokemon pokemon) {
+        pokemons[index] = pokemon;
     }
 
-    public TrainerPokemon[] getTeam() {
-        return team;
-    }
-
-    public void swap(int from, int to) {
-        TrainerPokemon old = team[from];
-        team[from] = team[to];
-        team[to] = old;
-    }
-
-    public void setPokemon(int slot, TrainerPokemon pokemon) {
-        team[slot - 1] = pokemon;
+    public TrainerPokemon getLead() {
+        return pokemons[0];
     }
 
     public int getSize() {
         int i = 0;
-        while (i < team.length && team[i] != null) i++;
+        while (i < pokemons.length && pokemons[i] != null) i++;
         return i;
-    }
-
-    @Nonnull
-    @Override
-    public DataArray toDataArray() {
-        return data;
     }
 }

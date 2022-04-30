@@ -24,7 +24,7 @@ public class TrainerPokemon extends PokemonData {
     public TrainerPokemon(Pokemon base, String id, DataObject data) {
         super(base, id, data);
         this.trainerId = data.getString("trainerId");
-        setNickname(data.getString("nickname", null));
+        this.nickname = data.getString("nickname", null);
     }
 
     @Override

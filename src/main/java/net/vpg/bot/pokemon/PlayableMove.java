@@ -32,8 +32,8 @@ public class PlayableMove implements Entity {
         this.data = data;
         this.move = Move.get(data.getString("move"));
         this.slot = data.getInt("slot");
-        this.currentPP = data.getInt("currentPP");
-        this.maxPP = data.getInt("maxPP");
+        this.maxPP = data.getInt("maxPP", move.getPP());
+        this.currentPP = data.getInt("currentPP", maxPP);
     }
 
     public PlayableMove(Move move, int slot) {
@@ -43,11 +43,7 @@ public class PlayableMove implements Entity {
     public PlayableMove(Move move, int slot, int maxPP) {
         this.data = DataObject.empty().put("slot", slot);
         this.slot = slot;
-        setMove(move);
-        if (this.maxPP != maxPP) {
-            setMaxPP(maxPP);
-            setCurrentPP(maxPP);
-        }
+        setMove(move, maxPP);
     }
 
     public Move getMove() {

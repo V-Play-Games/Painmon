@@ -99,7 +99,7 @@ public class Area implements Entity {
         private final String id;
         private final int priority;
         private final List<String> conditions;
-        private final DataArray defaultActions;
+        private final List<String> defaultActions;
         private final String text;
         private final Map<String, List<String>> buttonActions;
         private final List<Button> buttons;
@@ -110,7 +110,10 @@ public class Area implements Entity {
             this.text = data.getString("text");
             this.priority = data.getInt("priority");
             this.conditions = List.of(data.getString("conditions").split(";;;"));
-            this.defaultActions = data.optArray("default-actions").orElseGet(DataArray::empty);
+            this.defaultActions = data.optArray("default-actions")
+                .orElseGet(DataArray::empty)
+                .stream(DataArray::getString)
+                .collect(Collectors.toList());
             this.buttonActions = new HashMap<>();
             this.buttons = new ArrayList<>();
             data.getArray("buttons").stream(DataArray::getObject).map(button -> {
@@ -154,8 +157,12 @@ public class Area implements Entity {
         }
 
         public void executeActions(BotButtonEvent e, String actionId) {
-            getButtonActions(actionId).forEach(s -> ActionHandler.get(Util.getMethod(s)).handle(e, Util.getArgs(s)));
-            defaultActions.stream(DataArray::getString).forEach(s -> ActionHandler.get(Util.getMethod(s)).handle(e, Util.getArgs(s)));
+            Player player = Player.get(e.getUser().getId());
+            Area area = Area.get(player.getPosition());
+            State state = area.getStateFor(player);
+            if (area != Area.this && state != this) return;
+            getButtonActions(actionId).forEach(s -> ActionHandler.handleRaw(e, player, s));
+            defaultActions.forEach(s -> ActionHandler.handleRaw(e, player, s));
         }
 
         public ActionRow getActionRow(String userId) {

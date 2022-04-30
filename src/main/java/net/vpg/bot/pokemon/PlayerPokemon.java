@@ -15,7 +15,6 @@ public class PlayerPokemon extends TrainerPokemon {
     public static final EntityInfo<PlayerPokemon> INFO = new EntityInfo<>("pokemon", PlayerPokemon::new, CACHE);
     protected final DatabaseObject dbObj;
     protected final int playerSpecificId;
-    protected int slot;
     protected int exp;
     protected int currentHP;
     protected StatusCondition status;
@@ -28,7 +27,7 @@ public class PlayerPokemon extends TrainerPokemon {
         this(base, id, DataObject.empty()
             .put("id", id)
             .put("base", base.getId())
-            .put("playerSpecificId", player.incrementMonsCaught())
+            .put("playerSpecificId", player.getNextPokemonId())
             .put("trainerId", player.getId()), bot);
     }
 
@@ -41,10 +40,13 @@ public class PlayerPokemon extends TrainerPokemon {
             }
         };
         this.playerSpecificId = data.getInt("playerSpecificId");
-        setSlot(data.getInt("slot", 0));
-        setExp(data.getInt("exp", 0));
-        setCurrentHP(data.getInt("currentHP", getMaxHP()));
-        setStatus(StatusCondition.fromKey(data.getInt("status", 0)));
+        if (!data.isNull("exp")) {
+            setExpAccordingToLevel();
+        } else {
+            this.exp = data.getInt("exp", 0);
+        }
+        this.currentHP = data.getInt("currentHP", getMaxHP());
+        this.status = StatusCondition.fromKey(data.getInt("status", 0));
     }
 
     public static PlayerPokemon get(String id) {
@@ -62,15 +64,6 @@ public class PlayerPokemon extends TrainerPokemon {
 
     public int getPlayerSpecificId() {
         return playerSpecificId;
-    }
-
-    public int getSlot() {
-        return slot;
-    }
-
-    public void setSlot(int slot) {
-        this.slot = slot;
-        data.put("slot", slot);
     }
 
     public void setLevelAccordingToExp() {

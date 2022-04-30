@@ -17,8 +17,8 @@ package net.vpg.bot.pokemon;
 
 import net.dv8tion.jda.api.utils.data.DataObject;
 import net.dv8tion.jda.api.utils.data.SerializableData;
-import org.jetbrains.annotations.NotNull;
 
+import javax.annotation.Nonnull;
 import java.util.Map;
 
 import static net.vpg.bot.pokemon.Stat.*;
@@ -160,11 +160,20 @@ public class StatMapping implements SerializableData {
         );
     }
 
+    public void copyFrom(StatMapping stats) {
+        this.hp = stats.hp;
+        this.attack = stats.attack;
+        this.defense = stats.defense;
+        this.spAtk = stats.spAtk;
+        this.spDef = stats.spDef;
+        this.speed = stats.speed;
+    }
+
     public String toString() {
         return "HP: " + hp + " | Attack: " + attack + " | Defense: " + defense + " | Sp. Atk: " + spAtk + " | Sp. Def: " + spDef + " | Speed: " + speed;
     }
 
-    @NotNull
+    @Nonnull
     @Override
     public DataObject toData() {
         DataObject tor = DataObject.empty();

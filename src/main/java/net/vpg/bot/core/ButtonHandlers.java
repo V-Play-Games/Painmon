@@ -17,12 +17,16 @@ package net.vpg.bot.core;
 
 import net.dv8tion.jda.api.entities.User;
 import net.vpg.bot.commands.trilogy.BagCommand;
+import net.vpg.bot.entities.Area;
 import net.vpg.bot.entities.Player;
 import net.vpg.bot.event.BotButtonEvent;
 import net.vpg.bot.pokemon.WildPokemon;
+import net.vpg.bot.pokemon.battle.Battle;
+
+import java.util.Map;
 
 public interface ButtonHandlers {
-    class Area implements ButtonHandler {
+    class AreaHandler implements ButtonHandler {
         @Override
         public String getName() {
             return "area";
@@ -31,11 +35,11 @@ public interface ButtonHandlers {
         @Override
         public void handle(BotButtonEvent e) {
             if (!e.getArg(3).equals(e.getUser().getId())) return;
-            net.vpg.bot.entities.Area.get(e.getArg(0)).executeActions(e, e.getArg(1), e.getArg(2));
+            Area.get(e.getArg(0)).executeActions(e, e.getArg(1), e.getArg(2));
         }
     }
 
-    class Bag implements ButtonHandler {
+    class BagHandler implements ButtonHandler {
         @Override
         public String getName() {
             return "bag";
@@ -52,7 +56,7 @@ public interface ButtonHandlers {
         }
     }
 
-    class Battle implements ButtonHandler {
+    class BattleHandler implements ButtonHandler {
         public static void executeBattle() {
 
         }
@@ -80,7 +84,9 @@ public interface ButtonHandlers {
                     if (spawn == null) return;
                     WildPokemon.CACHE.remove(spawnId);
                     spawn.randomize();
-                    // TODO: Initialize Battle and start it
+                    Battle battle = Battle.between(player.getTeam(), spawn);
+                    Map<Battle.Position, String> positions = battle.getPositions();
+                    // TODO: Send the battle
             }
         }
     }

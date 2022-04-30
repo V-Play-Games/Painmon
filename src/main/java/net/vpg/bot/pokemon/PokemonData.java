@@ -1,12 +1,11 @@
 package net.vpg.bot.pokemon;
 
+import net.dv8tion.jda.api.utils.data.DataArray;
 import net.dv8tion.jda.api.utils.data.DataObject;
+import net.vpg.bot.core.Bot;
 import net.vpg.bot.core.Range;
 import net.vpg.bot.core.Util;
-import net.vpg.bot.entities.Ability;
-import net.vpg.bot.entities.Entity;
-import net.vpg.bot.entities.Item;
-import net.vpg.bot.entities.Pokemon;
+import net.vpg.bot.entities.*;
 import net.vpg.bot.pokemon.battle.BattlePokemon;
 
 import javax.annotation.Nonnull;
@@ -44,15 +43,13 @@ public abstract class PokemonData implements Entity {
         this.moveset = new Moveset(data.getArray("moves"));
         this.evs = new StatMapping(data.optObject("evs").orElseGet(DataObject::empty));
         this.ivs = new StatMapping(data.optObject("ivs").orElseGet(DataObject::empty));
-        setLevel(data.getInt("level", 0));
-        setShiny(data.getBoolean("shiny", false));
-        setAbility(Ability.get(data.getString("ability", "")));
-        setNature(Nature.fromKey(data.getString("nature", "")));
-        setHeldItem(Item.get(data.getString("heldItem", "")));
-        setGender(Gender.fromKey(data.getInt("gender", 0)));
-        data.put("moveset", moveset)
-            .put("evs", evs)
-            .put("ivs", ivs);
+        this.level = data.getInt("level", 1);
+        this.shiny = data.getBoolean("shiny", false);
+        this.ability = Ability.get(data.getString("ability", ""));
+        this.nature = Nature.fromKey(data.getString("nature", ""));
+        this.heldItem = Item.get(data.getString("heldItem", ""));
+        this.gender = Gender.fromKey(data.getInt("gender", 0));
+        data.put("evs", evs).put("ivs", ivs);
     }
 
     public BattlePokemon prepareForBattle() {
@@ -167,9 +164,7 @@ public abstract class PokemonData implements Entity {
     public void randomize() {
         setShiny(SHINY_RANGE.random() == 0);
         setNature(Util.getRandom(Nature.values()));
-        for (Stat stat : Stat.values()) {
-            getIvs().setStat(stat, IV_RANGE.random());
-        }
+        Stat.forEach(true, stat -> ivs.setStat(stat, IV_RANGE.random()));
         Ability[] abilities = getBase().getAbilities()
             .stream()
             .filter(a -> !a.isHidden())
@@ -177,6 +172,20 @@ public abstract class PokemonData implements Entity {
             .toArray(Ability[]::new);
         setAbility(Util.getRandom(abilities));
         setGender(base.getSpecies().getGenderRate().generate());
+    }
+
+    public PlayerPokemon giveTo(Player player, String id, Bot bot) {
+        DataObject data = DataObject.fromETF(this.data.toETF())
+            .put("id", id == null ? this.id : id)
+            .put("playerSpecificId", player.getNextPokemonId())
+            .put("trainerId", player.getId())
+            .remove("slot")
+            .remove("currentHP")
+            .remove("status");
+        data.getArray("moves").stream(DataArray::getObject).forEach(move -> move.remove("currentPP"));
+        PlayerPokemon pokemon = new PlayerPokemon(data, bot);
+        pokemon.setExpAccordingToLevel();
+        return pokemon;
     }
 
     public enum Type {

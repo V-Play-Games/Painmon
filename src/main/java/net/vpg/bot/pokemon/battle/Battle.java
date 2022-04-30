@@ -34,9 +34,9 @@ public class Battle {
     }
 
     public static Battle between(PokemonTeam team, WildPokemon spawn) {
-        TrainerPokemon lead = team.getPokemon(1);
+        TrainerPokemon lead = team.getLead();
         return new Battle(
-            getPokemonMap(team.getTeam(), spawn),
+            getPokemonMap(team.getPokemon(), spawn),
             new MiscUtil.MapBuilder<Position, String>()
                 .put(Position.POSITION_1, lead.getId())
                 .put(Position.POSITION_2, spawn.getId())
@@ -49,10 +49,10 @@ public class Battle {
     }
 
     public static Battle between(PokemonTeam playerTeam, PokemonTeam opponentTeam) {
-        TrainerPokemon playerLead = playerTeam.getPokemon(1);
-        TrainerPokemon opponentLead = opponentTeam.getPokemon(1);
+        TrainerPokemon playerLead = playerTeam.getLead();
+        TrainerPokemon opponentLead = opponentTeam.getLead();
         return new Battle(
-            getPokemonMap(playerTeam.getTeam(), opponentTeam.getTeam()),
+            getPokemonMap(playerTeam.getPokemon(), opponentTeam.getPokemon()),
             new MiscUtil.MapBuilder<Position, String>()
                 .put(Position.POSITION_1, playerLead.getId())
                 .put(Position.POSITION_2, opponentLead.getId())

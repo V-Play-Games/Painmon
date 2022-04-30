@@ -74,21 +74,21 @@
             "id": "starter-grass",
             "label": "The Grass type, Grazelle",
             "actions": [
-              "starter:grass"
+              "gift:paseagon.starter.grass"
             ]
           },
           {
             "id": "starter-fire",
             "label": "The Fire type, Infulgens",
             "actions": [
-              "starter:fire"
+              "gift:paseagon.starter.fire"
             ]
           },
           {
             "id": "starter-water",
             "label": "The Water type, Orchoo",
             "actions": [
-              "starter:water"
+              "gift:paseagon.starter.water"
             ]
           }
         ],

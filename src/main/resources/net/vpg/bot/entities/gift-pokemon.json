@@ -1,0 +1,47 @@
+[
+  {
+    "id": "paseagon.starter.fire",
+    "base": "charmander",
+    "level": 5,
+    "moves": [
+      {
+        "moves": "tackle",
+        "slot": 1
+      },
+      {
+        "moves": "leer",
+        "slot": 2
+      }
+    ]
+  },
+  {
+    "id": "paseagon.starter.grass",
+    "base": "bulbasaur",
+    "level": 5,
+    "moves": [
+      {
+        "moves": "tackle",
+        "slot": 1
+      },
+      {
+        "moves": "leer",
+        "slot": 2
+      }
+    ]
+  },
+  {
+    "id": "paseagon.starter.water",
+    "base": "squirtle",
+    "level": 5,
+    "moves": [
+      {
+        "moves": "tackle",
+        "slot": 1
+      },
+      {
+        "moves": "leer",
+        "slot": 2
+      }
+    ]
+  }
+]
