@@ -6,11 +6,11 @@
     "moves": [
       {
         "moves": "tackle",
-        "slot": 1
+        "index": 0
       },
       {
         "moves": "leer",
-        "slot": 2
+        "index": 1
       }
     ]
   },
@@ -21,11 +21,11 @@
     "moves": [
       {
         "moves": "tackle",
-        "slot": 1
+        "index": 0
       },
       {
         "moves": "leer",
-        "slot": 2
+        "index": 1
       }
     ]
   },
@@ -36,11 +36,11 @@
     "moves": [
       {
         "moves": "tackle",
-        "slot": 1
+        "index": 0
       },
       {
         "moves": "leer",
-        "slot": 2
+        "index": 1
       }
     ]
   }

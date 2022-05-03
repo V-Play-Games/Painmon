@@ -28,7 +28,7 @@ public class TrainerPokemon extends PokemonData {
     }
 
     @Override
-    public Type getType() {
+    public Type getDataType() {
         return Type.TRAINER;
     }
 

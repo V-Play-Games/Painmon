@@ -27,7 +27,7 @@ public class Moveset implements SerializableArray {
 
     public Moveset(DataArray data) {
         this.data = data;
-        for (int i = 0, size = data.toList().size(); i < size; i++) {
+        for (int i = 0; i < data.length(); i++) {
             moves[i] = new PlayableMove(data.getObject(i));
         }
     }
@@ -36,19 +36,19 @@ public class Moveset implements SerializableArray {
         this.data = DataArray.empty();
     }
 
-    public Moveset setMove(int slot, Move move) {
-        PlayableMove playable = getMove(slot);
+    public Moveset setMove(int index, Move move) {
+        PlayableMove playable = moves[index];
         if (playable == null) {
-            playable = new PlayableMove(move, slot);
-            moves[slot - 1] = playable;
+            playable = new PlayableMove(move, index);
+            moves[index] = playable;
             data.add(playable);
         }
         playable.setMove(move);
         return this;
     }
 
-    public PlayableMove getMove(int slot) {
-        return moves[slot - 1];
+    public PlayableMove[] getMoves() {
+        return moves;
     }
 
     @Nonnull

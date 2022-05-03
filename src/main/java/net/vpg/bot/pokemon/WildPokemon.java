@@ -43,7 +43,7 @@ public class WildPokemon extends PokemonData {
     }
 
     @Override
-    public Type getType() {
+    public Type getDataType() {
         return Type.WILD;
     }
 

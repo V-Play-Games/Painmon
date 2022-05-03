@@ -54,7 +54,7 @@ public class PlayerPokemon extends TrainerPokemon {
     }
 
     @Override
-    public Type getType() {
+    public Type getDataType() {
         return Type.PLAYER;
     }
 

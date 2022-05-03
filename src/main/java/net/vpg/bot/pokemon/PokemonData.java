@@ -56,7 +56,7 @@ public abstract class PokemonData implements Entity {
         return new BattlePokemon(this);
     }
 
-    public abstract Type getType();
+    public abstract Type getDataType();
 
     @Override
     public String getId() {

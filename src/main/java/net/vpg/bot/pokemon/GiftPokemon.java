@@ -53,7 +53,7 @@ public class GiftPokemon extends PokemonData {
     }
 
     @Override
-    public Type getType() {
+    public Type getDataType() {
         return null;
     }
 }

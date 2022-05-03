@@ -23,7 +23,7 @@ import javax.annotation.Nonnull;
 
 public class PlayableMove implements Entity {
     private final DataObject data;
-    private final int slot;
+    private final int index;
     private Move move;
     private int currentPP;
     private int maxPP;
@@ -31,18 +31,18 @@ public class PlayableMove implements Entity {
     public PlayableMove(DataObject data) {
         this.data = data;
         this.move = Move.get(data.getString("move"));
-        this.slot = data.getInt("slot");
+        this.index = data.getInt("index");
         this.maxPP = data.getInt("maxPP", move.getPP());
         this.currentPP = data.getInt("currentPP", maxPP);
     }
 
-    public PlayableMove(Move move, int slot) {
-        this(move, slot, move.getPP());
+    public PlayableMove(Move move, int index) {
+        this(move, index, move.getPP());
     }
 
-    public PlayableMove(Move move, int slot, int maxPP) {
-        this.data = DataObject.empty().put("slot", slot);
-        this.slot = slot;
+    public PlayableMove(Move move, int index, int maxPP) {
+        this.data = DataObject.empty().put("slot", index);
+        this.index = index;
         setMove(move, maxPP);
     }
 
@@ -85,8 +85,8 @@ public class PlayableMove implements Entity {
         return move.getId();
     }
 
-    public int getSlot() {
-        return slot;
+    public int getIndex() {
+        return index;
     }
 
     @Nonnull
