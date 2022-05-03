@@ -17,6 +17,7 @@ package net.vpg.bot.commands.trilogy;
 
 import net.dv8tion.jda.api.EmbedBuilder;
 import net.dv8tion.jda.api.interactions.commands.OptionType;
+import net.dv8tion.jda.api.utils.MarkdownSanitizer;
 import net.vpg.bot.commands.BotCommandImpl;
 import net.vpg.bot.core.Bot;
 import net.vpg.bot.entities.Ability;
@@ -46,7 +47,8 @@ public class SearchCommand extends BotCommandImpl {
     }
 
     public void execute(CommandReceivedEvent e, String searchTerm) {
-        String toSearch = searchTerm.replaceAll("[\\s\n-/\\\\_:]+", "-").toLowerCase();
+        searchTerm = MarkdownSanitizer.sanitize(searchTerm);
+        String toSearch = searchTerm.replaceAll("[\\s\n/\\\\_:]+", "-").toLowerCase();
         Pokemon p = Pokemon.get(toSearch);
         if (p != null) {
             e.sendEmbeds(
