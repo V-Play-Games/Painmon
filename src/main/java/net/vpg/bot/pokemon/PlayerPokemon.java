@@ -53,6 +53,13 @@ public class PlayerPokemon extends TrainerPokemon {
         return CACHE.get(id);
     }
 
+    public static PlayerPokemon createNew(DataObject data, Bot bot) {
+        PlayerPokemon pokemon = new PlayerPokemon(data, bot);
+        pokemon.asDatabaseObject().ensureInserted();
+        CACHE.put(pokemon.getId(), pokemon);
+        return pokemon;
+    }
+
     @Override
     public Type getDataType() {
         return Type.PLAYER;

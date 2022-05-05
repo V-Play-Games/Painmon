@@ -28,6 +28,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.regex.Pattern;
 import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 public class Player extends DatabaseObject {
     public static final String COLLECTION_NAME = "players";
@@ -115,8 +116,8 @@ public class Player extends DatabaseObject {
         return s;
     }
 
-    public List<String> getPokemonOwned() {
-        return pokemonOwned.stream(DataArray::getString).collect(Collectors.toUnmodifiableList());
+    public Stream<String> getPokemonOwnedAsStream() {
+        return pokemonOwned.stream(DataArray::getString);
     }
 
     public int getNextPokemonId() {

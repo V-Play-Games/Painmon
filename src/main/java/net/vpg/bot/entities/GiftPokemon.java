@@ -1,9 +1,9 @@
-package net.vpg.bot.pokemon;
+package net.vpg.bot.entities;
 
 import net.dv8tion.jda.api.utils.data.DataObject;
 import net.vpg.bot.core.Bot;
-import net.vpg.bot.entities.EntityInfo;
-import net.vpg.bot.entities.Player;
+import net.vpg.bot.pokemon.PlayerPokemon;
+import net.vpg.bot.pokemon.PokemonData;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -21,7 +21,7 @@ public class GiftPokemon extends PokemonData {
     protected final boolean useDefaultGender;
 
     public GiftPokemon(DataObject data) {
-        this(data, data.isNull("evs"));
+        this(data, !data.isNull("ivs"));
     }
 
     private GiftPokemon(DataObject data, boolean useDefaultIvs) {

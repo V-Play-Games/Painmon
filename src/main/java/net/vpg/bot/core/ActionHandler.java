@@ -23,7 +23,7 @@ import net.vpg.bot.entities.Player;
 import net.vpg.bot.entities.Route;
 import net.vpg.bot.event.BotButtonEvent;
 import net.vpg.bot.pokemon.Gender;
-import net.vpg.bot.pokemon.GiftPokemon;
+import net.vpg.bot.entities.GiftPokemon;
 import net.vpg.bot.pokemon.WildPokemon;
 import net.vpg.bot.ratelimit.AbstractRatelimiter;
 import net.vpg.bot.ratelimit.Ratelimit;
@@ -61,7 +61,7 @@ public interface ActionHandler {
 
         @Override
         public void handle(BotButtonEvent e, Player player, String arg) {
-            if (player.getGender().isGenderless()) {
+            if (player.getGender() == null) {
                 player.setGender(arg.equals("m") ? Gender.MALE : Gender.FEMALE);
             }
         }
@@ -82,7 +82,7 @@ public interface ActionHandler {
     class GiftHandler implements ActionHandler {
         @Override
         public String getName() {
-            return "starter";
+            return "gift";
         }
 
         @Override
@@ -90,6 +90,7 @@ public interface ActionHandler {
             String id = player.getId() + "_" + System.nanoTime();
             GiftPokemon.get(arg).giveTo(player, id, e.getBot());
             player.addPokemonOwned(id);
+            player.update();
         }
     }
 

@@ -5,11 +5,11 @@
     "level": 5,
     "moves": [
       {
-        "moves": "tackle",
+        "move": "tackle",
         "index": 0
       },
       {
-        "moves": "leer",
+        "move": "leer",
         "index": 1
       }
     ]
@@ -20,11 +20,11 @@
     "level": 5,
     "moves": [
       {
-        "moves": "tackle",
+        "move": "tackle",
         "index": 0
       },
       {
-        "moves": "leer",
+        "move": "leer",
         "index": 1
       }
     ]
@@ -35,11 +35,11 @@
     "level": 5,
     "moves": [
       {
-        "moves": "tackle",
+        "move": "tackle",
         "index": 0
       },
       {
-        "moves": "leer",
+        "move": "leer",
         "index": 1
       }
     ]

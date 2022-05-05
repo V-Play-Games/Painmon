@@ -11,6 +11,7 @@ import net.vpg.bot.pokemon.PlayerPokemon;
 import net.vpg.bot.pokemon.StatMapping;
 
 import java.util.Arrays;
+import java.util.Objects;
 import java.util.stream.Collectors;
 
 public class ViewCommand extends TrilogyCommand {
@@ -33,8 +34,7 @@ public class ViewCommand extends TrilogyCommand {
 
     public void execute(CommandReceivedEvent e, int id) {
         Player player = Player.get(e.getUser().getId());
-        PlayerPokemon pokemon = player.getPokemonOwned()
-            .stream()
+        PlayerPokemon pokemon = player.getPokemonOwnedAsStream()
             .map(PlayerPokemon::get)
             .filter(p -> p.getPlayerSpecificId() == id)
             .findFirst()
@@ -54,10 +54,11 @@ public class ViewCommand extends TrilogyCommand {
                     "\n**Level**: " + pokemon.getLevel() +
                     "\n**Ability**: " + pokemon.getAbility().getName() +
                     "\n**Nature**: " + pokemon.getNature() +
-                    "\n**Held Item**: " + pokemon.getHeldItem().getId(),
+                    "\n**Held Item**: " + (pokemon.getHeldItem() == null ? "None" : pokemon.getHeldItem().getId()),
                 false)
             .addField("Moves",
                 Arrays.stream(pokemon.getMoveset().getMoves())
+                    .filter(Objects::nonNull)
                     .map(move -> String.format("**%s** (%d/%d)", move.getMove().getName(), move.getCurrentPP(), move.getMaxPP()))
                     .collect(Collectors.joining("\n")),
                 false)

@@ -80,7 +80,7 @@ public class Route implements Entity {
             reference = new EntityReference<>(Pokemon.INFO, data.getString("id"));
             rate = data.getInt("rate");
             levelRange = Range.of(data.getString("level_range"));
-            moveRange = Range.of(data.getString("move_count"));
+            moveRange = Range.of(data.getString("move_range"));
             possibleMoves = data.getArray("moves_list")
                 .stream(DataArray::getString)
                 .map(move -> new EntityReference<>(Move.INFO, id))

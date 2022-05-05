@@ -16,7 +16,9 @@
 package net.vpg.bot.pokemon;
 
 import net.dv8tion.jda.api.utils.data.DataObject;
+import net.vpg.bot.core.MiscUtil;
 import net.vpg.bot.entities.Entity;
+import net.vpg.bot.entities.EntityReference;
 import net.vpg.bot.entities.Move;
 
 import javax.annotation.Nonnull;
@@ -25,15 +27,19 @@ public class PlayableMove implements Entity {
     private final DataObject data;
     private final int index;
     private Move move;
+    private EntityReference<Move> reference; // Store reference instead of move directly to avoid initialization issues
     private int currentPP;
     private int maxPP;
 
     public PlayableMove(DataObject data) {
         this.data = data;
-        this.move = Move.get(data.getString("move"));
+        this.reference = new EntityReference<>(Move.INFO, data.getString("move"));
+        this.move = reference.get();
         this.index = data.getInt("index");
-        this.maxPP = data.getInt("maxPP", move.getPP());
-        this.currentPP = data.getInt("currentPP", maxPP);
+        if (move != null) {
+            this.maxPP = data.getInt("maxPP", move.getPP());
+            this.currentPP = data.getInt("currentPP", maxPP);
+        }
     }
 
     public PlayableMove(Move move, int index) {
@@ -47,7 +53,7 @@ public class PlayableMove implements Entity {
     }
 
     public Move getMove() {
-        return move;
+        return move == null ? reference.get() : move;
     }
 
     public PlayableMove setMove(Move move) {
@@ -60,6 +66,12 @@ public class PlayableMove implements Entity {
         setCurrentPP(pp);
         setMaxPP(pp);
         return this;
+    }
+
+    public void swapWith(PlayableMove move) {
+        MiscUtil.swapFields(this, move, PlayableMove::getMove, PlayableMove::setMove);
+        MiscUtil.swapFields(this, move, PlayableMove::getCurrentPP, PlayableMove::setCurrentPP);
+        MiscUtil.swapFields(this, move, PlayableMove::getMaxPP, PlayableMove::setMaxPP);
     }
 
     public int getCurrentPP() {
@@ -82,7 +94,7 @@ public class PlayableMove implements Entity {
 
     @Override
     public String getId() {
-        return move.getId();
+        return getMove().getId();
     }
 
     public int getIndex() {

@@ -27,12 +27,12 @@ public class PokemonSpecies implements Entity {
     public PokemonSpecies(DataObject data) {
         this.id = data.getString("name");
         this.generation = data.getInt("generation");
-        this.evolutionChain = data.getInt("evolutionChain");
-        this.baseHappiness = data.getInt("baseHappiness");
-        this.captureRate = data.getInt("captureRate");
-        this.growthRate = GrowthRate.fromId(data.getString("growthRate"));
-        this.genderRate = GenderRate.of(data.getInt("genderRate"));
-        this.eggGroups = data.getArray("eggGroups").stream(DataArray::getString).collect(Collectors.toList());
+        this.evolutionChain = data.getInt("evolution_chain");
+        this.baseHappiness = data.getInt("base_happiness");
+        this.captureRate = data.getInt("capture_rate");
+        this.growthRate = GrowthRate.fromId(data.getString("growth_rate"));
+        this.genderRate = GenderRate.of(data.getInt("gender_rate"));
+        this.eggGroups = data.getArray("egg_groups").stream(DataArray::getString).collect(Collectors.toList());
         this.tags = data.getArray("tags").stream(DataArray::getString).collect(Collectors.toList());
     }
 

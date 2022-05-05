@@ -18,6 +18,7 @@ package net.vpg.bot.core;
 import java.util.EnumSet;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.function.BiConsumer;
 import java.util.function.Function;
 import java.util.function.UnaryOperator;
 import java.util.stream.Collectors;
@@ -35,6 +36,12 @@ public class MiscUtil {
 
     public static <V extends Enum<V>> Map<String, V> getEnumMap(Class<V> clazz) {
         return getEnumMap(clazz, obj -> obj.name().toLowerCase());
+    }
+
+    public static <T, V> void swapFields(T t1, T t2, Function<T, V> getter, BiConsumer<T, V> setter) {
+        V temp = getter.apply(t1);
+        setter.accept(t1, getter.apply(t2));
+        setter.accept(t2, temp);
     }
 
     public static class MapBuilder<K, V> {
