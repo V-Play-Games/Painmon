@@ -2,11 +2,12 @@ package net.vpg.bot.pokemon.battle;
 
 import net.vpg.bot.core.MiscUtil;
 import net.vpg.bot.pokemon.PokemonData;
-import net.vpg.bot.pokemon.PokemonTeam;
 import net.vpg.bot.pokemon.TrainerPokemon;
 import net.vpg.bot.pokemon.WildPokemon;
 import net.vpg.bot.pokemon.battle.field.EntireField;
 import net.vpg.bot.pokemon.battle.field.Field;
+import net.vpg.bot.pokemon.team.NPCTeam;
+import net.vpg.bot.pokemon.team.PlayerTeam;
 
 import java.util.Map;
 import java.util.stream.Collectors;
@@ -33,7 +34,7 @@ public class Battle {
         this.fields = fields;
     }
 
-    public static Battle between(PokemonTeam team, WildPokemon spawn) {
+    public static Battle between(PlayerTeam team, WildPokemon spawn) {
         TrainerPokemon lead = team.getLead();
         return new Battle(
             getPokemonMap(team.getPokemon(), spawn),
@@ -48,7 +49,7 @@ public class Battle {
             Field.makeFieldMap(PLAYER, NPC));
     }
 
-    public static Battle between(PokemonTeam playerTeam, PokemonTeam opponentTeam) {
+    public static Battle between(PlayerTeam playerTeam, NPCTeam opponentTeam) {
         TrainerPokemon playerLead = playerTeam.getLead();
         TrainerPokemon opponentLead = opponentTeam.getLead();
         return new Battle(

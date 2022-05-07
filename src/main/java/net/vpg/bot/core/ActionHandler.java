@@ -19,11 +19,11 @@ import net.dv8tion.jda.api.EmbedBuilder;
 import net.dv8tion.jda.api.interactions.components.buttons.Button;
 import net.vpg.bot.action.Sender;
 import net.vpg.bot.entities.Area;
+import net.vpg.bot.entities.GiftPokemon;
 import net.vpg.bot.entities.Player;
 import net.vpg.bot.entities.Route;
 import net.vpg.bot.event.BotButtonEvent;
 import net.vpg.bot.pokemon.Gender;
-import net.vpg.bot.entities.GiftPokemon;
 import net.vpg.bot.pokemon.WildPokemon;
 import net.vpg.bot.ratelimit.AbstractRatelimiter;
 import net.vpg.bot.ratelimit.Ratelimit;
@@ -75,7 +75,7 @@ public interface ActionHandler {
 
         @Override
         public void handle(BotButtonEvent e, Player player, String arg) {
-            Area.get(arg).send(e, e.getUser());
+            Area.get(arg).send(e, player);
         }
     }
 
@@ -87,9 +87,7 @@ public interface ActionHandler {
 
         @Override
         public void handle(BotButtonEvent e, Player player, String arg) {
-            String id = player.getId() + "_" + System.nanoTime();
-            GiftPokemon.get(arg).giveTo(player, id, e.getBot());
-            player.addPokemonOwned(id);
+            GiftPokemon.get(arg).giveTo(player, player.getId() + "_" + System.nanoTime(), e.getBot());
             player.update();
         }
     }

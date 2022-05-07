@@ -17,9 +17,11 @@ package net.vpg.bot.core;
 
 import net.dv8tion.jda.api.entities.User;
 import net.vpg.bot.commands.trilogy.BagCommand;
+import net.vpg.bot.commands.trilogy.ViewCommand;
 import net.vpg.bot.entities.Area;
 import net.vpg.bot.entities.Player;
 import net.vpg.bot.event.BotButtonEvent;
+import net.vpg.bot.pokemon.PlayerPokemon;
 import net.vpg.bot.pokemon.WildPokemon;
 import net.vpg.bot.pokemon.battle.Battle;
 
@@ -52,7 +54,19 @@ public interface ButtonHandlers {
                 return;
             }
             long page = Long.parseLong(e.getArg(1));
-            BagCommand.execute(e, user, page);
+            BagCommand.execute(e, Player.get(user.getId()), page);
+        }
+    }
+
+    class ViewHandler implements ButtonHandler {
+        @Override
+        public String getName() {
+            return "view";
+        }
+
+        @Override
+        public void handle(BotButtonEvent e) {
+            ViewCommand.execute(e, null, e.getArg(0));
         }
     }
 

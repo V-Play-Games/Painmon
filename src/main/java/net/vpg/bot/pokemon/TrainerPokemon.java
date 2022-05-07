@@ -7,7 +7,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class TrainerPokemon extends PokemonData {
-    public static final Map<String, PlayerPokemon> CACHE = new HashMap<>();
+    public static final Map<String, TrainerPokemon> CACHE = new HashMap<>();
     protected final String trainerId;
     protected String nickname;
 
@@ -25,6 +25,10 @@ public class TrainerPokemon extends PokemonData {
         super(base, id, data);
         this.trainerId = data.getString("trainerId");
         this.nickname = data.getString("nickname", null);
+    }
+
+    public static TrainerPokemon get(String id) {
+        return CACHE.get(id);
     }
 
     @Override

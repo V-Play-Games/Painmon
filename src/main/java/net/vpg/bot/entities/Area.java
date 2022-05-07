@@ -55,24 +55,12 @@ public class Area implements Entity {
         return id;
     }
 
-    public String getText(Player player) {
-        return getStateFor(player).getText(player);
-    }
-
-    public void send(Sender e, User user) {
-        getStateFor(user.getId()).send(e, user);
-    }
-
     public void send(Sender e, Player player) {
         getStateFor(player).send(e, player);
     }
 
     public State getState(String id) {
         return states.get(id);
-    }
-
-    public State getStateFor(String id) {
-        return getStateFor(Player.get(id));
     }
 
     public State getStateFor(Player player) {

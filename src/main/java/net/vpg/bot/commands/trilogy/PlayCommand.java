@@ -15,19 +15,18 @@
  */
 package net.vpg.bot.commands.trilogy;
 
-import net.vpg.bot.commands.NoArgsCommand;
+import net.vpg.bot.commands.BotCommandImpl;
 import net.vpg.bot.core.Bot;
 import net.vpg.bot.entities.Area;
 import net.vpg.bot.entities.Player;
 import net.vpg.bot.event.CommandReceivedEvent;
 
-public class PlayCommand extends TrilogyCommand implements NoArgsCommand {
+public class PlayCommand extends BotCommandImpl implements NoArgsTrilogyCommand {
     public PlayCommand(Bot bot) {
         super(bot, "play", "Continue playing from where you left off!");
     }
 
-    public void execute(CommandReceivedEvent e) {
-        Player player = Player.get(e.getUser().getId());
-        Area.get(player.getPosition()).send(e, e.getUser());
+    public void execute(CommandReceivedEvent e, Player player) {
+        Area.get(player.getPosition()).send(e, player);
     }
 }

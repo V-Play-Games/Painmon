@@ -185,6 +185,8 @@ public abstract class PokemonData implements Entity {
         data.getArray("moves").stream(DataArray::getObject).forEach(move -> move.remove("currentPP"));
         PlayerPokemon pokemon = PlayerPokemon.createNew(data, bot);
         pokemon.setExpAccordingToLevel();
+        player.addPokemonOwned(id);
+        player.getTeam().addPokemon(pokemon);
         return pokemon;
     }
 

@@ -2,6 +2,8 @@ package net.vpg.bot.commands.trilogy;
 
 import net.dv8tion.jda.api.EmbedBuilder;
 import net.dv8tion.jda.api.interactions.commands.OptionType;
+import net.vpg.bot.action.Sender;
+import net.vpg.bot.commands.BotCommandImpl;
 import net.vpg.bot.core.Bot;
 import net.vpg.bot.entities.Player;
 import net.vpg.bot.event.CommandReceivedEvent;
@@ -12,41 +14,29 @@ import net.vpg.bot.pokemon.StatMapping;
 
 import java.util.Arrays;
 import java.util.Objects;
+import java.util.regex.Pattern;
 import java.util.stream.Collectors;
 
-public class ViewCommand extends TrilogyCommand {
+public class ViewCommand extends BotCommandImpl {
     public ViewCommand(Bot bot) {
         super(bot, "view", "View details about a Pokemon owned");
         setMinArgs(1);
         setMaxArgs(1);
-        addOption(OptionType.INTEGER, "id", "Id of the pokemon to view.", true);
+        addOption(OptionType.STRING, "id", "Id of the pokemon to view.", true);
     }
 
-    @Override
-    public void onTextCommandRun(TextCommandReceivedEvent e) {
-        execute(e, Integer.parseInt(e.getArg(0)));
-    }
-
-    @Override
-    public void onSlashCommandRun(SlashCommandReceivedEvent e) {
-        execute(e, (int) e.getLong("id"));
-    }
-
-    public void execute(CommandReceivedEvent e, int id) {
-        Player player = Player.get(e.getUser().getId());
-        PlayerPokemon pokemon = player.getPokemonOwnedAsStream()
-            .map(PlayerPokemon::get)
-            .filter(p -> p.getPlayerSpecificId() == id)
-            .findFirst()
-            .orElse(null);
+    public static void execute(Sender sender, PlayerPokemon pokemon, String id) {
         if (pokemon == null) {
-            e.send("Cannot find any pokemon with the id " + id).setEphemeral(true).queue();
+            pokemon = PlayerPokemon.get(id);
+        }
+        if (pokemon == null) {
+            sender.send("Cannot find any pokemon with ID " + id).setEphemeral(true).queue();
             return;
         }
         StatMapping stats = pokemon.getStats();
         StatMapping ivs = pokemon.getIvs();
         StatMapping evs = pokemon.getEvs();
-        e.sendEmbeds(new EmbedBuilder()
+        sender.sendEmbeds(new EmbedBuilder()
             .setTitle((pokemon.getNickname() == null ? "" : pokemon.getNickname() + " the ") + pokemon.getBase().getName())
             .addField("General Info",
                 "**Shiny**: " + pokemon.isShiny() +
@@ -84,6 +74,31 @@ public class ViewCommand extends TrilogyCommand {
                 "**HP**: " + pokemon.getCurrentHP() + "/" + pokemon.getMaxHP() +
                     "\n**Status**: " + pokemon.getStatus(),
                 false)
+            .setFooter("Global ID: " + pokemon.getId())
             .build()).queue();
+    }
+
+    @Override
+    public void onTextCommandRun(TextCommandReceivedEvent e) {
+        execute(e, e.getArg(0));
+    }
+
+    @Override
+    public void onSlashCommandRun(SlashCommandReceivedEvent e) {
+        execute(e, e.getString("id"));
+    }
+
+    public void execute(CommandReceivedEvent e, String id) {
+        PlayerPokemon pokemon = null;
+        Player player = Player.get(e.getUser().getId());
+        if (player != null && Pattern.matches("\\d+", id)) {
+            int specificId = Integer.parseInt(id);
+            pokemon = player.getPokemonOwnedAsStream()
+                .map(PlayerPokemon::get)
+                .filter(p -> p.getPlayerSpecificId() == specificId)
+                .findFirst()
+                .orElse(null);
+        }
+        execute(e, pokemon, id);
     }
 }

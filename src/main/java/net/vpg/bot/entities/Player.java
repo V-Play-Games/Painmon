@@ -21,13 +21,11 @@ import net.vpg.bot.core.Bot;
 import net.vpg.bot.database.DatabaseObject;
 import net.vpg.bot.pokemon.Bag;
 import net.vpg.bot.pokemon.Gender;
-import net.vpg.bot.pokemon.PlayerTeam;
+import net.vpg.bot.pokemon.team.PlayerTeam;
 
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 import java.util.regex.Pattern;
-import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 public class Player extends DatabaseObject {

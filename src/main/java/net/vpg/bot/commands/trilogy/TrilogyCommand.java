@@ -15,24 +15,38 @@
  */
 package net.vpg.bot.commands.trilogy;
 
-import net.vpg.bot.commands.BotCommandImpl;
-import net.vpg.bot.core.Bot;
+import net.vpg.bot.commands.BotCommand;
 import net.vpg.bot.entities.Player;
 import net.vpg.bot.event.CommandReceivedEvent;
+import net.vpg.bot.event.SlashCommandReceivedEvent;
+import net.vpg.bot.event.TextCommandReceivedEvent;
 
-public abstract class TrilogyCommand extends BotCommandImpl {
-    public TrilogyCommand(Bot bot, String name, String description, String... aliases) {
-        super(bot, name, description, aliases);
+public interface TrilogyCommand extends BotCommand {
+    @Override
+    default void onTextCommandRun(TextCommandReceivedEvent e) throws Exception {
+        Player player = checkPlayer(e);
+        if (player != null) {
+            onTextCommandRun(e, player);
+        }
     }
 
     @Override
-    public boolean runChecks(CommandReceivedEvent e) {
-        if (!super.runChecks(e)) return false;
+    default void onSlashCommandRun(SlashCommandReceivedEvent e) throws Exception {
+        Player player = checkPlayer(e);
+        if (player != null) {
+            onSlashCommandRun(e, player);
+        }
+    }
+
+    void onTextCommandRun(TextCommandReceivedEvent e, Player player) throws Exception;
+
+    void onSlashCommandRun(SlashCommandReceivedEvent e, Player player) throws Exception;
+
+    default Player checkPlayer(CommandReceivedEvent e) {
         Player player = Player.get(e.getUser().getId());
         if (player == null) {
             e.send("Please start your journey with `" + e.getPrefix() + "start` command first").setEphemeral(true).queue();
-            return false;
         }
-        return true;
+        return player;
     }
 }
