@@ -21,7 +21,6 @@ import net.vpg.bot.commands.trilogy.ViewCommand;
 import net.vpg.bot.entities.Area;
 import net.vpg.bot.entities.Player;
 import net.vpg.bot.event.BotButtonEvent;
-import net.vpg.bot.pokemon.PlayerPokemon;
 import net.vpg.bot.pokemon.WildPokemon;
 import net.vpg.bot.pokemon.battle.Battle;
 
@@ -98,9 +97,11 @@ public interface ButtonHandlers {
                     if (spawn == null) return;
                     WildPokemon.CACHE.remove(spawnId);
                     spawn.randomize();
-                    Battle battle = Battle.between(player.getTeam(), spawn);
+                    battle = Battle.between(player.getTeam(), spawn);
                     Map<Battle.Position, String> positions = battle.getPositions();
                     // TODO: Send the battle
+                default:
+                    throw new IllegalArgumentException("Unsupported battle type");
             }
         }
     }
